@@ -1,0 +1,30 @@
+<div class="container-fluid">
+<h2>Welcome to Ultimate FlashCards!</h2>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <ul class="nav nav-tabs">
+      <!-- Need to use property binding on routerLinkActiveOptions because it takes a javascript 
+            object, not a string -->
+        <li role="presentation" 
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/">Login</a>
+        </li>
+        <li role="presentation" 
+          routerLinkActive="active">
+          <a routerLink="/makeflashcards">Make Flash Cards</a>
+        </li>
+        <li role="presentation" 
+          routerLinkActive="active">
+          <a routerLink="/playflashcards">Play Flash Cards</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
