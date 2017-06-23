@@ -4,10 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
+var userRoutes = require('./routes/user');
 
 var app = express();
+mongoose.connect('localhost:27017/flashcards');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

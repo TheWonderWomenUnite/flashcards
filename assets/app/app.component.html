@@ -6,10 +6,10 @@
       <ul class="nav nav-tabs">
       <!-- Need to use property binding on routerLinkActiveOptions because it takes a javascript 
             object, not a string -->
+      <!-- [routerLinkActiveOptions]="{exact: true}"> -->
         <li role="presentation" 
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{exact: true}">
-          <a routerLink="/">Login</a>
+          routerLinkActive="active">
+          <a [routerLink]="['/auth']">Authentication</a>
         </li>
         <li role="presentation" 
           routerLinkActive="active">
