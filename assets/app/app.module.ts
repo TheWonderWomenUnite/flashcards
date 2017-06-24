@@ -6,7 +6,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ErrorPageComponent } from './error-page/error-page.component';
+import { ErrorComponent } from './errors/error.component';
+import { ErrorService } from './errors/error.service';
 import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.component';
 import { PlayFlashCardsComponent } from './play-flash-cards/play-flash-cards.component';
 import { AuthenticationComponent } from "./auth/authentication.component";
@@ -18,7 +19,7 @@ import { AuthService } from './auth/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorPageComponent,
+    ErrorComponent,
     MakeFlashCardsComponent,
     PlayFlashCardsComponent,
     AuthenticationComponent,
@@ -33,7 +34,7 @@ import { AuthService } from './auth/auth.service';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, ErrorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

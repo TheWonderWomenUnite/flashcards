@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ErrorPageComponent } from './error-page/error-page.component';
 import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.component';
 import { PlayFlashCardsComponent } from './play-flash-cards/play-flash-cards.component';
 import { AuthenticationComponent } from "./auth/authentication.component";
@@ -12,7 +11,6 @@ const appRoutes: Routes = [
 	{ path: 'auth', component: AuthenticationComponent, children: auth_routes },
 	{ path: 'makeflashcards', component: MakeFlashCardsComponent },
 	{ path: 'playflashcards', component: PlayFlashCardsComponent },
-	{ path: 'not-found', component: ErrorPageComponent, data: {message: 'Page not Found'}}
 
 ];
 
