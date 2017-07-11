@@ -7,11 +7,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var Deck = require('./deck');
+var User = require('./user');
+
 var schema = new Schema({
-	lastPlayed: {type: date, required: true},
+	lastPlayed: {type: Date, required: true},
 	progressBar: {type: String, required: true},
-	deck: {type: Schema.Types.ObjectId, ref: 'Deck'},
-	user: {type: Schema.Types.ObectId, ref: 'User'}
+	decks: {type: Schema.Types.ObjectId, ref: 'Deck'},
+	user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
-module.exports = mongoose.model('User-Deck', schema);
+module.exports = mongoose.model('UserDeck', schema);

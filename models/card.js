@@ -6,10 +6,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var Deck = require('./deck');
+
 var schema = new Schema({
 	side1: {type: String, required: true},
 	side2: {type: String, required: true},
-	deck: {type: Schema.Types.ObectId, ref: 'Deck'}
+	deck: {type: Schema.Types.ObjectId, ref: 'Deck'}
 });
 
 module.exports = mongoose.model('Card', schema);

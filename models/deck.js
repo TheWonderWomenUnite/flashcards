@@ -9,12 +9,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var User = require('./user');
+var Card = require('./card');
+
 var schema = new Schema({
 	name: {type: String, required: true},
 	userOwned: {type: Boolean, required: true},
 	category: {type: String, required: true},
-	user: {type: Schema.Types.ObectId, ref: 'User'}
+	user: {type: Schema.Types.ObjectId, ref: 'User'},
 	cards: [{type: Schema.Types.ObjectId, ref: 'Card'}]
 	});
 
-module.exports = mongoose.model('deck', schema);
+module.exports = mongoose.model('Deck', schema);

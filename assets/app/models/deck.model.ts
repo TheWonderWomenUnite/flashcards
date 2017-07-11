@@ -1,8 +1,14 @@
 export class Deck {
-    id: number;
-    userId: number;
-    subCategoryId: string;
-    deckName: string;
-    progressBar: string;
-    lastPlayed: string;
+    
+	name: string;
+	userOwned: boolean;
+	category: string;
+	userId: string;
+	
+     constructor(name: string, userOwned: boolean, category: string, userId?: string) {
+        this.name = name;
+        this.userOwned = userOwned;
+        this.category = category;
+        this.userId = userId;
+    }
 }

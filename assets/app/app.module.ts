@@ -10,11 +10,14 @@ import { ErrorComponent } from './errors/error.component';
 import { ErrorService } from './errors/error.service';
 import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.component';
 import { PlayFlashCardsComponent } from './play-flash-cards/play-flash-cards.component';
+import { DeckListComponent } from './play-flash-cards/deck-list.component';
+import { DeckComponent } from './play-flash-cards/deck.component';
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { LogoutComponent } from "./auth/logout.component";
 import { SignupComponent } from "./auth/signup.component";
 import { SigninComponent } from "./auth/signin.component";
 import { AuthService } from './auth/auth.service';
+import { DeckService } from './decks/deck.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,8 @@ import { AuthService } from './auth/auth.service';
     ErrorComponent,
     MakeFlashCardsComponent,
     PlayFlashCardsComponent,
+    DeckListComponent,
+    DeckComponent,
     AuthenticationComponent,
     LogoutComponent,
     SignupComponent,
@@ -34,7 +39,7 @@ import { AuthService } from './auth/auth.service';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AuthService, ErrorService],
+  providers: [AuthService, ErrorService, DeckService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

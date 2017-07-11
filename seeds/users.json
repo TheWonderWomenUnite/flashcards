@@ -1,0 +1,14 @@
+{
+	"_id":{"$oid":"59612ff4d77b55059817b837"},
+	"firstName":"OrangeKitty",
+	"lastName":"Copeland",
+	"password":"$2a$10$aHPJ7Dz8cBhm6ES/eGko3ez.S7Sj.soxy9nuptoC9mnbM2TOI.h46",
+	"email":"kitty@msn.com"
+}
+{
+	"_id":{"$oid":"59613153d77b55059817b838"},
+	"firstName":"Lisa",
+	"lastName":"Copeland",
+	"password":"$2a$10$n4VF2LApD271zQGtYoNk.e7B2acar23SZFi0KtfXVe1S/pX3v/knW",
+	"email":"lisacope@msn.com"
+}
