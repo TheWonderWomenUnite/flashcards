@@ -19,14 +19,19 @@ import { DeckComponent } from './deck.component';
 export class DeckListComponent implements OnInit {
     decks: Deck[];
 
-    constructor(private deckService: DeckService) {}
+    constructor(private deckService: DeckService) {
+        console.log("Hi from the constructor for deck-list");
+    }
 
     ngOnInit() {
-        this.deckService.getDecks()
+        const userId = localStorage.getItem('UserId');
+        console.log("Hi from ngOnInit, UserId = "+userId);
+        this.deckService.getDecks(userId)
             .subscribe(
                 (decks: Deck[]) => {
                     this.decks = decks;
                 }
             );
+            
     }
 }

@@ -11,7 +11,7 @@ import { DeckService } from "../decks/deck.service";
 export class DeckComponent {
     @Input() deck: Deck;
 
-    constructor(private deckService: DessageService) {}
+   // constructor(private deckService: DessageService) {}
 
     onEdit() {
 

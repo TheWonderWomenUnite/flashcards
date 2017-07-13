@@ -5,13 +5,11 @@ var mongoose = require('mongoose');
 
 var User = require('../models/user');
 var Deck = require('../models/deck');
-
-// for a given user, find all of this users decks
-
-router.get('/userDecks/:userId', function (req, res, next) {
+/*
+router.get('/', function (req, res, next) {
     // id is the user id
-    var userId = req.params.userId;
-    Deck.find('user': userId)
+    
+    Deck.find()
         .exec(function (err, decks) {
             if (err) {
                 return res.status(500).json({
@@ -25,9 +23,59 @@ router.get('/userDecks/:userId', function (req, res, next) {
             });
         });
 });
-
+*/
 // for a given user, find all of this users decks
 
+router.get('/userDecks/:userId', function (req, res, next) {
+    // id is the user id
+    var userId = req.params.userId;
+
+    var textObj = "{ " + 
+                  '"user": ObjectId("' +
+                  userId +
+                  '")' +
+                  " }";
+
+    // User.findOne({email: req.body.email}, function(err, user) {
+                 
+    console.log("Going to call find with string "+textObj);
+    Deck.find({user: userId}, function (err, decks) {
+            if (err) {
+                console.log("Got an error from the find");
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            console.log("Didnt get an error on the find");
+            console.log(decks);
+            res.status(200).json({
+                message: 'Success',
+                obj: decks
+            });
+        });
+    /*
+    Deck.find(textObj)
+        .exec(function (err, decks) {
+            if (err) {
+                console.log("Got an error from the find");
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            console.log("Didnt get an error on the find");
+            console.log(decks);
+            res.status(200).json({
+                message: 'Success',
+                obj: decks
+            });
+        });
+        */
+});
+
+// for a given user, find all of this users decks
+/*
 router.get('/unownedDecks/', function (req, res, next) {
     // id is the user id
     
@@ -45,6 +93,6 @@ router.get('/unownedDecks/', function (req, res, next) {
             });
         });
 });
-
+*/
 module.exports = router;
 // a comment

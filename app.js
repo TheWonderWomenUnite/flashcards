@@ -8,8 +8,10 @@ var mongoose = require('mongoose');
 
 var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
+var deckRoutes = require('./routes/deck');
 
 var app = express();
+mongoose.set('debug', true);
 mongoose.connect('localhost:27017/flashcards');
 
 // view engine setup
@@ -32,6 +34,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/user', userRoutes);
+app.use('/decks', deckRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler

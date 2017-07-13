@@ -13,8 +13,11 @@ export class DeckService {
    constructor(private http: Http, private errorService: ErrorService) {
     }
 
-    getDecks(user: User) {
-        return this.http.get('http://localhost:3000/userDecks/:user._Id')
+
+    getDecks(userId: string) {
+        
+        console.log("Going to call get with userId: "+userId);
+        return this.http.get('http://localhost:3000/decks/userDecks/' + userId)
             .map((response: Response) => {
                 const decks = response.json().obj;
                 let transformedDecks: Deck[] = [];
@@ -30,9 +33,11 @@ export class DeckService {
                 return transformedDecks;
             })
             .catch((error: Response) => {
+                console.log("Hi from the catch block for getdecks");
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json());
             });
+        
     }
 
 }    
