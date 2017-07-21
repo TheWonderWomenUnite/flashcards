@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { Deck } from "../models/deck.model";
 import { DeckService } from "../decks/deck.service";
-import { DeckComponent } from './deck.component';
+import { DeckDetailComponent } from './deck.component';
 
 @Component({
     selector: 'app-deck-list',

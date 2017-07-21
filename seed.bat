@@ -1,0 +1,2 @@
+mongoimport /db:flashcards /collection:decks c:\users\lisac\documents\Flashcards\devfc\flashcards\seeds\decks.json
+mongoimport /db:flashcards /collection:cards c:\users\lisac\documents\Flashcards\devfc\flashcards\seeds\cards.json

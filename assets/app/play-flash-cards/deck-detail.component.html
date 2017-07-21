@@ -1,0 +1,16 @@
+<article class="panel panel-default">
+    <div class="panel-body">
+        {{ deck.name }}, {{ deck.category }}, {{ deck.userOwned }}, {{ deck.deckId }}, {{ deck.userId }}
+    </div>
+	<footer class="panel-footer">
+		<div class="config">
+			<a (click)="onEdit()"">Edit</a>
+			<a [routerLink]="['add']">Add</a>
+			<a (click)="onDelete()">Delete</a>
+			<a [routerLink]="['play']">List Flashcards</a>
+		</div>
+	</footer>    
+</article>
+<div class="row spacing">
+	<router-outlet></router-outlet>
+</div>

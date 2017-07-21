@@ -11,7 +11,7 @@ import { ErrorService } from './errors/error.service';
 import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.component';
 import { PlayFlashCardsComponent } from './play-flash-cards/play-flash-cards.component';
 import { DeckListComponent } from './play-flash-cards/deck-list.component';
-import { DeckComponent } from './play-flash-cards/deck.component';
+import { DeckDetailComponent } from './play-flash-cards/deck-detail.component';
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { LogoutComponent } from "./auth/logout.component";
 import { SignupComponent } from "./auth/signup.component";
@@ -26,7 +26,7 @@ import { DeckService } from './decks/deck.service';
     MakeFlashCardsComponent,
     PlayFlashCardsComponent,
     DeckListComponent,
-    DeckComponent,
+    DeckDetailComponent,
     AuthenticationComponent,
     LogoutComponent,
     SignupComponent,

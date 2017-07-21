@@ -1,0 +1,76 @@
+{
+	"side1": "please",
+	"side2": "s'il vous plait",
+	"deck": {"$oid":"596e9203136a72f3c0542bd5"}
+}
+{
+	"side1": "thanks",
+	"side2": "merci",
+	"deck": {"$oid":"596e9203136a72f3c0542bd5"}
+}
+{
+	"side1": "what is your name",
+	"side2": "Comment tallez vous",
+	"deck": {"$oid":"596e9203136a72f3c0542bd5"}
+}
+{
+	"side1": "5 + 1",
+	"side2": "6",
+	"deck": {"$oid":"596e9203136a72f3c0542bd2"}
+}
+{
+	"side1": "7 + 10",
+	"side2": "17",
+	"deck": {"$oid":"596e9203136a72f3c0542bd2"}
+}
+{
+	"side1": "6 + 5",
+	"side2": "11",
+	"deck": {"$oid":"596e9203136a72f3c0542bd2"}
+}
+{
+	"side1": "3 + 7",
+	"side2": "10",
+	"deck": {"$oid":"596e9203136a72f3c0542bd2"}
+}
+{
+	"side1": "7 + 2",
+	"side2": "9",
+	"deck": {"$oid":"596e9203136a72f3c0542bd2"}
+}
+{
+	"side1": "8 + 1",
+	"side2": "11",
+	"deck": {"$oid":"596e9203136a72f3c0542bd2"}
+}
+
+{
+	"side1": "2 * 2",
+	"side2": "4",
+	"deck": {"$oid":"596e9203136a72f3c0542bd3"}
+}
+{
+	"side1": "1 * 1",
+	"side2": "1",
+	"deck": {"$oid":"596e9203136a72f3c0542bd3"}
+}
+{
+	"side1": "3 * 3",
+	"side2": "9",
+	"deck": {"$oid":"596e9203136a72f3c0542bd3"}
+}
+{
+	"side1": "4 * 4",
+	"side2": "16",
+	"deck": {"$oid":"596e9203136a72f3c0542bd3"}
+}
+{
+	"side1": "5 * 5",
+	"side2": "25",
+	"deck": {"$oid":"596e9203136a72f3c0542bd3"}
+}
+{
+	"side1": "6 * 6",
+	"side2": "36",
+	"deck": {"$oid":"596e9203136a72f3c0542bd3"}
+}
