@@ -14,4 +14,13 @@ var schema = new Schema({
 	deck: {type: Schema.Types.ObjectId, ref: 'Deck'}
 });
 
+// When you remove a card, remove the reference to the card
+// from the deck it belongs to
+schema.post('remove', function(card) {
+	Deck.findById(card.deck, function(err, deck) {
+		deck.cards.pull(card);
+		deck.save();
+	});
+});
+
 module.exports = mongoose.model('Card', schema);

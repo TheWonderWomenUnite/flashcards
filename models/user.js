@@ -25,6 +25,12 @@ var schema = new Schema({
 	userdecks: [{type: Schema.Types.ObjectId, ref: 'UserDeck'}]
 });
 
+// When you remove a user, remove the dependant subdocs in decks and userdecks
+schema.post('remove', function(user) {
+	Deck.remove({ user: user._id }).exec();
+	UserDeck.remove({ user: user._id }).exec();
+});
+
 // This is how we use the validator
 schema.plugin(mongooseUniqueValidator);
 

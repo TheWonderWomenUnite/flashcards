@@ -11,6 +11,7 @@ var Schema = mongoose.Schema;
 
 var User = require('./user');
 var Card = require('./card');
+var UserDeck = require('./userdeck');
 
 var schema = new Schema({
 	name: {type: String, required: true},
@@ -19,5 +20,22 @@ var schema = new Schema({
 	user: {type: Schema.Types.ObjectId, ref: 'User'},
 	cards: [{type: Schema.Types.ObjectId, ref: 'Card'}]
 	});
+
+// When you remove a deck, you have to remove the ref from the user 
+// document and remove the dependant subdocs
+schema.post('remove', function(deck) {
+
+	// Only look for the user if this is not an orphan deck
+	if (deck.userOwned) {
+		User.findById(deck.user, function(err, user) {
+			user.decks.pull(deck);
+			user.save();
+		});
+	}
+
+	// Remove the dependant subdocs
+	Card.remove({ deck: deck._id }).exec();
+	UserDeck.remove({ deck: deck._id }).exec();
+});
 
 module.exports = mongoose.model('Deck', schema);

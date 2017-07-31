@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
 router.get('/userDecks/:userId', function (req, res, next) {
 
     var userId = req.params.userId;
-    console.log("Going to call find with string "+textObj);
+    // console.log("Going to call find with string "+textObj);
     Deck.find({user: userId}, function (err, decks) {
             if (err) {
                 console.log("Got an error from the find");
@@ -47,23 +47,8 @@ router.get('/userDecks/:userId', function (req, res, next) {
         });
 });
 
-// If you want to get passed this, you must be logged in
-router.use('/', function(req, res, next){
-    jwt.verify(req.query.token, 'secret', function(err, decoded) {
-        if (err) {
-            return res.status(401).json({
-                title: 'Not Authenticated',
-                error: err
-            });
-        }
-        next(); // This user is logged in, let the post request continue
-    }); 
-});
-
 // Find all unowned decks
 router.get('/unownedDecks/', function (req, res, next) {
-    // id is the user id
-    
     Deck.find({userOwned: false}, function (err, decks) {
             if (err) {
                 return res.status(500).json({
@@ -77,6 +62,21 @@ router.get('/unownedDecks/', function (req, res, next) {
             });
         });
 });
+
+// If you want to get passed this, you must be logged in
+/*
+router.use('/', function(req, res, next){
+    jwt.verify(req.query.token, 'secret', function(err, decoded) {
+        if (err) {
+            return res.status(401).json({
+                title: 'Not Authenticated',
+                error: err
+            });
+        }
+        next(); // This user is logged in, let the post request continue
+    }); 
+});
+*/ 
 
 // This is how you save a new deck
 router.post('/', function (req, res, next) {
@@ -92,10 +92,12 @@ router.post('/', function (req, res, next) {
                 });
             }
     
-        // Create the new message, add the user info to the message before you save it
+        // Create the new deck, add the user info to the deck
         var deck = new Deck({
-            content: req.body.content,
-            user: user
+            name: req.body.name,
+            userOwned: req.body.userOwned,
+            category: req.body.category,
+            user: user._id
         });
 
         deck.save(function(err, result) {
@@ -134,6 +136,7 @@ router.patch('/:id', function(req, res, next) {
         if (err) {
         // If there is an error trying to get the message from the server, 
         // return from this function immediately with the error code
+        console.log("Returned error from findById");
             return res.status(500).json({
                 title: 'An error occurred',
                 error: err
@@ -141,11 +144,13 @@ router.patch('/:id', function(req, res, next) {
         }
         if (!deck) {
             // The message couldn't be found, return with an error
+            console.log("No deck found by findById");
             return res.status(500).json({
                 title: 'No Deck Found',
                 error: {message: 'Deck not found'}
             }); 
         }
+        /*
         if (deck.user != decoded.user._id) {
             return res.status(401).json({
                 title: 'Not Authenticated',
@@ -153,7 +158,12 @@ router.patch('/:id', function(req, res, next) {
 
             });
         }
-
+        */
+        console.log("Found a valid deck");
+        console.log("replacing name with "+
+            req.body.name+
+            ' userOwned'+req.body.userOwned+
+            ' category'+req.body.category);
         deck.name = req.body.name;
         deck.userOwned = req.body.userOwned;
         deck.category = req.body.category;
@@ -161,11 +171,13 @@ router.patch('/:id', function(req, res, next) {
             if (err) {
                 // If there is an error, return from this function immediately with
                 // the error code
+                console.log("Got an error from the save");
                 return res.status(500).json({
                     title: 'An error occurred',
                     error: err
                 });
             }
+
             res.status(200).json({
                 message: 'Updated Deck',
                 obj: result
@@ -181,47 +193,56 @@ router.delete('/:id', function(req, res, next) {
     // to delete it
     var decoded = jwt.decode(req.query.token);
 
-    Deck.findById(req.params.id, function(err, deck) {
-    if (err) {
-        // If there is an error trying to get the message from the server, 
-        // return from this function immediately with the error code
-        return res.status(500).json({
-            title: 'An error occurred',
-            error: err
-        }); 
-    }
-    if (!deck) {
-        // The message couldn't be found, return with an error
-        return res.status(500).json({
-            title: 'No deck Found',
-            error: {message: 'Deck not found'}
-        }); 
-    }
+    // Find the user this deck is for so you can delete the 
+    // deck from the user's array
     
-    if (deck.user != decoded.user._id) {
-        return res.status(401).json({
-            title: 'Not Authenticated',
-            error: {message: 'Users do not match'}
-        });
-    }
-    deck.remove(function(err, result) {
+     Deck.findById(req.params.id, function(err, deck) {
         if (err) {
-            // If there is an error, return from this function immediately with
-            // the error code
+            // If there is an error trying to get the deck from the server, 
+            // return from this function immediately with the error code
             return res.status(500).json({
                 title: 'An error occurred',
                 error: err
+            }); 
+        }
+        if (!deck) {
+            // The message couldn't be found, return with an error
+            return res.status(500).json({
+                title: 'No deck Found',
+                error: {message: 'Deck not found'}
+            }); 
+        }    
+
+        /*
+        // If this is an unowned deck then you don't need to do this
+        if (deck.user != decoded.user._id) {
+            return res.status(401).json({
+                title: 'Not Authenticated',
+                error: {message: 'Users do not match'}
             });
         }
+        */
 
-        // Don't we need to remove the deck from the user? 
-        res.status(200).json({
-            message: 'Deleted Deck',
-            obj: result
-            });
+        deck.remove(function(err, result) {
+            if (err) {
+                // If there is an error, return from this function immediately with
+                // the error code
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+
+            }
+
+            res.status(200).json({
+                message: 'Deleted Deck',
+                obj: result
+                });
         });
-    });
+     });   
+        
 });
+
 
 
 module.exports = router;

@@ -114,7 +114,7 @@ export class DeckService {
 
     }
 
-    deleteMessage(deck: Deck) {
+    deleteDeck(deck: Deck) {
         this.decks.splice(this.decks.indexOf(deck), 1);
         const token = localStorage.getItem('token') 
             ? '?token=' + localStorage.getItem('token') 

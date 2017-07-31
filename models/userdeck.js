@@ -13,8 +13,20 @@ var User = require('./user');
 var schema = new Schema({
 	lastPlayed: {type: Date, required: true},
 	progressBar: {type: String, required: true},
-	decks: {type: Schema.Types.ObjectId, ref: 'Deck'},
+	deck: {type: Schema.Types.ObjectId, ref: 'Deck'},
 	user: {type: Schema.Types.ObjectId, ref: 'User'}
+});
+
+// When you remove a userdeck doc, remove the reference to it 
+// in the user parent doc
+
+schema.post('remove', function(userdeck) {
+
+	User.findById(userdeck.user, function(err, user) {
+		user.userdecks.pull(userdeck);
+		user.save();
+	});
+
 });
 
 module.exports = mongoose.model('UserDeck', schema);

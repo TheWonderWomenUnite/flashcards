@@ -18,12 +18,21 @@ export class DeckDetailComponent {
 
 
 	onDelete() {
-  		this.deckService.deleteDeck(this.deck);
-  		this.router.navigate(['../']);
+  		// this.deckService.deleteDeck(this.deck);
+  		this.router.navigate(['./']);
+	}
+
+	onAdd() {
+		this.router.navigate(['./', 'add'], {relativeTo: this.route});		
 	}
 
 	onEdit() {
-		this.router.navigate(['./', this.deck.deckId, 'edit'], {relativeTo: this.route});
+		this.router.navigate(['./', 'edit', this.deck.deckId], {relativeTo: this.route});
+
+	}
+
+	onPlay() {
+		this.router.navigate(['./', 'play', this.deck.deckId], {relativeTo: this.route});
 
 	}
 }
