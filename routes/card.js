@@ -8,21 +8,24 @@ var Deck = require('../models/deck');
 
 // for a given deck, find all of this decks cards
 router.get(':deckId', function (req, res, next) {
-    // id is the user id
     var deckId = req.params.deckId;
-    Card.find('deck': deckId)
-        .exec(function (err, cards) {
+    // console.log("Going to call find with string "+textObj);
+    Deck.find({deck: deckId}, function (err, cards) {
             if (err) {
+                console.log("Got an error from the find");
                 return res.status(500).json({
                     title: 'An error occurred',
                     error: err
                 });
             }
+            console.log("Didnt get an error on the find");
+            console.log(cards);
             res.status(200).json({
                 message: 'Success',
                 obj: cards
             });
         });
+    
 });
 
 // This is how you save a new card

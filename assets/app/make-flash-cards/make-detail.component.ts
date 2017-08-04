@@ -5,11 +5,11 @@ import { Deck } from "../models/deck.model";
 import { DeckService } from "../shared/deck.service";
 
 @Component({
-    selector: 'app-deck-detail',
-    templateUrl: './deck-detail.component.html'    
+    selector: 'app-make-detail',
+    templateUrl: './make-detail.component.html'    
 })
 
-export class DeckDetailComponent {
+export class MakeDetailComponent {
     @Input() deck: Deck;
 
    	constructor(private deckService: DeckService,
@@ -31,8 +31,4 @@ export class DeckDetailComponent {
 
 	}
 
-	onPlay() {
-		this.router.navigate(['./', 'play', this.deck.deckId], {relativeTo: this.route});
-
-	}
 }

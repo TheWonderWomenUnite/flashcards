@@ -5,12 +5,12 @@ import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { DeckService } from "../shared/deck.service";
 
 @Component({
-  selector: 'app-deck-edit',
-  templateUrl: './deck-edit.component.html',
-  styleUrls: ['./deck-edit.component.css']
+  selector: 'app-make-edit',
+  templateUrl: './make-edit.component.html',
+  styleUrls: ['./make-edit.component.css']
 })
 
-export class DeckEditComponent implements OnInit {
+export class MakeEditComponent implements OnInit {
 	id: string;
 	deckForm: FormGroup;
 

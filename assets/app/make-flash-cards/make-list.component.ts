@@ -2,25 +2,25 @@ import { Component, OnInit } from "@angular/core";
 
 import { Deck } from "../models/deck.model";
 import { DeckService } from "../shared/deck.service";
-import { DeckDetailComponent } from './deck.component';
+import { MakeDetailComponent } from './make-detail.component';
 
 @Component({
-    selector: 'app-deck-list',
+    selector: 'app-make-list',
     template: `
         <div class="col-md-12"> 
-            <app-deck-detail
+            <app-make-detail
                    [deck]="deck"
-                    *ngFor="let deck of decks"></app-deck-detail>
-              
+                    *ngFor="let deck of decks"></app-make-detail>
+            
         </div>
     `
 })
 
-export class DeckListComponent implements OnInit {
+export class MakeListComponent implements OnInit {
     decks: Deck[];
 
     constructor(private deckService: DeckService) {
-        console.log("Hi from the constructor for deck-list");
+        console.log("Hi from the constructor for make-list");
     }
 
     ngOnInit() {

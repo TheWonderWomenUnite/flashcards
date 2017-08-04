@@ -6,12 +6,13 @@ import { PlayFlashCardsComponent } from './play-flash-cards/play-flash-cards.com
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { auth_routes } from './auth/auth.routes';
 import { flashcard_routes } from './play-flash-cards/flashcard.routes';
+import { makecard_routes } from './make-flash-cards/makecard.routes';
 
 const appRoutes: Routes = [
 	{ path: '', redirectTo: '/auth', pathMatch: 'full' },
 	{ path: 'auth', component: AuthenticationComponent, children: auth_routes },
-	{ path: 'makeflashcards', component: MakeFlashCardsComponent },
-	{ path: 'playflashcards', component: PlayFlashCardsComponent, children: flashcard_routes },
+	{ path: 'makeflashcards', component: MakeFlashCardsComponent, children: makecard_routes },
+	{ path: 'playflashcards', component: PlayFlashCardsComponent, children: flashcard_routes }
 ];
 
 @NgModule({
