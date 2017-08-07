@@ -38,4 +38,6 @@ schema.post('remove', function(deck) {
 	UserDeck.remove({ deck: deck._id }).exec();
 });
 
+
+
 module.exports = mongoose.model('Deck', schema);

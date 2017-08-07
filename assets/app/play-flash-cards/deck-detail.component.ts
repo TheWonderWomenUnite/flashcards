@@ -16,21 +16,6 @@ export class DeckDetailComponent {
 				private route: ActivatedRoute,
 				private router: Router) { }
 
-
-	onDelete() {
-  		// this.deckService.deleteDeck(this.deck);
-  		this.router.navigate(['./']);
-	}
-
-	onAdd() {
-		this.router.navigate(['./', 'add'], {relativeTo: this.route});		
-	}
-
-	onEdit() {
-		this.router.navigate(['./', 'edit', this.deck.deckId], {relativeTo: this.route});
-
-	}
-
 	onPlay() {
 		this.router.navigate(['./', 'play', this.deck.deckId], {relativeTo: this.route});
 

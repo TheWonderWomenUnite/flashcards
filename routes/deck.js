@@ -123,6 +123,66 @@ router.post('/', function (req, res, next) {
     }); 
 });
 
+router.post('/clone/:id', function(req, res, next) {
+
+    // First get the user
+    var decoded = jwt.decode(req.query.token);
+    
+    User.findById(decoded.user._id, function(err, user) {
+        if (err) {
+
+            // If there is an error, return from this function immediately with
+            // the error code
+            return res.status(500).json({ title: 'An error occurred', error: err });
+        }
+
+        // Now get the deck
+        
+        Deck.findById(req.params.id, function(err, deck) {     
+            if (err) {
+
+                // If there is an error, return from this function immediately with
+                // the error code
+                return res.status(500).json({ title: 'An error occurred', error: err });
+            }
+            // The deck to be cloned was found and now we can copy it
+            var newDeck = new Deck({
+                name: deck.name,
+                userOwned: true, 
+                category: deck.category,
+                user: user._id 
+            });
+            newDeck.save(function(err, deck) {
+                if (err) {
+
+                    // If there is an error, return from this function immediately with
+                    // the error code
+                    return res.status(500).json({ title: 'An error occurred', error: err });
+                }    
+
+                // Update the user 
+                user.decks.push(deck);
+                user.save();
+            
+                // Now copy the cards
+                for (let card of deck.cards) {
+                    var newCard = new Card({
+                        side1: card.side1,
+                        side2: card.side2,
+                        deck: deck._id
+                    });
+                    newDeck.cards.push(newCard);
+                    newDeck.save();
+                }
+
+                res.status(201).json({
+                    message: 'Saved Deck',
+                    obj: result
+                });
+            }); // end of newDeck.save
+        }); // end of Deck.findById
+    }); // end of User.findById
+}); // end of router.Post
 
 // Use this route to update deck details like name, category, or userOwned
 // this does not affect the cards for this deck
@@ -155,7 +215,6 @@ router.patch('/:id', function(req, res, next) {
             return res.status(401).json({
                 title: 'Not Authenticated',
                 error: {message: 'Users do not match'}
-
             });
         }
         */

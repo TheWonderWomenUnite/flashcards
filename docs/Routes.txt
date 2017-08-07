@@ -1,0 +1,101 @@
+
+User Routes
+
+router.post('/', function (req, res, next) 
+	Use this route to create a user
+
+	Pass in a user object - 
+		email: string 
+		password: string
+		firstName: string (Optional)
+		lastName: string (Optional)
+
+	Return Values
+		201 - Save was successful, User object returned 
+		500 - Error ocurred saving user
+
+router.post('/signin', function (req, res, next)
+	Use this route to authenticate a user
+
+	Pass in user details - 
+		email: string
+		password: string
+
+	Return Values
+		200 - User was authenticated, token & userId returned
+		500 - User was not found
+		401 - User was not valid or password was not valid
+
+Deck Routes
+
+router.get('/', function (req, res, next)
+	Use this route to get all cards
+
+	No parameters need
+
+	Return Values
+		200 - Decks were found, Array of Deck Objects returned
+		500 - Error in Find
+
+router.get('/userDecks/:userId', function (req, res, next)
+	Use this route to get cards for a valid user
+
+	Param should be the id:string for the user
+
+	Return values
+		200 - Decks were found, Array of Deck Objects returned
+		500 - Error in Find
+
+router.get('/unownedDecks/', function (req, res, next)	
+	Use this route to get cards which have unowned:true
+
+	No Params needed
+
+	Return values
+		200 - Decks were found, Array of Deck Objects returned
+		500 - Error in Find
+
+router.post('/', function (req, res, next) 
+	Use this route to create a new deck
+
+	Pass in a json web token to represent a valid user
+
+	Pass in a deck object
+		name: string
+		userOwned: boolean
+		category: string
+	    deckId: string (Optional)
+		userId: string (Optional)
+
+	Return Values
+		201 - Save was successful, Deck object returned 
+		500 - Error ocurred finding the User Object or saving Deck
+
+router.patch('/:id', function(req, res, next) 
+	Use this route to edit details about a deck including Name, UserOwned, and Category, This call does not affect the cards for this deck 
+
+	Param should be the id:string for the deck
+
+	Pass in a json web token to represent a valid user
+
+	Pass in a deck object
+		name: string
+		userOwned: boolean
+		category: string
+	    deckId: string (Optional)
+		userId: string (Optional)
+
+	Return Values 
+		200 - Deck was updated, Deck Object returned
+		500 - Find or Save Error
+
+router.delete('/:id', function(req, res, next)
+	Use this route to delete a deck. The Schema for this collection ensures that the User Ref and the Cards array are removed
+
+	Param should be the id:string for the deck
+	
+	Return Values
+		200 - Deck was deleted
+		500 - Error in finding deck or in deleting deck
+
+		

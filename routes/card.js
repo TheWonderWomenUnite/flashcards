@@ -10,7 +10,7 @@ var Deck = require('../models/deck');
 router.get(':deckId', function (req, res, next) {
     var deckId = req.params.deckId;
     // console.log("Going to call find with string "+textObj);
-    Deck.find({deck: deckId}, function (err, cards) {
+    Card.find({deck: deckId}, function (err, cards) {
             if (err) {
                 console.log("Got an error from the find");
                 return res.status(500).json({
@@ -71,13 +71,12 @@ router.post(':deckId', function (req, res, next) {
     }); 
 });
 
-// Use this route to update deck details like name, category, or userOwned
-// this does not affect the cards for this deck
+// Use this route to update card details for both sides 
 router.patch('/:id', function(req, res, next) {
 
     Card.findById(req.params.id, function(err, card) {
         if (err) {
-        // If there is an error trying to get the message from the server, 
+        // If there is an error trying to get the card from the server, 
         // return from this function immediately with the error code
         console.log("Returned error from findById");
             return res.status(500).json({
@@ -86,7 +85,7 @@ router.patch('/:id', function(req, res, next) {
             }); 
         }
         if (!card) {
-            // The message couldn't be found, return with an error
+            // The card couldn't be found, return with an error
             console.log("No card found by findById");
             return res.status(500).json({
                 title: 'No Card Found',
