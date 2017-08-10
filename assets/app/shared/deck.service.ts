@@ -26,8 +26,8 @@ export class DeckService {
                     deck.name,
                     deck.userOwned,
                     deck.category,
-                    deck._id,
-                    deck.userId)
+                    deck.userId,
+                    deck._id)
                     );
                 }
                 this.decks = transformedDecks;
@@ -54,8 +54,8 @@ export class DeckService {
                     deck.name,
                     deck.userOwned,
                     deck.category,
-                    deck._id
-                    deck.userId)
+                    deck.userId,
+                    deck._id)
                     );
                 }
                 this.decks = transformedDecks;
@@ -66,6 +66,18 @@ export class DeckService {
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json());
             });
+        
+    }
+
+    getDeck(deckId: string) {
+        
+        for (let i = 0; i < this.decks.length; i++) {
+            if (this.decks[i].deckId == deckId) {
+                return this.decks[i];
+            }
+        }
+        
+        return null;
         
     }
 
@@ -86,8 +98,8 @@ export class DeckService {
                     result.obj.name,
                     result.obj.userOwned,
                     result.obj.category,
-                    result.obj._id,
-                    result.obj.userId);
+                    result.obj.userId,
+                    result.obj._id);
                 this.decks.push(deck);
                 return deck;
             })
@@ -126,6 +138,5 @@ export class DeckService {
                 return Observable.throw(error.json());
             });
     }
-
 
 }    

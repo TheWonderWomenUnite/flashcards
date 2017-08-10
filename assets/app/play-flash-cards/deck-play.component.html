@@ -1,8 +1,17 @@
 <div class="col-xs-12">
 	<h1 style="text-align:center">
-  	These are the cards for deck - deck.name in deck.category
+  	These are the cards for {{ deck.name }} in Category {{ deck.category }}
 	</h1>
+	<a (click)="onAdd()">Add a card</a>
 </div>
 <div class="col-xs-12">
-This will be a list of cards    
+ 
+	<ul>
+		<li *ngFor="let card of cards; let i = index">
+			Side 1: {{ card.side1 }} Side 2: {{ card.side2 }} Deck Id: {{ card.deckId }} Card Id: {{ card.cardId }}
+			<a (click)="onDelete(card)">Delete this card </a>
+			<a (click)="onEdit(i)">Edit this card</a>
+		</li>
+	</ul>	
+
 </div>

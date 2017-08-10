@@ -26,12 +26,12 @@ var schema = new Schema({
 schema.post('remove', function(deck) {
 
 	// Only look for the user if this is not an orphan deck
-	if (deck.userOwned) {
-		User.findById(deck.user, function(err, user) {
-			user.decks.pull(deck);
-			user.save();
-		});
-	}
+//	if (deck.userOwned) {
+//		User.findById(deck.user, function(err, user) {
+//			user.decks.pull(deck);
+//			user.save();
+//		});
+//	}
 
 	// Remove the dependant subdocs
 	Card.remove({ deck: deck._id }).exec();

@@ -292,7 +292,12 @@ router.delete('/:id', function(req, res, next) {
                 });
 
             }
-
+           if (deck.userOwned) {
+                User.findById(deck.user, function(err, user) {
+                    user.decks.pull(deck);
+                    user.save();
+                });
+            }
             res.status(200).json({
                 message: 'Deleted Deck',
                 obj: result
@@ -301,8 +306,6 @@ router.delete('/:id', function(req, res, next) {
      });   
         
 });
-
-
 
 module.exports = router;
 // a comment

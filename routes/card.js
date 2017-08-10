@@ -1,15 +1,33 @@
 var express = require('express');
 var router = express.Router();
-var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 
 var Card = require('../models/card');
 var Deck = require('../models/deck');
 
+// A general get function to return all decks
+router.get('/', function (req, res, next) {
+    // id is the user id
+    
+    Card.find()
+        .exec(function (err, cards) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: cards
+            });
+        });
+});
+
 // for a given deck, find all of this decks cards
-router.get(':deckId', function (req, res, next) {
+router.get('/:deckId', function (req, res, next) {
     var deckId = req.params.deckId;
-    // console.log("Going to call find with string "+textObj);
+    console.log("Going to call find with deckId "+deckId);
     Card.find({deck: deckId}, function (err, cards) {
             if (err) {
                 console.log("Got an error from the find");
@@ -29,7 +47,7 @@ router.get(':deckId', function (req, res, next) {
 });
 
 // This is how you save a new card
-router.post(':deckId', function (req, res, next) {
+router.post('/:deckId', function (req, res, next) {
     Deck.findById(req.params.deckId, function(err, deck) {
         if (err) {
 
@@ -42,12 +60,14 @@ router.post(':deckId', function (req, res, next) {
             }
     
         // Create the new deck, add the user info to the deck
+        console.log("side 1 - "+req.body.side1+" side2 - "+req.body.side2);
         var card = new Card({
             side1: req.body.side1,
             side2: req.body.side2,
             deck: deck._id
         });
 
+        console.log("Going to save card");
         card.save(function(err, result) {
             if (err) {
 
@@ -115,8 +135,7 @@ router.patch('/:id', function(req, res, next) {
     });
 });
 
-// Use this route to delete decks, this deletes all cards in this
-// deck 
+// Use this route to delete a card, ID is the id of the card
 router.delete('/:id', function(req, res, next) {
 
     Card.findById(req.params.id, function(err, card) {
@@ -147,9 +166,15 @@ router.delete('/:id', function(req, res, next) {
 
         }
 
+        // Remove the reference for this card from its deck
+        // Moved from the post middleware
+        Deck.findOne({ _id: card.deck}, function(err, deck) {
+            deck.cards.pull(card);
+            deck.save();
+        });
         // Use result.deckId to remove the reference to this card in the deck
          res.status(200).json({
-            message: 'Deleted Deck',
+            message: 'Deleted Card',
             obj: result
             });
         });

@@ -54,7 +54,7 @@ import { CardService } from './shared/card.service';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AuthService, ErrorService, DeckService],
+  providers: [AuthService, ErrorService, DeckService, CardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
