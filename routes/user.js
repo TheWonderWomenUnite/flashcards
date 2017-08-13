@@ -7,6 +7,27 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
 
+// Use this route to get the user object for this userId
+router.get('/userInfo/:userId', function (req, res, next) {
+
+    var userId = req.params.userId;
+    User.findById(userId, function (err, user) {
+        if (err) {
+            console.log("Got an error from the find");
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        console.log("Didnt get an error on the find");
+        console.log(user);
+        res.status(200).json({
+            message: 'Success',
+            obj: user
+        });
+    });
+});    
+
 router.post('/', function (req, res, next) {
     var user = new User({
     	firstName: req.body.firstName,

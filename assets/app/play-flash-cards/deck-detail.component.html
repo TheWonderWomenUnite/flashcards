@@ -1,10 +1,13 @@
 <article class="panel panel-default">
     <div class="panel-body">
         {{ deck.name }}, {{ deck.category }}, {{ deck.userOwned }}, {{ deck.deckId }}, {{ deck.userId }}
+
     </div>
 	<footer class="panel-footer">
 		<div class="config">
 			<a (click)="onPlay()">Play Flashcards</a>
+			<a (click)="onDelete()">Delete this deck</a>
+			<a (click)="onEdit()">Edit this deck</a>
 		</div>
 	</footer>    
 </article>

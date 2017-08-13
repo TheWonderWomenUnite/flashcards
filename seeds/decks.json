@@ -1,9 +1,9 @@
-{
+db.decks.insert({
 	"name": "Addition",
 	"userOwned": "true",
 	"category": "Mathematics",
 	"user": {"$oid":"596e9090ac15df4d907e27e4"}
-}
+})
 {
 	"name": "Multiplication",
 	"userOwned": "true",
@@ -23,12 +23,12 @@
 	"user": {"$oid":"596e9090ac15df4d907e27e4"}
 }
 
-{
+db.decks.insert({
 	"name": "Addition",
 	"userOwned": "true",
 	"category": "Mathematics",
 	"user": {"$oid":"596e90a5ac15df4d907e27e5"}
-}
+})
 {
 	"name": "Multiplication",
 	"userOwned": "true",

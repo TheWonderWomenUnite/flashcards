@@ -13,6 +13,7 @@ import { PlayFlashCardsComponent } from './play-flash-cards/play-flash-cards.com
 import { DeckListComponent } from './play-flash-cards/deck-list.component';
 import { DeckDetailComponent } from './play-flash-cards/deck-detail.component';
 import { DeckPlayComponent } from './play-flash-cards/deck-play.component';
+import { CardDetailComponent } from './play-flash-cards/card-detail.component';
 
 import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.component';
 import { MakeListComponent } from './make-flash-cards/make-list.component';
@@ -28,6 +29,7 @@ import { SigninComponent } from "./auth/signin.component";
 import { AuthService } from './auth/auth.service';
 import { DeckService } from './shared/deck.service';
 import { CardService } from './shared/card.service';
+import { UtilsService } from './shared/utils.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { CardService } from './shared/card.service';
     DeckListComponent,
     DeckDetailComponent,
     DeckPlayComponent,
+    CardDetailComponent,
     MakeListComponent,
     MakeDetailComponent,
     MakeEditComponent,
@@ -54,7 +57,7 @@ import { CardService } from './shared/card.service';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AuthService, ErrorService, DeckService, CardService],
+  providers: [AuthService, ErrorService, DeckService, CardService, UtilsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

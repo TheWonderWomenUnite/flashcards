@@ -11,8 +11,9 @@ var Deck = require('./deck');
 var User = require('./user');
 
 var schema = new Schema({
-	lastPlayed: {type: Date, required: true},
-	progressBar: {type: String, required: true},
+	lastPlayed: {type: Date},
+	progressBar: {type: String},
+	favorite: {type: Boolean},
 	deck: {type: Schema.Types.ObjectId, ref: 'Deck'},
 	user: {type: Schema.Types.ObjectId, ref: 'User'}
 });
