@@ -1,33 +1,6 @@
-<!-- Modal: Log in/Sign Up -->
-<div class="w3-modal">
-    <div class="w3-modal-content form">
-      <span class="w3-button w3-display-topright">&times;</span>
-  
-      <form class="signup-form">
-        <input id="firstName" type="text" placeholder="First Name"/>
-        <input id="lastName" type="text" placeholder="Last Name"/>
-        <input id="email" type="text" placeholder="Email address"/>
-        <input id="password" type="password" placeholder="Password"/>
-        <button type="button" class="w3-button w3-black" id="signup_now">Sign up</button>
-        <p id="gotoLogin" class="message">Already registered? <a href="#login">Log In</a></p> 
-      </form>
-  
-    </div>
-  </div>
-
-<div class="w3-modal">
-	<div class="w3-modal-content form">
-		<span class="w3-button w3-display-topright">&times;</span>
-<p>no this isn't right</p>
-		<!--    Log in-->
-		<form class="login-form">
-			<input id="email" type="text" placeholder="Email" />
-			<input id="password" type="password" placeholder="Password" />
-			<button type="button" class="w3-button w3-black" id="login_now">login</button>
-			<p id="gotoSignin" class="message">Not registered? <a href="#login">Sign up now</a></p>
-		</form>
-	</div>
-</div>
+<!-- Default to login. -->
+<!-- TBD: add if condition if user is logging out instead of in -->
+<app-signin>
 
 
 
