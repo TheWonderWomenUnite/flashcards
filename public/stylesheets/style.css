@@ -1,17 +1,220 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
- 	background-image: url("woodgrain.jpg");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 100vh;
-}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif}
+body, html {
+    height: 100%;
+    line-height: 1.8;
+    box-sizing:border-box;
+    overflow: scroll;
+		overflow-x: hidden;
+		
+		/* moved from bgimg-1 */
+		/* TBD experiment with other backgrounds - see .bgimg-1 */
+		background-position: center;
+    background-size: cover;
+    background-image: url("../img/woodgrain.jpg"); 
+    min-height: 100vh;
 
 }
-
-a {
-  color: #00B7FF;
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
 }
+/* Full height image header */
+.bgimg-1 {
+    background-position: center;
+  
+/*  moved to <body> - use this for photo background or texture (below) */
+/*    background-size: cover;*/
+/*    background-image: url("../img/wood3.jpg");*/
+/*    background-image: url("../img/wood4.jpg");*/
+/*    background-image: url("../img/wood5.jpg");*/
+    /* background-image: url("../img/woodgrain.jpg"); */
+  
+/*  or a texture background...*/
+/*
+  background-color: #21202c;
+  background-image: url("../img/real-carbon-fibre.png");
+*/
+/*
+  background-color: #45403c;
+  background-image: url("../img/navy.png");
+*/
+/*
+  background-color: #efcda2;
+  background-image: url("../img/white-linen.png");
+*/
 
-
+  min-height: 100%;
+}
+.w3-bar .w3-button, .bottomNav p {
+    padding: 16px;
+}
+.cardSet {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */  
+  height: 100%;
+  width: 95vw;
+  max-width: 1200px;
+  margin: 0 auto;
+/*  display: block;*/
+}
+.container {
+  width: 100%;
+/*  margin-top: 35px;*/
+}
+.aspect{
+/*  for aspect ratio*/
+  width: 100%;
+  position: relative;
+  padding-top: 135%;
+}
+.smallCard, .lgCard, .symbol {
+  float: left;
+}
+.lgCard {
+  width: 30%;
+  margin: 1%;
+}
+.smallCard {
+  width: 24%;
+  margin: 5% 1% auto 1%;
+}
+.symbol {
+  width: 7%;
+  fill: #4444a7;
+}
+.symbol:hover {
+  fill: white;
+}
+.flip svg {
+  transform: rotate(180deg);
+}
+/*TBD: make font-size dynamic depending on length of text. Also adjust top margin or figure out how
+to center text vertically w/o messing up scrolling*/
+.card, .liveCard {
+  background-color: #4444a7;
+  font-size: 2vw;
+  padding: 9%;
+  text-align: center;
+/*  border: 3px solid #cccccc;*/
+  border-radius: 1.5vw;
+/*  for aspect ratio*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+/*
+  overflow: hidden;
+  overflow-y: scroll;  
+*/
+}
+/*
+TBD: look at https://www.transparenttextures.com/
+for background for back side of cards
+*/
+.card {
+/*  background-color: #3e3e7c;*/
+/*  background-image:  url("../img/twinkle-twinkle.png");*/
+}
+.liveCard {
+/*  background-color: rgb(63, 108, 91);*/
+}
+.empty {
+  background-color: transparent;
+  border: 2px dotted white;
+  box-shadow: none;
+}
+.empty .cardText {
+  display: none;
+}
+.displayModal {
+  display: block;
+}
+.hide {
+  visibility: hidden;
+}
+.cardText span {
+  font-weight: 800;
+}
+.questionSide {
+  background-image:  url("../img/twinkle-twinkle.png");
+}
+.questionSide, .answerSide {
+    -moz-box-shadow: 6px 8px 10px rgba(0, 0, 0,0.8);
+    -webkit-box-shadow: 6px 8px 10px rgba(0, 0, 0, .8);
+    box-shadow: 6px 8px 10px rgba(0, 0, 0, .8);
+}
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  background-color: transparent;
+}
+.bottomNav a {
+  margin: 0 auto;
+  width: 100%;
+}
+.bottomNav p {
+  float: right;
+  margin: 0;
+}
+/*
+.modal {
+  width: 100%; 
+  margin: 0 auto;
+}
+*/
+.thumbs {
+  justify-content: center;
+  background-color: transparent;
+/*  max-width: 500px;*/
+}
+// TBD change to svg
+.qMark a {
+  width: 100%;
+  cursor: pointer;
+/*  height: 10vw;*/
+}
+.qMark i {
+  font-size: 5em;
+}
+.thumbs svg {
+  width: 45%;
+}
+.thumbs svg, .qMark {
+  margin: 0 auto;
+  padding: 3%;
+  opacity: .8;
+}
+.thumbs a:first-child svg {
+  fill: #ff0000;
+}
+.thumbs svg:hover, .qMark:hover {
+  opacity: 1;
+}
+.thumbs a:last-child svg {
+  fill: #00ff61;
+}
+.cardText {
+  background-color: white;
+  color: black;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 5px;
+}
+.card .cardText {
+  height: 88%;
+}
+.liveCard .cardText {
+  height: 75%;
+}
+.w3-button:hover {
+  opacity: .7;
+}
+.lgCard a {
+  width: 100%;
+  height: 100%;
+}
+.bottomNav {
+  box-shadow: none;
+}

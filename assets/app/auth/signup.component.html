@@ -1,4 +1,26 @@
-<div class="col-md-8 col-md-offset-2">
+<!-- Modal: Sign Up -->
+<div class="w3-modal">
+  <div class="w3-modal-content form">
+    <span class="w3-button w3-display-topright">&times;</span>
+
+<!-- DMZ: need to understand formGroup stuff -->
+    <!--    Sign up-->
+    <form class="signup-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <input id="firstName" type="text" placeholder="First Name" formControlName="firstName"/>
+      <input id="lastName" type="text" placeholder="Last Name" formControlName="lastName"/>
+      <input id="email" type="text" placeholder="Email address" formControlName="email"/>
+      <input id="password" type="password" placeholder="Password" formControlName="password"/>
+
+      <!-- <button type="submit" [disabled]="!myForm.valid" class="w3-button w3-black" id="signup_now">Sign up</button> -->
+      <button type="submit" class="w3-button w3-black" id="signup_now">Sign up</button>
+      
+      <p id="gotoLogin" class="message">Already registered? <a href="#login">Log In</a></p> 
+    </form>
+
+  </div>
+</div>
+
+<!-- <div class="col-md-8 col-md-offset-2">
 	<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
 		<div class="form-group">
 			<label for="firstName">First Name</label>
@@ -39,4 +61,4 @@
 			[disabled]="!myForm.valid" 
 			>Submit</button>
 	</form>
-</div>
+</div> -->

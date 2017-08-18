@@ -1,4 +1,20 @@
-<div class="col-md-8 col-md-offset-2">
+<!-- Modal: Log In -->
+<div class="w3-modal">
+	<div class="w3-modal-content form">
+		<span class="w3-button w3-display-topright">&times;</span>
+
+		<!--    Log in-->
+		<form class="login-form">
+			<input id="email" type="text" placeholder="Email" />
+			<input id="password" type="password" placeholder="Password" />
+			<button type="button" class="w3-button w3-black" id="login_now">login</button>
+			<p id="gotoSignin" class="message">Not registered? <a href="#login">Sign up now</a></p>
+		</form>
+	</div>
+</div>
+
+
+<!-- <div class="col-md-8 col-md-offset-2">
 	<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
 		<div class="form-group">
 			<label for="email">Email</label>
@@ -22,4 +38,4 @@
 			[disabled]="!myForm.valid" 
 			>Submit</button>
 	</form>
-</div>
+</div> -->

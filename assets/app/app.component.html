@@ -1,26 +1,55 @@
 <div class="container-fluid">
-  <h2>Welcome to Ultimate FlashCards!</h2>
+
+  <!-- Navbar (sit on top) -->
+   <div class="w3-top">
+    <div class="w3-bar w3-text-white" id="myNavbar">
+      <a href="#home" class="w3-bar-item w3-button w3-wide">ULTIMATE FLASH CARDS</a> 
+      <!-- Right-sided navbar links -->
+       <div class="w3-right w3-hide-small  w3-hide-medium">
+        <!-- <a [routerLink]="['/auth']" class="w3-bar-item w3-button" id="main_login">LOG IN</a>
+        <a [routerLink]="['/auth']" class="w3-bar-item w3-button" id="main_signup">SIGN UP</a> -->
+        <a [routerLink]="['/auth/signin']" class="w3-bar-item w3-button" id="main_login">LOG IN</a>
+        <a [routerLink]="['/auth/signup']" class="w3-bar-item w3-button" id="main_signup">SIGN UP</a>
+        <a routerLink="/makeflashcards" class="w3-bar-item w3-button" id="main_make"><i class="fa fa-pencil-square-o"></i> MAKE FLASH CARDS</a>
+        <a routerLink="/playflashcards" class="w3-bar-item w3-button" id="main_play"><i class="fa fa-th"></i> PLAY FLASH CARDS</a>
+      </div> 
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+       <!-- <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large" id="menu_icon">
+        <i class="fa fa-bars"></i>
+      </a>  -->
+     </div>
+  </div> 
+
+  <!--  Welcome Section-->
+  <!-- Want this to close when user makes selection. would this need to be separate component? -->
+  <!-- <div id="welcome" class="container w3-display-left w3-text-white">
+    <h1>Welcome to Ultimate Flash Cards!</h1>
+  </div> -->
+
+
+    <!-- <h2>Welcome to Ultimate FlashCards!</h2>
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs">  -->
       <!-- Need to use property binding on routerLinkActiveOptions because it takes a javascript 
             object, not a string -->
       <!-- [routerLinkActiveOptions]="{exact: true}"> -->
-        <li role="presentation" 
+        <!-- <li role="presentation" 
           routerLinkActive="active">
           <a [routerLink]="['/auth']">Authentication</a>
         </li>
         <li role="presentation" 
           routerLinkActive="active">
           <a routerLink="/makeflashcards">Make Flash Cards</a>
-        </li>
+        </li> 
         <li role="presentation" 
           routerLinkActive="active">
           <a routerLink="/playflashcards">Play Flash Cards</a>
         </li>
       </ul>
     </div>
-  </div>
+  </div>    -->
   <!-- <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"> -->
   <router-outlet></router-outlet>
 </div>
