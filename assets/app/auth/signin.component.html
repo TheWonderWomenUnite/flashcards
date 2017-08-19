@@ -1,14 +1,19 @@
 <!-- Modal: Log In -->
 <div class="w3-modal">
 	<div class="w3-modal-content form">
-		<span class="w3-button w3-display-topright">&times;</span>
-
+		<span class="w3-button w3-display-topright" (click)="onClose()">&times;</span>
+		<a href="#" (click)="onClose()"><span class="w3-button w3-display-topright">&times;</span></a>
+		
 		<!--    Log in-->
 		<form class="login-form">
 			<input id="email" type="text" placeholder="Email" />
 			<input id="password" type="password" placeholder="Password" />
 			<button type="button" class="w3-button w3-black" id="login_now">login</button>
-			<p id="gotoSignin" class="message">Not registered? <a href="#login">Sign up now</a></p>
+
+			<!-- DMZ TBD: add code to  switch to <app-signup> if user clicks this -->
+			<!-- Question for Lisa: the href='#' makes my modal close, 
+			but I assume this will really get accomplished with routing? not sure... -->
+			<p id="gotoSignin" class="message">Not registered? <a href="#" (click)="onSwitchToSignup()">Sign up now</a></p>
 		</form>
 	</div>
 </div>

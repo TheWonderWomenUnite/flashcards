@@ -30,6 +30,12 @@ export class SigninComponent implements OnInit {
 				);
 		this.myForm.reset();
 	}
+	onSwitchToSignup() {
+		console.log('user wants to change to signup');
+	}
+	onClose() {
+		console.log('user clicked X to close');
+	}
 
 	ngOnInit() {
 		this.myForm = new FormGroup({

@@ -31,6 +31,13 @@ export class SignupComponent implements OnInit {
 				error => console.error(error)
 				);
 		this.myForm.reset();
+		this.router.navigate('', {relativeTo: this.route});
+	}
+	onSwitchToSignin() {
+		console.log('user wants to change to signin');
+	}
+	onClose() {
+		console.log('user clicked X to close');
 	}
 
 	ngOnInit() {
