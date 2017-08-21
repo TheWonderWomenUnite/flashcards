@@ -91,6 +91,9 @@ router.post('/', function (req, res, next) {
             name: req.body.name,
             userOwned: req.body.userOwned,
             category: req.body.category,
+            lastPlayed: null,
+            progressBar: 0,
+            favorite: false,
             user: user._id
         });
 
@@ -138,6 +141,9 @@ router.post('/clone/:id', function(req, res, next) {
                 name: deck.name,
                 userOwned: true, 
                 category: deck.category,
+                lastPlayed: null,
+                progressBar: 0,
+                favorite: false,
                 user: user._id 
             });
             newDeck.save(function(err, deck) {
@@ -172,8 +178,9 @@ router.post('/clone/:id', function(req, res, next) {
     }); // end of User.findById
 }); // end of router.Post
 
-// Use this route to update deck details like name, category, or userOwned
-// this does not affect the cards for this deck
+// Use this route to update deck details like name, category, userOwned, 
+// lastPlayed, progressBar, and favorite.
+// This does not affect the cards for this deck
 router.patch('/:id', function(req, res, next) {
 
     var decoded = jwt.decode(req.query.token);
@@ -202,6 +209,9 @@ router.patch('/:id', function(req, res, next) {
         deck.name = req.body.name;
         deck.userOwned = req.body.userOwned;
         deck.category = req.body.category;
+        deck.lastPlayed = req.body.lastPlayed;
+        deck.progressBar = req.body.progressBar;
+        deck.favorite = req.body.favorite;
         deck.save(function(err, result) {
             if (err) {
                 return res.status(500).json({
@@ -230,7 +240,7 @@ router.delete('/:id', function(req, res, next) {
             }); 
         }
         if (!deck) {
-            // The message couldn't be found, return with an error
+            // The deck couldn't be found, return with an error
             return res.status(500).json({
                 title: 'No deck Found',
                 error: {message: 'Deck not found'}

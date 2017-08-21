@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { DeckListComponent } from './deck-list.component';
 
@@ -9,11 +10,10 @@ import { DeckListComponent } from './deck-list.component';
 
 })
 
-export class PlayFlashCardsComponent implements OnInit {
+export class PlayFlashCardsComponent {
+// The main component for the PlayFlashCards Module
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  constructor(private route: ActivatedRoute,
+			  private router: Router) { }
+  
 }

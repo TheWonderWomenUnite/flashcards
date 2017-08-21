@@ -15,4 +15,5 @@ export const flashcard_routes: Routes = [
 	imports: [RouterModule.forChild(flashcard_routes)],
 	exports: [RouterModule]
 })
+
 export class FlashcardRoutingModule {}

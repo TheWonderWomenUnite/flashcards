@@ -9,8 +9,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Deck = require('./deck');
-var UserDeck = require('./userdeck');
-
 
 // We need this to validate the uniqueness of the email field,
 // we did npm install on it to include it in the app
@@ -22,13 +20,11 @@ var schema = new Schema({
 	password: {type: String, required: true},
 	email: {type: String, required: true, unique: true},
 	decks: [{type: Schema.Types.ObjectId, ref: 'Deck'}],
-	userdecks: [{type: Schema.Types.ObjectId, ref: 'UserDeck'}]
 });
 
 // When you remove a user, remove the dependant subdocs in decks and userdecks
 schema.post('remove', function(user) {
 	Deck.remove({ user: user._id }).exec();
-	UserDeck.remove({ user: user._id }).exec();
 });
 
 // This is how we use the validator

@@ -27,6 +27,9 @@ export class DeckService {
                     deck.name,
                     deck.userOwned,
                     deck.category,
+                    deck.lastPlayed,
+                    deck.progressBar,
+                    deck.favorite,
                     deck.user,
                     deck._id)
                     );
@@ -54,6 +57,9 @@ export class DeckService {
                     deck.name,
                     deck.userOwned,
                     deck.category,
+                    deck.lastPlayed,
+                    deck.progressBar,
+                    deck.favorite,
                     deck.user,
                     deck._id)
                     );
@@ -97,6 +103,9 @@ export class DeckService {
                     result.name,
                     result.userOwned,
                     result.category,
+                    result.lastPlayed,
+                    result.progressBar,
+                    result.favorite,
                     result.user,
                     result._id);
                 // Update this.decks array
@@ -125,6 +134,9 @@ export class DeckService {
                     result.name,
                     result.userOwned,
                     result.category,
+                    result.lastPlayed,
+                    result.progressBar,
+                    result.favorite,
                     result.user,
                     result._id);
 
@@ -135,6 +147,9 @@ export class DeckService {
                         this.decks.name = deck.name;
                         this.decks.userOwned = deck.userOwned;
                         this.decks.category = deck.category;
+                        this.decks.lastPlayed = deck.lastPlayed;
+                        this.decks.progressBar = deck.progressBar;
+                        this.decks.favorite = deck.favorite;
                     }
                 }
                 

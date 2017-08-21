@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { Card } from "../models/card.model";
 import { CardService } from "../shared/card.service";
 import { UtilsService } from "../shared/utils.service";
@@ -8,14 +8,13 @@ import { UtilsService } from "../shared/utils.service";
     templateUrl: './card-detail.component.html'    
 })
 
-export class CardDetailComponent implements OnInit {
+export class CardDetailComponent {
+  // Not currently used, originally for testing the card services
+  // This functionality has been moved to the makeflashcard module
 	@Input() card: Card;
 
   	constructor(private cardService: CardService,
   				private utilsService: UtilsService) { }
-
-    ngOnInit() {
-    }  
 
   	onEdit() {
     	console.log("CardDetail -> onEdit: card Id is "+this.card.cardId);

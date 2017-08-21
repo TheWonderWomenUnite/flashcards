@@ -1,4 +1,0 @@
-<p *ngIf="authService.loggedIn">User is Logged In</p>
-<p *ngIf="!authService.loggedIn">User is not Logged In</p>
-<button [ngStyle]="{ backgroundColor: authService.loggedIn ? 'red' : 'green' }" class="btn btn-default" (click)="onLogin()">Login</button>
-<button [ngStyle]="{ backgroundColor: authService.loggedIn ? 'green' : 'red' }" class="btn btn-default" (click)="onLogout()">Logout</button>

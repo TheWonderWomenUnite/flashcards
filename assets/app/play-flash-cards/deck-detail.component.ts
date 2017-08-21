@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Deck } from "../models/deck.model";
@@ -10,7 +10,14 @@ import { UtilsService } from "../shared/utils.service";
     templateUrl: './deck-detail.component.html'    
 })
 
-export class DeckDetailComponent implements OnInit {
+export class DeckDetailComponent {
+  // This component displays the details of a deck. There are 
+  // three buttons with click listeners on the template
+  // onPlay - routes the user to the deck-play component
+  // onEdit - for testing purposes, uses random data to test the deckservice 
+  // updateDeck method
+  // onDelete = for testing purposes, allows the user to delete a deck  
+
   @Input() deck: Deck;
 
   constructor(private deckService: DeckService,
@@ -23,24 +30,31 @@ export class DeckDetailComponent implements OnInit {
 
 	}
 
-  	onEdit() {
-    	console.log("DeckDetail-> onEdit: deck Id is "+this.deck.deckId);
+	onEdit() {
+    // This is here to test the deck service - edit a deck with 
+    // a bunch of random data
+  	console.log("DeckDetail-> onEdit: deck Id is "+this.deck.deckId);
 
-    	const editDeck = new Deck(
-    		this.utilsService.randomString(12), 
-    		true, 
-    		this.utilsService.randomString(12),
-        this.deck.userId,
-        this.deck.deckId);
-    	
-    	this.deckService.updateDeck(editDeck).subscribe(
-    	  (deck: Deck) => {
-    	    console.log(deck);
-    	  });
-  	}
+  	const editDeck = new Deck(
+  		this.utilsService.randomString(12), 
+  		true, 
+  		this.utilsService.randomString(12),
+      Date.now(),
+      Math.floor((Math.random() * 10) + 1),
+      false,
+      this.deck.userId,
+      this.deck.deckId);
+  	
+  	this.deckService.updateDeck(editDeck).subscribe(
+  	  (deck: Deck) => {
+  	    console.log(deck);
+  	  });
+	}
 
 	  onDelete() {
-	    console.log("DeckDetail-> onDelete: deck Id = "+this.deck.deckId);
+      // This is here to test the deck service - delete a deck
+      // given an ID
+      console.log("DeckDetail-> onDelete: deck Id = "+this.deck.deckId);
 	    this.deckService.deleteDeck(this.deck).subscribe(
 	      (deck: Deck) => {
 	        console.log(deck);
