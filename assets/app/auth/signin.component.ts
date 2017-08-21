@@ -16,7 +16,7 @@ export class SigninComponent implements OnInit {
 	constructor(private authService: AuthService, private router: Router) {} 
 
 	onSubmit() {
-		// console.log(this.myForm);
+		console.log('running onSubmit in signin.component.ts');
 		const user = new User(this.myForm.value.email, this.myForm.value.password);
 		this.authService.signin(user) 
 			.subscribe(
@@ -29,6 +29,12 @@ export class SigninComponent implements OnInit {
 				error => console.error(error)
 				);
 		this.myForm.reset();
+	}
+	onSwitchToSignup() {
+		console.log('user wants to change to signup');
+	}
+	onClose() {
+		console.log('user clicked X to close');
 	}
 
 	ngOnInit() {
