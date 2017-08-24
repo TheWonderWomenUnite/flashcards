@@ -44,8 +44,9 @@ body, html {
 
   min-height: 100%;
 }
-.w3-bar .w3-button, .bottomNav p {
-    padding: 16px;
+/* .w3-bar .w3-button, .bottomNav p { */
+.w3-bar .w3-bar-item, .bottomNav p {
+    padding: 16px;  
 }
 .cardSet {
   display: flex;
