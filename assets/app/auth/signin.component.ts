@@ -32,9 +32,11 @@ export class SigninComponent implements OnInit {
 	}
 	onSwitchToSignup() {
 		console.log('user wants to change to signup');
+		this.router.navigate(['./', 'signup'], {relativeTo: this.route});		
 	}
 	onClose() {
 		console.log('user clicked X to close');
+		this.router.navigateByUrl('/');
 	}
 
 	ngOnInit() {
