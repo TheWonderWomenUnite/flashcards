@@ -1,14 +1,21 @@
 <article class="panel panel-default">
     <div class="panel-body">
-        {{ deck.name }}, {{ deck.category }}, {{ deck.userOwned }}, 
-        {{ deck.lastPlayed }}, {{ deck.progressBar }}, {{ deck.favorite }}, {{ deck.deckId }}, {{ deck.userId }}
-
+        <h4> {{ deck.category }} - {{ deck.name }} </h4> 
+        <div *ngIf="deck.lastPlayed">
+	        Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
+	        <span *ngIf="deck.favorite">Favorite!</span> 
+	        <span *ngIf="!deck.favorite">Not a Favorite!</span> 
+	        Progress: {{ deck.progressBar | number:'1.0-0' }}%
+ 		</div>
     </div>
 	<footer class="panel-footer">
-		<div class="config">
-			<a (click)="onPlay()">Play Flashcards</a>
-			<a (click)="onDelete()">Delete this deck</a>
-			<a (click)="onEdit()">Edit this deck</a>
+		<div>
+			<button class="btn btn-success" 
+				(click)="onPlay()">Play Flashcards</button>
+			<button class="btn btn-warning" 
+				(click)="onEdit()">Edit this deck</button>
+			<button class="btn btn-danger" 
+				(click)="onDelete()">Delete this deck</button>
 		</div>
 	</footer>    
 </article>

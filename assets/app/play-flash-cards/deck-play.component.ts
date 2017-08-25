@@ -13,7 +13,8 @@ import { UtilsService } from '../shared/utils.service';
 
 @Component({
     selector: 'app-deck-play',
-    templateUrl: './deck-play.component.html'
+    templateUrl: './deck-play.component.html',
+    styleUrls: ['./deck-play.component.css']
 })
 
 export class DeckPlayComponent implements ngOnInit {
@@ -41,7 +42,7 @@ export class DeckPlayComponent implements ngOnInit {
         // Get the deck Id from the route parameters
 				const deckId = params['id'];
         this.deck = this.deckService.getDeck(deckId);
-        this.favorite = this.deck.favorite ? 'red': 'blue';
+        this.favorite = this.deck.favorite ? 'green': 'red';
 
         // Get the cards for this deck;
         console.log("Going to get cards");

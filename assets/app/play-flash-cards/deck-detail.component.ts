@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { PercentPipe } from '@angular/common';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Deck } from "../models/deck.model";

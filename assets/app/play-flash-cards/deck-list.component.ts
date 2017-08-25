@@ -7,14 +7,8 @@ import { UtilsService } from "../shared/utils.service";
 
 @Component({
     selector: 'app-deck-list',
-    template: `
-        <div class="col-md-12"> 
-            <app-deck-detail
-                   [deck]="deck"
-                    *ngFor="let deck of decks"></app-deck-detail>
-              
-        </div>
-    `
+    templateUrl: './deck-list.component.html',
+    styleUrls: ['./deck-list.component.css']
 })
 
 export class DeckListComponent implements OnInit {

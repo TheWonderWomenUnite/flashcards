@@ -1,0 +1,39 @@
+.playing-field {
+	position: relative;
+	padding-top: 20%;
+	left: 10%;
+}
+.button-row {
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.left-caret {
+	padding-top:75px;
+}
+
+.right-caret {
+	padding-top:75px;
+}
+
+.flash-card {
+	height:200px;
+	width: 100px;
+	border-top: 2px solid #000066;
+	border-left: 2px solid #000066;
+	border-right: 2px solid #000066;
+	border-bottom: 10px solid #000066;
+	border-radius: 5px;
+	background:white;
+}
+
+.flashcard-text {
+	padding-top: 10px;
+	font-size: 24px;
+	text-align: center;
+}
+
+.thumbs-area {
+	padding-top: 10px;
+    margin: 0 auto;
+}
