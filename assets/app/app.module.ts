@@ -13,7 +13,6 @@ import { PlayFlashCardsComponent } from './play-flash-cards/play-flash-cards.com
 import { DeckListComponent } from './play-flash-cards/deck-list.component';
 import { DeckDetailComponent } from './play-flash-cards/deck-detail.component';
 import { DeckPlayComponent } from './play-flash-cards/deck-play.component';
-import { CardDetailComponent } from './play-flash-cards/card-detail.component';
 
 import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.component';
 import { MakeListComponent } from './make-flash-cards/make-list.component';
@@ -40,7 +39,6 @@ import { UtilsService } from './shared/utils.service';
     DeckListComponent,
     DeckDetailComponent,
     DeckPlayComponent,
-    CardDetailComponent,
     MakeListComponent,
     MakeDetailComponent,
     MakeEditComponent,
