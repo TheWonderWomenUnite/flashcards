@@ -7,19 +7,38 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
 
+// A general get function to return all users
+router.get('/', function (req, res, next) {
+    
+    User.find()
+        .exec(function (err, users) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'Error finding users',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Success',
+                obj: users
+            });
+        });
+});
+
 // Use this route to get the user object for this userId
-router.get('/userInfo/:userId', function (req, res, next) {
+router.get('/:userId', function (req, res, next) {
 
     var userId = req.params.userId;
+    console.log("User->get:going to call findbyId with userId: "+userId);
     User.findById(userId, function (err, user) {
         if (err) {
-            console.log("Got an error from the find");
+            console.log("User->get:Got an error from the find");
             return res.status(500).json({
                 title: 'An error occurred',
                 error: err
             });
         }
-        console.log("Didnt get an error on the find");
+        console.log("User->get:Didnt get an error on the find");
         console.log(user);
         res.status(200).json({
             message: 'Success',
