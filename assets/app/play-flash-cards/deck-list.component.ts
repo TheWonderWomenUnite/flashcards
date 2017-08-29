@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Deck } from "../models/deck.model";
 import { DeckService } from "../shared/deck.service";
@@ -17,24 +18,30 @@ export class DeckListComponent implements OnInit {
     decks: Deck[];
     userId: string;
 
-    constructor(private deckService: DeckService,
+    constructor(private route: ActivatedRoute,
+                private deckService: DeckService,
                 private utilsService: UtilsService) {
     }
 
     ngOnInit() {
 
         // Get the current userId from local storage 
-        this.userId = localStorage.getItem('UserId');
-        console.log("DeckList -> ngOnInit: UserId = "+this.userId);
-        // Go get the decks from the database
-        this.deckService.getDecks(this.userId)
-            .subscribe(
-                (decks: Deck[]) => {
-                    console.log(decks);
-                    this.decks = decks;
-                }
-            );
-            
+        // this.userId = localStorage.getItem('UserId');
+        // console.log("DeckList -> ngOnInit: UserId = "+this.userId);
+
+        // Now, get the userId from the params, as we are now being
+        // routed to here
+        this.route.params
+            .subscribe((params: Params) =>{
+                // Get the user Id from the route parameters
+                this.userId = params['id'];
+                this.deckService.getDecks(this.userId)
+                    .subscribe(
+                        (decks: Deck[]) => {
+                        console.log(decks);
+                        this.decks = decks;
+                    });
+            });            
     }
 
     /*

@@ -24,16 +24,24 @@ export class DeckPlayComponent implements ngOnInit {
   currIndex = 0;
   faceUp = true;
   displayThumbs = 'none';
-  favorite = 'green';
   currentCard: Card;
   nextCard: Card;
   previousCard: Card;
+  const backButton = "../img/back_button.png";
+  const thumbsUp = "../img/thumbsUp.png";
+  const thumbsDown = "../img/thumbsDown.png";
+  const heartFilled = "../img/heart_filled.png";
+  const heartUnfilled = "../img/heart_unfilled.png";
+  const questionMark = "../img/questionMark.png";
+  const rightCaret = "../img/right_caret.png";
+  const leftCaret = "../img/left_caret.png";
+  displayBar = "../img/progressbarstart.png";
 
 	constructor(private route: ActivatedRoute,
+              private router: Router,
               private cardService: CardService,
               private deckService: DeckService,
-              private utilsService: UtilsService,
-        		  private router: Router) { }
+              private utilsService: UtilsService) { }
 
 	ngOnInit() {
 		this.route.params
@@ -42,7 +50,6 @@ export class DeckPlayComponent implements ngOnInit {
         // Get the deck Id from the route parameters
 				const deckId = params['id'];
         this.deck = this.deckService.getDeck(deckId);
-        this.favorite = this.deck.favorite ? 'green': 'red';
 
         // Get the cards for this deck;
         console.log("Going to get cards");
@@ -54,6 +61,7 @@ export class DeckPlayComponent implements ngOnInit {
             this.faceUp = true;
             this.deck.lastPlayed = Date.now();
             this.updateDeckInfo(this.deck);
+            this.updateProgressBar();
             this.currentCard = this.cards[this.currIndex];
             this.nextCard = this.cards[this.currIndex + 1];
             this.previousCard = this.cards[this.cards.length-1];
@@ -135,13 +143,49 @@ export class DeckPlayComponent implements ngOnInit {
 
     const incNumber = ((1/this.cards.length) * 100);
 
+    console.log("Number of cards = "+ this.cards.length+ 
+      " incNumber = "+ incNumber+
+      " before math, prog bar = "+this.deck.progressBar);
+
     this.deck.progressBar = (upOrDown) ? 
       this.deck.progressBar + incNumber : 
       this.deck.progressBar - incNumber;
+
+    if (this.deck.progressBar > 100) {
+      this.deck.progressBar = 100; 
+    } else if (this.deck.progressBar < 0) {
+      this.deck.progressBar = 0; 
+    }
+
     this.updateDeckInfo(this.deck);
+    this.updateProgressBar();
     this.goNext(true);
   }
 
+  updateProgressBar() {
+    if (this.deck.progressBar < 20) {
+      this.displayBar = "../img/progressbarstart.png";
+    }
+    else if (this.deck.progressBar < 40) {
+      this.displayBar = "../img/progressbar20.png";
+    }
+    else if (this.deck.progressBar < 60) {
+      this.displayBar = "../img/progressbar40.png";
+    }
+    else if (this.deck.progressBar < 80) {
+      this.displayBar = "../img/progressbar60.png";
+    }
+    else if (this.deck.progressBar < 100) {
+      this.displayBar = "../img/progressbar80.png";
+    }
+    else {
+      this.displayBar = "../img/progressbar100.png"; 
+    }
+
+
+  }
+
+/*
   onAdd() {
     // Add a new card to this deck - keeping for testing purposes
 
@@ -155,14 +199,20 @@ export class DeckPlayComponent implements ngOnInit {
         this.cards.push(card);
       });
   } 
-
+*/
   onFavorite() {
     // Toggle favorite for this deck
-
     this.deck.favorite = !this.deck.favorite;
-    this.favorite = this.deck.favorite ? 'green' : 'red';
     this.updateDeckInfo(this.deck);
 
+    }
+
+    onHelp() {
+
+    }
+
+    onGoBack() {
+      this.router.navigate(['./playflashcards/', 'decklist', this.deck.userId]);
     }
 
   updateDeckInfo() {

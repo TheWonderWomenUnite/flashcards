@@ -27,7 +27,7 @@ export class DeckDetailComponent {
 			        private router: Router) {}
 
 	onPlay() {
-		this.router.navigate(['./', 'play', this.deck.deckId], {relativeTo: this.route});
+		this.router.navigate(['./playflashcards/', 'play', this.deck.deckId]);
 
 	}
 

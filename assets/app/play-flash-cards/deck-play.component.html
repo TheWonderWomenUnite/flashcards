@@ -2,16 +2,29 @@
 
 	<!-- Title row with buttons underneath --> 
 	<div class="row">
-		<div class="col-xs-12">
-			<h4 style="text-align:center">
+		<div class="col-xs-12 title-row">
+			<h2>
 			{{ deck.category }} - {{ deck.name }}
-			</h4>
+			</h2>
 		</div>		
-		<div class="col-xs-12 button-row">
-			<a [routerLink]="['']"><button class="btn btn-danger">Exit</button></a>
-			<button class="btn btn-success" (click)="onAdd()">Add a card</button>
-			<a [ngStyle]="{'color': favorite}" (click)="onFavorite()">I Like It!</a>
-		</div>
+		<div class="row button-row">
+			<div class="col-xs-3">
+				<a (click)="onGoBack()"><img src="{{backButton}}" /></a>
+			</div>
+			<div class="col-xs-3">
+				<a (click)="onHelp()"><img src="{{questionMark}}" /></a>
+			</div>
+			<div class="col-xs-3">
+				<div *ngIf="deck.favorite">
+					<a (click)="onFavorite()"><img src="{{heartFilled}}" /></a>
+				</div>
+				<div *ngIf="!deck.favorite">
+					<a (click)="onFavorite()"><img src="{{heartUnfilled}}" /></a>
+				</div>
+			</div>
+			<div class="col-xs-3">
+				<img src="{{displayBar}}" />
+			</div>
 	</div>
 
 	<!-- The row with the cards --> 
@@ -21,22 +34,18 @@
 			<div *ngIf="previousCard" class="flashcard-text">{{ previousCard.side1 }}</div>
 		</div>
 		<div class="col-xs-2">
-			<button type="button" 
-				(click)="onSlideLeft()" 
-				class="btn btn-default btn-sm">
-	          	<span class="glyphicon glyphicon-chevron-left"></span> Left
-	        </button>
+			<a (click)="onSlideLeft()">
+	          	<img src="{{leftCaret}}" />
+	        </a>
 		</div>
 		<div class="col-xs-3 flash-card" id="middle-card">
 			<a *ngIf="faceUp && currentCard" class="flashcard-text" (click)="showAnswer()">{{ currentCard.side1 }}</a>
 			<a *ngIf="!faceUp && currentCard" class="flashcard-text" (click)="faceup=true">{{ currentCard.side2 }}</a>
 		</div>
 		<div class="col-xs-2">
-			<button type="button" 
-				(click)="onSlideRight()" 
-				class="btn btn-default btn-sm">
-	          	<span class="glyphicon glyphicon-chevron-right"></span> Right
-        	</button>
+			<a (click)="onSlideRight()">
+	          	<img src="{{rightCaret}}" />
+        	</a>
 		</div>
 		<div class="col-xs-3 flash-card" id="right-card">
 			<div *ngIf="nextCard" class="flashcard-text">{{ nextCard.side1 }}</div>
@@ -44,10 +53,10 @@
 	</div>
 
 	<!-- Display the thumbs up or down --> 
-	<div class="row thumbs-area" [ngStyle]="{'display': displayThumbs}">
-		<button class="btn btn-primary" (click)="onThumbsUpOrDown(true)">
-		Thumbs Up</button>
-		<button class="btn btn-primary" (click)="onThumbsUpOrDown(false)">
-		Thumbs Dn</button>
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4 thumbs-area" [ngStyle]="{'display': displayThumbs}">
+			<a (click)="onThumbsUpOrDown(true)"><img src="{{thumbsUp}}" /></a>
+			<a (click)="onThumbsUpOrDown(false)"><img src="{{thumbsDown}}" /></a>
+		</div>
 	</div>
 </div>

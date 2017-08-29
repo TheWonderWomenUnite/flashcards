@@ -1,21 +1,22 @@
-<article class="panel panel-default">
-    <div class="panel-body">
-        <h4> {{ deck.category }} - {{ deck.name }} </h4> 
-        <div *ngIf="deck.lastPlayed">
-	        Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
-	        <span *ngIf="deck.favorite">Favorite!</span> 
-	        <span *ngIf="!deck.favorite">Not a Favorite!</span> 
-	        Progress: {{ deck.progressBar | number:'1.0-0' }}%
- 		</div>
-    </div>
-	<footer class="panel-footer">
-		<div>
-			<button class="btn btn-success" 
-				(click)="onPlay()">Play Flashcards</button>
-			<button class="btn btn-warning" 
-				(click)="onEdit()">Edit this deck</button>
-			<button class="btn btn-danger" 
-				(click)="onDelete()">Delete this deck</button>
-		</div>
-	</footer>    
-</article>
+	<article class="panel panel-default">
+	    <div class="panel-body">
+	        <h4> {{ deck.category }} - {{ deck.name }} </h4> 
+	        <div *ngIf="deck.lastPlayed">
+		        Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
+		        <span *ngIf="deck.favorite">Favorite!</span> 
+		        <span *ngIf="!deck.favorite">Not a Favorite!</span> 
+		        Progress: {{ deck.progressBar | number:'1.0-0' }}%
+	 		</div>
+	    </div>
+		<footer class="panel-footer">
+			<div>
+				<button class="btn btn-success" 
+					(click)="onPlay()">Play Flashcards</button>
+				<button class="btn btn-warning" 
+					(click)="onEdit()">Edit this deck</button>
+				<button class="btn btn-danger" 
+					(click)="onDelete()">Delete this deck</button>
+			</div>
+		</footer>    
+	</article>
+

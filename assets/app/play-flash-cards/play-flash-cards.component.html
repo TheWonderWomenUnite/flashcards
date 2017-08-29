@@ -1,15 +1,22 @@
 <div>
-	<div class="col-xs-3 col-xs-offset-3">
-		<h4>Hello, {{ userName }}</h4>
+	<div class="fc-header">
+		<div class="col-xs-3 col-xs-offset-3">
+			<h4>Hello, {{ userName }}</h4>
+		</div>
+		<div class="col-xs-6">
+			<img class="img-circle"
+				 src="https://www.gravatar.com/avatar/{{gravHash}}.jpg" />
+		</div>
 	</div>
-	<div class="col-xs-6">
-		<img class="img-circle"
-			 src="https://www.gravatar.com/avatar/{{gravHash}}.jpg" />
+	<div class="col-xs-12">
+		<router-outlet></router-outlet>
 	</div>
+<!-- 
 	<div class="col-md-5">
 		<app-deck-list></app-deck-list>
 	</div>
 	<div class="col-md-7">
 		<router-outlet></router-outlet>
 	</div>
+--> 
 </div>	

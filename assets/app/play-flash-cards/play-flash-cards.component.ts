@@ -32,6 +32,8 @@ export class PlayFlashCardsComponent implements ngOnInit {
                     console.log(user);
                     this.userName = this.authService.getUserName();
  				    this.gravHash = this.authService.getGravHash();
+ 				    // Now route to the deck-list
+		    		this.router.navigate(['./', 'decklist', UserId], {relativeTo: this.route});
                 }
             );
 		}  
