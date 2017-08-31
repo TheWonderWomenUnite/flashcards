@@ -27,15 +27,16 @@ export class DeckPlayComponent implements ngOnInit {
   currentCard: Card;
   nextCard: Card;
   previousCard: Card;
+
   const backButton = "../img/back_button.png";
   const thumbsUp = "../img/thumbsUp.png";
   const thumbsDown = "../img/thumbsDown.png";
-  const heartFilled = "../img/heart_filled.png";
-  const heartUnfilled = "../img/heart_unfilled.png";
+
   const questionMark = "../img/questionMark.png";
   const rightCaret = "../img/right_caret.png";
   const leftCaret = "../img/left_caret.png";
-  displayBar = "../img/progressbarstart.png";
+  displayBar = "";
+  displayHeart = "";
 
 	constructor(private route: ActivatedRoute,
               private router: Router,
@@ -55,13 +56,16 @@ export class DeckPlayComponent implements ngOnInit {
         console.log("Going to get cards");
 				this.cardService.getCards(this.deck.deckId)
         	.subscribe((cards: Card[]) => {
-            // we have our cards, initialize values to start the game
+            // we have our cards, shuffle them and initialize values 
+            // to start the game
          		this.cards = cards;
+            this.deckShuffle();
          		console.log(this.cards);
             this.faceUp = true;
             this.deck.lastPlayed = Date.now();
             this.updateDeckInfo(this.deck);
-            this.updateProgressBar();
+            this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+            this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
             this.currentCard = this.cards[this.currIndex];
             this.nextCard = this.cards[this.currIndex + 1];
             this.previousCard = this.cards[this.cards.length-1];
@@ -158,32 +162,11 @@ export class DeckPlayComponent implements ngOnInit {
     }
 
     this.updateDeckInfo(this.deck);
-    this.updateProgressBar();
+    this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
     this.goNext(true);
   }
 
-  updateProgressBar() {
-    if (this.deck.progressBar < 20) {
-      this.displayBar = "../img/progressbarstart.png";
-    }
-    else if (this.deck.progressBar < 40) {
-      this.displayBar = "../img/progressbar20.png";
-    }
-    else if (this.deck.progressBar < 60) {
-      this.displayBar = "../img/progressbar40.png";
-    }
-    else if (this.deck.progressBar < 80) {
-      this.displayBar = "../img/progressbar60.png";
-    }
-    else if (this.deck.progressBar < 100) {
-      this.displayBar = "../img/progressbar80.png";
-    }
-    else {
-      this.displayBar = "../img/progressbar100.png"; 
-    }
 
-
-  }
 
 /*
   onAdd() {
@@ -204,16 +187,24 @@ export class DeckPlayComponent implements ngOnInit {
     // Toggle favorite for this deck
     this.deck.favorite = !this.deck.favorite;
     this.updateDeckInfo(this.deck);
+    this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
 
     }
 
-    onHelp() {
+  onHelp() {
 
     }
 
-    onGoBack() {
+  onGoBack() {
       this.router.navigate(['./playflashcards/', 'decklist', this.deck.userId]);
     }
+
+  onResetProgressBar() {
+    this.deck.progressBar = 0; 
+    this.updateDeckInfo(this.deck);
+    this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+    
+    }    
 
   updateDeckInfo() {
     // Update the database with new info for the deck. This is called 
@@ -234,6 +225,21 @@ export class DeckPlayComponent implements ngOnInit {
       (deck: Deck) => {
         console.log(deck);
       });
+
+    }
+
+  deckShuffle() {
+    // Shuffle the deck so the cards are presented in a different order
+    // than they are in the database
+
+    tempCard: Card;
+
+    for (var i = this.cards.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tempCard = this.cards[i];
+        this.cards[i] = this.cards[j];
+        this.cards[j] = tempCard;
+      }
 
     }
 

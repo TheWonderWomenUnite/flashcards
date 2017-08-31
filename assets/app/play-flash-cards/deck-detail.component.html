@@ -3,10 +3,9 @@
 	        <h4> {{ deck.category }} - {{ deck.name }} </h4> 
 	        <div *ngIf="deck.lastPlayed">
 		        Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
-		        <span *ngIf="deck.favorite">Favorite!</span> 
-		        <span *ngIf="!deck.favorite">Not a Favorite!</span> 
-		        Progress: {{ deck.progressBar | number:'1.0-0' }}%
 	 		</div>
+			<img src="{{displayHeart}}" /> 
+	        <img src="{{displayBar}}" />
 	    </div>
 		<footer class="panel-footer">
 			<div>

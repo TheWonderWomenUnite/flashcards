@@ -11,7 +11,7 @@ import { UtilsService } from "../shared/utils.service";
     templateUrl: './deck-detail.component.html'    
 })
 
-export class DeckDetailComponent {
+export class DeckDetailComponent implements OnInit {
   // This component displays the details of a deck. There are 
   // three buttons with click listeners on the template
   // onPlay - routes the user to the deck-play component
@@ -20,11 +20,20 @@ export class DeckDetailComponent {
   // onDelete = for testing purposes, allows the user to delete a deck  
 
   @Input() deck: Deck;
+  displayBar: String = '';
+  displayHeart: String = '';
 
   constructor(private deckService: DeckService,
   		        private utilsService: UtilsService,
 	   	        private route: ActivatedRoute,
 			        private router: Router) {}
+
+  ngOnInit() {
+    // Go get the progress bar img string
+    this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+    this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+
+  }  
 
 	onPlay() {
 		this.router.navigate(['./playflashcards/', 'play', this.deck.deckId]);

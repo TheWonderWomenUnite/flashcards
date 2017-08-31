@@ -2,35 +2,36 @@
 
 	<!-- Title row with buttons underneath --> 
 	<div class="row">
-		<div class="col-xs-12 title-row">
+		<div class="col-xs-1">
+			<a (click)="onGoBack()"><img src="{{backButton}}" /></a>
+		</div>
+		<div class="col-xs-1">
+			<a (click)="onHelp()"><img src="{{questionMark}}" /></a>
+		</div>
+		<div class="col-xs-3 col-xs-offset-2 title-row">
 			<h2>
-			{{ deck.category }} - {{ deck.name }}
+			{{ deck.name }}
 			</h2>
+			<h3>
+			{{ deck.category }}
+			</h3>
 		</div>		
-		<div class="row button-row">
-			<div class="col-xs-3">
-				<a (click)="onGoBack()"><img src="{{backButton}}" /></a>
-			</div>
-			<div class="col-xs-3">
-				<a (click)="onHelp()"><img src="{{questionMark}}" /></a>
-			</div>
-			<div class="col-xs-3">
-				<div *ngIf="deck.favorite">
-					<a (click)="onFavorite()"><img src="{{heartFilled}}" /></a>
-				</div>
-				<div *ngIf="!deck.favorite">
-					<a (click)="onFavorite()"><img src="{{heartUnfilled}}" /></a>
-				</div>
-			</div>
-			<div class="col-xs-3">
+		<div class="col-xs-2">
+			<div class="imgContainer">
 				<img src="{{displayBar}}" />
-			</div>
+				<button class="btn reset-button" 
+					(click)="onResetProgressBar()">Reset Progress</button>
+			</div>	
+		</div>
+		<div class="col-xs-1 col-xs-offset-1">
+			<a (click)="onFavorite()"><img src="{{displayHeart}}" /></a>
+		</div>
 	</div>
 
 	<!-- The row with the cards --> 
 
-	<div class="row">
-		<div class="col-xs-2 flash-card" id="left-card">
+	<div class="row flash-card-row">
+		<div class="col-xs-3 flash-card" id="left-card">
 			<div *ngIf="previousCard" class="flashcard-text">{{ previousCard.side1 }}</div>
 		</div>
 		<div class="col-xs-2">

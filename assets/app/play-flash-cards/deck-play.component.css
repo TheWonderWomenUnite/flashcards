@@ -5,14 +5,12 @@
 }
 
 .title-row {
-	padding-top:10px;
-	padding-bottom:10px;
+	background-color: white;
+	border: 5px solid #27509F;
+	border-radius: 10px;
+	padding-top:5px;
+	padding-bottom:5px;
 	text-align: center;
-}
-
-.button-row {
-	padding-top:10px;
-	padding-bottom:10px;
 }
 
 .left-caret {
@@ -23,15 +21,29 @@
 	padding-top:75px;
 }
 
+.flash-card-row {
+	padding-top: 20px;
+	text-align: center;
+}
+
 .flash-card {
 	height:350px;
 	width: 200px;
-	border-top: 4px solid #000066;
-	border-left: 4px solid #000066;
-	border-right: 4px solid #000066;
-	border-bottom: 20px solid #000066;
+	background-color: white;
+	border-top: 5px solid #27509F;
+	border-left: 5px solid #27509F;
+	border-right: 5px solid #27509F;
+	border-bottom: 65px solid #27509F;
+	border-radius: 7px;
+}
+
+.reset-button {
 	border-radius: 5px;
-	background:white;
+	text-align: center;
+	background-color: #27509F;
+	color: white;
+	font-weight: bold; 
+	width: 100%;
 }
 
 .flashcard-text {
@@ -42,5 +54,4 @@
 
 .thumbs-area {
 	padding-top: 10px;
-    margin: 0 auto;
 }

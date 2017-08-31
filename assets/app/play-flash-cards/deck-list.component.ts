@@ -44,6 +44,10 @@ export class DeckListComponent implements OnInit {
             });            
     }
 
+    onSortBy(sortOrder:string) {
+        console.log("Sort by "+sortOrder);
+    }
+
     /*
     This was temporarily here to test the deck service
     To add it back in, add an "add deck" button to the template
