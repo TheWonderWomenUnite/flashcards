@@ -4,42 +4,32 @@
 		<span class="w3-button w3-display-topright" (click)="onClose()">&times;</span>
 
 		<!--    Log in-->
-		<form class="login-form">
-			<input id="email" type="text" placeholder="Email" />
-			<input id="password" type="password" placeholder="Password" />
-			<button type="button" class="w3-button w3-black" id="login_now" (click)="onSubmit()">login</button>
+		<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+			<div class="form-group">
+				<input 
+					type="email" 
+					id="email" 
+					class="form-control"
+					formControlName="email"
+					placeholder="Email" />
+			</div>
+			<div class="form-group">
+				<input 
+					type="password" 
+					id="password" 
+					class="form-control"
+					formControlName="password"
+					placeholder="Password" />
+			</div>
+			<button 
+				class="btn btn-primary" 
+				type="submit"
+				[disabled]="!myForm.valid" 
+				>LOGIN</button>
 
-			<!-- DMZ TBD: add code to  switch to <app-signup> if user clicks this -->
-			<!-- Question for Lisa: the href='#' makes my modal close, 
-			but I assume this will really get accomplished with routing? not sure... -->
-			<p id="gotoSignin" class="message">Not registered? <a href="#" (click)="onSwitchToSignup()">Sign up now</a></p>
 		</form>
+
+		<!-- DMZ TBD: figure out routing here & whether ng-href for <a> would be solution? -->
+		<p id="gotoSignin" class="message">Not registered? <a href="" (click)="onSwitchToSignup()">Sign up now</a></p>
 	</div>
 </div>
-
-
-<!-- <div class="col-md-8 col-md-offset-2">
-	<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-		<div class="form-group">
-			<label for="email">Email</label>
-			<input 
-				type="email" 
-				id="email" 
-				class="form-control"
-				formControlName="email">
-		</div>
-		<div class="form-group">
-			<label for="password">Password</label>
-			<input 
-				type="password" 
-				id="password" 
-				class="form-control"
-				formControlName="password">
-		</div>
-		<button 
-			class="btn btn-primary" 
-			type="submit"
-			[disabled]="!myForm.valid" 
-			>Submit</button>
-	</form>
-</div> -->
