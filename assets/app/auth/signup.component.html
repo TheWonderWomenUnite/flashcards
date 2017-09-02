@@ -16,7 +16,8 @@
 		<!-- DMZ TBD: add code to  switch to <app-signin> if user clicks this -->
 			<!-- Question for Lisa: the href='#' makes my modal close, 
 			but I assume this will really get accomplished with routing? not sure... -->
-		<p id="gotoLogin" class="message">Already registered? <a href="#"  (click)="onSwitchToSignup()">Log In</a></p> 
+		<!-- LMC: took out href -->			
+		<p id="gotoLogin" class="message">Already registered? <a (click)="onSwitchToSignup()">Log In</a></p> 
 	  </form>
   
 	</div>

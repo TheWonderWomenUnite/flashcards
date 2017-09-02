@@ -31,10 +31,13 @@ export class SignupComponent implements OnInit {
 				error => console.error(error)
 				);
 		this.myForm.reset();
+		// This will take the user back to the signin page?
 		this.router.navigate('', {relativeTo: this.route});
 	}
 	onSwitchToSignin() {
 		console.log('user wants to change to signin');
+	    this.router.navigate(['./auth/', 'signin']);
+
 	}
 	onClose() {
 		console.log('user clicked X to close');
