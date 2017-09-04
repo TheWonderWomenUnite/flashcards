@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from './auth.service';
 import { User } from '../models/user.model';
@@ -12,7 +13,7 @@ import { User } from '../models/user.model';
 export class SignupComponent implements OnInit {
 	myForm: FormGroup;
 
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private router: Router) {} 
 
 	onSubmit() {
 		console.log('running onSubmit in signUP.component.ts');
@@ -32,6 +33,7 @@ export class SignupComponent implements OnInit {
 				);
 		this.myForm.reset();
 		// This will take the user back to the signin page?
+		// TBD: Ask Lisa - Should routing be in callback, similar to signin.ts?
 		this.router.navigate('', {relativeTo: this.route});
 	}
 	onSwitchToSignin() {
