@@ -30,6 +30,9 @@
 		</form>
 
 		<!-- DMZ TBD: figure out routing here & whether ng-href for <a> would be solution? -->
-		<p id="gotoSignin" class="message">Not registered? <a href="" (click)="onSwitchToSignup()">Sign up now</a></p>
+		<!-- LMC Took out href="" (not needed) -->
+		<p id="gotoSignin" class="message">Not registered? 
+			<a (click)="onSwitchToSignup()">Sign up now</a>
+		</p>
 	</div>
 </div>
