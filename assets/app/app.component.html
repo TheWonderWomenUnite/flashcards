@@ -1,23 +1,68 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid"> -->
   
+
+<!--navbar - fixed on top or not? -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+  <div class="container">
+    <p class="navbar-brand" >ULTIMATE FLASH CARDS</p>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a routerLink="/playflashcards" class="nav-link">PLAY FLASH CARDS <i class="fa fa-th"></i> <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/makeflashcards" class="nav-link">MAKE FLASH CARDS<i class="fa fa-pencil-square-o"></i> </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/auth']" class="nav-link">LOG IN/SIGN UP</a>
+        </li>
+  <!--
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+  -->
+      </ul>
+    </div>
+    </div>
+  </nav>
+  
+<!--sidebar (toggles) -->
+<!-- TBD revise/implement with bootstrap instead of toggling with 'hidden' class?-->
+<!-- see https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_navbar_collapse&stacked=h -->
+<!-- also - use click on hamburger to close sidebar -->
+
+<!-- <nav class="sidebar d-lg-none hidden" id="side">
+  <a routerLink="/playflashcards">PLAY FLASH CARDS</a>
+  <a routerLink="/makeflashcards">MAKE FLASH CARDS</a>
+  <a [routerLink]="['/auth']">LOG IN/SIGN UP</a> -->
+<!--  <a href="#" class="disabled">Disabled</a>-->
+<!-- </nav> -->
+  
+<br>
+
+
+
     <!-- Navbar (sit on top) -->
-     <div class="w3-top">
+     <!-- <div class="w3-top">
       <div class="w3-bar w3-text-white" id="myNavbar">
-        <p class="w3-bar-item w3-wide">ULTIMATE FLASH CARDS</p> 
+        <p class="w3-bar-item w3-wide">ULTIMATE FLASH CARDS</p>  -->
 
         <!-- Right-sided navbar links -->
-         <div class="w3-right w3-hide-small  w3-hide-medium">
+         <!-- <div class="w3-right w3-hide-small  w3-hide-medium">
           <a [routerLink]="['/auth']" class="w3-bar-item w3-button" id="main_login">LOG IN/SIGN UP</a>
           <a routerLink="/makeflashcards" class="w3-bar-item w3-button" id="main_make"><i class="fa fa-pencil-square-o"></i> MAKE FLASH CARDS</a>
           <a routerLink="/playflashcards" class="w3-bar-item w3-button" id="main_play"><i class="fa fa-th"></i> PLAY FLASH CARDS</a>
-        </div> 
+        </div>  -->
         <!-- Hide right-floated links on small screens and replace them with a menu icon -->
   
          <!-- <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large" id="menu_icon">
           <i class="fa fa-bars"></i>
         </a>  -->
-       </div>
-    </div> 
+       <!-- </div>
+    </div>  -->
   
     <!--  Welcome Section-->
     <!-- Want this to close when user makes selection. would this need to be separate component? -->
@@ -50,5 +95,14 @@
     </div>    -->
     <!-- <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"> -->
     <router-outlet></router-outlet>
-  </div>
+
+
+    <footer class="footer navbar fixed-bottom">
+      <div class="container">
+        <p class="text-muted">During play: Deck name / fav star here / prog. bar</p>
+        <p class="text-muted">After login: grav. here instead?</p>
+      </div>
+    </footer>
+        
+  <!-- </div> -->
   <app-error></app-error>
