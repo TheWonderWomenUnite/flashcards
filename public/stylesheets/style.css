@@ -173,16 +173,16 @@ body, html {
   margin: 2%;
 */
 }
-.deck-modify, .deck-modify:hover {
+.deck-modify i, .deck-modify:hover i {
   color: limegreen;
 }
-.deck-remove, .deck-remove:hover {
+.deck-remove i, .deck-remove:hover i {
   color: red;
 }
-.deck-fav, .deck-fav:hover {
+.deck-fav i, .deck-fav:hover i {
   color: yellow;
 }
-.play-deck, .play-deck:hover, .deck-new, .deck-new:hover {
+.play-deck i, .play-deck:hover i, .deck-new i, .deck-new:hover i {
   color: #6397f8;
 }
 a[class^="deck-"], .play-deck {
