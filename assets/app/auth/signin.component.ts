@@ -25,7 +25,7 @@ export class SigninComponent implements OnInit {
 					localStorage.setItem('UserId', data.userId);
 					// After a successful login maybe it should go 
 					// To the play flashcards screen?
-					this.router.navigateByUrl('/');
+					this.router.navigateByUrl('/playflashcards');
 				},
 				error => console.error(error)
 				);
