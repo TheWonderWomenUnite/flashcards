@@ -1,13 +1,42 @@
 <article class="panel panel-default">
     <div class="panel-body">
-        {{ deck.name }}, {{ deck.category }}, {{ deck.userOwned }}, {{ deck.deckId }}, {{ deck.userId }}
+	        <h4> {{ deck.category }} - {{ deck.name }} </h4> 
+	        <div *ngIf="deck.lastPlayed">
+		        Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
+	 		</div>
+			<img src="{{displayHeart}}" /> 
+	        <img src="{{displayBar}}" />
     </div>
 	<footer class="panel-footer">
 		<div class="config">
 			<a (click)="onEdit()">Edit</a>
-			<a (click)="onAdd()">Add</a>
 			<a (click)="onDelete()">Delete</a>
-			
+			<a (click)="onFavorite()">Favorite</a>
 		</div>
 	</footer>    
 </article>
+
+<div class="backdrop" [ngStyle]="{'display': display}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button 
+            type="button" 
+            class="close" 
+            aria-label="Close"
+            (click)="onModalResponse(false)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Delete Deck</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure?</p>
+        </div>
+        <div class="modal-footer">
+        	<button type="button" class="btn btn-default" (click)="onModalResponse(true)">Yes</button>
+          	<button type="button" class="btn btn-default" (click)="onModalResponse(false)">No</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
