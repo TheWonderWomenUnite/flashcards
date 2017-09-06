@@ -56,6 +56,11 @@ body, html {
   margin-left: 0;
   box-sizing: border-box;
 }
+.footer {
+  font-size: 125%;
+  text-transform: uppercase;
+}
+
 .navbar-brand {
   letter-spacing: 4px;
   padding: 4px 8px;
@@ -92,8 +97,8 @@ body, html {
   min-height: 20vh;
 }
 .topOfDecks .col-12,.topOfDecks .col-md-3,.topOfDecks .col-sm-6 {
-  margin-top: 3vh;
-  margin-bottom: 3vh;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
   color: white;
 }
 .topOfDecks .btn-group {
@@ -110,9 +115,9 @@ body, html {
 .hidden {
   display: none !important;
 }
-.aspect{
- /* for aspect ratio */
-  /* width: 100%; */
+.aspect {
+/*  for aspect ratio*/
+  /*width: 100%;*/ /* not working in ang */
   width: 250px;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -128,7 +133,7 @@ body, html {
   overflow: hidden;
   overflow-y: scroll;
 }
-.deckSelect {
+.deckSelect, .liveGame {
   margin-top: 20px;
   margin-bottom: 50px;
 }
@@ -148,9 +153,11 @@ body, html {
   border: 1px solid #e6e5e5;
   padding: 9%;
 }
+/*
 .card, .liveCard {
   font-size: 2vw;
 }
+*/
 .spreadCards {
   font-size: 1.5vw;
 }
@@ -179,7 +186,7 @@ body, html {
 .deck-remove i, .deck-remove:hover i {
   color: red;
 }
-.deck-fav i, .deck-fav:hover i {
+.deck-fav i, .deck-fav:hover i , .footer i{
   color: yellow;
 }
 .play-deck i, .play-deck:hover i, .deck-new i, .deck-new:hover i {
@@ -244,11 +251,15 @@ a[class^="deck-"]:hover, .play-deck:hover {
   height: 100%;
   width: 95vw;
   max-width: 1200px;
+/*  margin: 65px auto 0 auto;*/
   margin: 0 auto;
 }
 .smallCard, .lgCard, .symbol {
   float: left;
 }
+
+/*this works for deck to play*/
+
 .lgCard {
   width: 30%;
   margin: 1%;
@@ -261,6 +272,7 @@ a[class^="deck-"]:hover, .play-deck:hover {
   width: 7%;
   fill: #4444a7;
 }
+
 .symbol:hover {
   fill: white;
 }
@@ -349,4 +361,17 @@ to center text vertically w/o messing up scrolling*/
   cursor: pointer;
   text-decoration-line: underline!important;
   color: black!important;
+}
+
+.lgCard .questionSide:hover .gameTip {
+  visibility: visible;
+}
+.gameTip {
+  visibility: hidden;
+  position:absolute; 
+  left:0; 
+  right:0; 
+  bottom:0;
+  color: gray;
+/*  font-size: 1em;*/
 }
