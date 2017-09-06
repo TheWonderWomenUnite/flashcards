@@ -1,1 +1,113 @@
-<h1>This is the deck edit component!</h1>
+<div class="row">
+	<div class="col-xs-12">
+		<form *ngIf="readyForm" [formGroup]="deckForm" (ngSubmit)="onSubmit()">
+
+			<!-- Buttons for saving or cancelling -->
+			<div class="row">
+				<div class="col-xs-12">
+					<button 
+						type="submit" 
+						class="btn btn-success"
+						[disabled]="!deckForm.valid">Save</button>	
+					<button 
+						type="button" 
+						class="btn btn-danger"
+						(click)="onCancel()">Cancel</button>	
+				</div>
+			</div>
+
+			<!-- Fields for Deck Name and Category -->
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label for="name">Deck Name</label>
+						<input 
+							type="text"
+							id="name"
+							formControlName="name"
+							class="form-control">
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label for="category">Category</label>
+						<input 
+							type="text"
+							id="category"
+							class="form-control"
+							formControlName="category">
+					</div>
+				</div>
+			</div>
+
+			<!-- List of cards for this deck -->
+			<hr>
+			<div class="row">
+				<div class="col-xs-12">
+					<button 
+						type="button"
+						class="btn btn-success" 
+						(click)="onAddCard()">
+						Add Card</button>		
+				</div>
+			</div>	
+
+			<div class="row">
+				<div class="col-xs-12" formArrayName="cards">
+					<div class="row" 
+					*ngFor="let cardCtrl of getControls(); let i = index"
+						[formGroupName]="i"
+						style="margin-top:10px;">
+						<div class="col-xs-5">
+							<input 
+								type="text" 
+								class="form-control"
+								formControlName="side1">
+						</div>
+						<div class="col-xs-5">
+							<input 
+								type="text" 
+								class="form-control"
+								formControlName="side2">
+						</div>
+						<div class="col-xs-2">
+							<button 
+								type="button"
+								class="btn btn-danger"
+								(click)="onDeleteCard(i)">X</button>
+						</div>
+					</div>
+				</div>
+			</div> <!-- End of Card List -->
+
+		</form>
+	</div>
+</div>
+
+<!-- Modal for when the user wants to cancel after they have made changes -->
+
+<div class="backdrop" [ngStyle]="{'display': display}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button 
+            type="button" 
+            class="close" 
+            aria-label="Close"
+            (click)="onModalResponse(false)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Cancel Edit</h4>
+        </div>
+        <div class="modal-body">
+          <p>You have unsaved changes. Are you sure?</p>
+        </div>
+        <div class="modal-footer">
+        	<button type="button" class="btn btn-default" (click)="onModalResponse(true)">Yes</button>
+          	<button type="button" class="btn btn-default" (click)="onModalResponse(false)">No</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+		

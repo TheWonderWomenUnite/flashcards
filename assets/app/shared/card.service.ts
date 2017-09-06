@@ -89,8 +89,8 @@ export class CardService {
                 for (let i = 0; i < this.cards.length; i++)
                 {
                     if (this.cards[i].cardId == card.cardId) {
-                        this.side1 = card.side1;
-                        this.side2 = card.side2;           
+                        this.cards[i].side1 = card.side1;
+                        this.cards[i].side2 = card.side2;           
                     }
                 }
                 return card;
@@ -108,6 +108,25 @@ export class CardService {
         this.cards.splice(this.cards.indexOf(card), 1);
         console.log("deleteCard: calling delete with cardId = "+card.cardId);                
         return this.http.delete('http://localhost:3000/cards/' + card.cardId)
+            .map((response: Response) => {
+                const result = response.json().obj;
+                return result;
+            })
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
+    }
+
+    deleteAllCards(deckId: string) {
+    // Call this method to delete all cards for a deck (Does not affect the deck itself)
+        console.log("deleteAllCards: Going to call delete with deckId = "+deckId);
+        const token = localStorage.getItem('token') 
+            ? '?token=' + localStorage.getItem('token') 
+            : ''; 
+
+        this.cards = [];    
+        return this.http.delete('http://localhost:3000/cards/allCards/' + deckId + token)
             .map((response: Response) => {
                 const result = response.json().obj;
                 return result;

@@ -48,6 +48,11 @@ export class DeckListComponent implements OnInit {
         console.log("Sort by "+sortOrder);
     }
 
+    onGoBack() {
+        // This component should have a back button that takes you 
+        // back to a general welcome screen
+    }
+
     /*
     This was temporarily here to test the deck service
     To add it back in, add an "add deck" button to the template
