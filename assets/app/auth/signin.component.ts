@@ -41,7 +41,9 @@ export class SigninComponent implements OnInit {
 	}
 	onClose() {
 		console.log('user clicked X to close');
-		this.router.navigateByUrl('/');
+	    // this.router.navigate(['./auth/', 'signup']);
+
+		//this.router.navigateByUrl('/');
 	}
 
 	ngOnInit() {
