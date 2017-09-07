@@ -1,66 +1,100 @@
 <!-- Modal: Sign Up -->
 <div class="w3-modal">
-	<div class="w3-modal-content form">
-	  <span class="w3-button w3-display-topright" (click)="onClose()">&times;</span>
-  
-	  <!--    Sign up-->
-	  <form class="signup-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
-		<input id="firstName" type="text" placeholder="First Name" formControlName="firstName"/>
-		<input id="lastName" type="text" placeholder="Last Name" formControlName="lastName"/>
-		<input id="email" type="text" placeholder="Email address" formControlName="email"/>
-		<input id="password" type="password" placeholder="Password" formControlName="password"/>
-  
-		<!-- <button type="submit" [disabled]="!myForm.valid" class="w3-button w3-black" id="signup_now">Sign up</button> -->
-		<button type="submit" class="w3-button w3-black" id="signup_now">Sign up</button>
+		<div class="w3-modal-content form">
+			<span class="w3-button w3-display-topright" (click)="onClose()">&times;</span>
 		
-		<!-- DMZ TBD: add code to  switch to <app-signin> if user clicks this -->
-			<!-- Question for Lisa: the href='#' makes my modal close, 
-			but I assume this will really get accomplished with routing? not sure... -->
-		<p id="gotoLogin" class="message">Already registered? <a href="#"  (click)="onSwitchToSignup()">Log In</a></p> 
-	  </form>
-  
-	</div>
-  </div>
-  
-  <!-- <div class="col-md-8 col-md-offset-2">
-	  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-		  <div class="form-group">
-			  <label for="firstName">First Name</label>
-			  <input 
-				  type="text" 
-				  id="firstName" 
-				  class="form-control"
-				  formControlName="firstName">
-		  </div>
-		  <div class="form-group">
-			  <label for="lastName">Last Name</label>
-			  <input 
-				  type="text" 
-				  id="lastName" 
-				  class="form-control"
-				  formControlName="lastName"
-				  >
-		  </div>
-		  <div class="form-group">
-			  <label for="email">Email</label>
-			  <input 
-				  type="email" 
-				  id="email" 
-				  class="form-control"
-				  formControlName="email">
-		  </div>
-		  <div class="form-group">
-			  <label for="password">Password</label>
-			  <input 
-				  type="password" 
-				  id="password" 
-				  class="form-control"
-				  formControlName="password">
-		  </div>
-		  <button 
-			  class="btn btn-primary" 
-			  type="submit"
-			  [disabled]="!myForm.valid" 
-			  >Submit</button>
-	  </form>
-  </div> -->
+			<!--    Sign up-->
+			<form class="signup-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+				<div class="form-group">
+					<input 
+						type="text" 
+						id="firstName" 
+						class="form-control"
+						formControlName="firstName"
+						placeholder="First name" />
+				</div>
+				<div class="form-group">
+					<input 
+						type="text" 
+						id="lastName" 
+						class="form-control"
+						formControlName="lastName"
+						placeholder="Last name" />
+				</div>
+				<div class="form-group">
+						<input 
+							type="text" 
+							id="email" 
+							class="form-control"
+							formControlName="email"
+							placeholder="Email address" />
+					</div>
+					<div class="form-group">
+						<input 
+							type="password" 
+							id="password" 
+							class="form-control"
+							formControlName="password"
+							placeholder="Password" />
+					</div>
+					<button 
+						class="btn btn-primary" 
+						type="submit"
+						[disabled]="!myForm.valid" 
+						>SIGNUP</button>
+	
+			
+			<!-- <button type="submit" class="w3-button w3-black" id="signup_now">Sign up</button> -->
+			
+			</form>
+	
+			<!-- DMZ moved this outside of form & changed click event from signup to signin -->
+			<p id="gotoLogin" class="message">Already registered? 
+				<a (click)="onSwitchToSignin()" class="highlight">Log In</a>
+			</p> 
+					
+		</div>
+		</div>
+		
+		<!-- <div class="col-md-8 col-md-offset-2">
+			<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+				<div class="form-group">
+					<label for="firstName">First Name</label>
+					<input 
+						type="text" 
+						id="firstName" 
+						class="form-control"
+						formControlName="firstName">
+				</div>
+				<div class="form-group">
+					<label for="lastName">Last Name</label>
+					<input 
+						type="text" 
+						id="lastName" 
+						class="form-control"
+						formControlName="lastName"
+						>
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input 
+						type="email" 
+						id="email" 
+						class="form-control"
+						formControlName="email">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input 
+						type="password" 
+						id="password" 
+						class="form-control"
+						formControlName="password">
+				</div>
+				<button 
+					class="btn btn-primary" 
+					type="submit"
+					[disabled]="!myForm.valid" 
+					>Submit</button>
+			</form>
+		</div> -->

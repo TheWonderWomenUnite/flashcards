@@ -1,7 +1,13 @@
 .img-circle {
+    padding-top: 15px;
     border-radius: 50%;
 }
 
 .fc-header {
-	padding-top: 15px;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    align-items: center;
+    margin: auto;  
+    float: right;
 }

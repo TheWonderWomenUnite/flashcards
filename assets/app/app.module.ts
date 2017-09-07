@@ -18,7 +18,7 @@ import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.com
 import { MakeListComponent } from './make-flash-cards/make-list.component';
 import { MakeDetailComponent } from './make-flash-cards/make-detail.component';
 import { MakeEditComponent } from './make-flash-cards/make-edit.component';
-import { MakeAddComponent } from './make-flash-cards/make-add.component';
+import { MakeStartComponent } from './make-flash-cards/make-start.component';
 
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { LogoutComponent } from "./auth/logout.component";
@@ -42,7 +42,7 @@ import { UtilsService } from './shared/utils.service';
     MakeListComponent,
     MakeDetailComponent,
     MakeEditComponent,
-    MakeAddComponent,
+    MakeStartComponent,
     AuthenticationComponent,
     LogoutComponent,
     SignupComponent,

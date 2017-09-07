@@ -11,7 +11,9 @@ import { makecard_routes } from './make-flash-cards/makecard.routes';
 
 const appRoutes: Routes = [
 	// DMZ I commented this out - couldn't figure out another way to prevent auth comp from displaying at start
-	// { path: '', redirectTo: '/auth', pathMatch: 'full' },
+	// LMC - added this back in so that when the app is first opened it goes 
+	// to the signin page
+	{ path: '', redirectTo: 'auth', pathMatch: 'full' },
 	{ path: 'auth', component: AuthenticationComponent, children: auth_routes },
 	{ path: 'makeflashcards', component: MakeFlashCardsComponent, children: makecard_routes },
 	{ path: 'playflashcards', component: PlayFlashCardsComponent, children: flashcard_routes }

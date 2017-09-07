@@ -23,20 +23,27 @@ export class SigninComponent implements OnInit {
 				data => {
 					localStorage.setItem('token', data.token);
 					localStorage.setItem('UserId', data.userId);
-					// After a successful login go back to the main route (messages page)
-					this.router.navigateByUrl('/');
+					// After a successful login maybe it should go 
+					// To the play flashcards screen?
+					this.router.navigateByUrl('/playflashcards');
 				},
 				error => console.error(error)
 				);
+
 		this.myForm.reset();
 	}
 	onSwitchToSignup() {
 		console.log('user wants to change to signup');
-		this.router.navigate(['./', 'signup'], {relativeTo: this.route});		
+
+		// LMC: This jsut needed a tweak
+	    this.router.navigate(['./auth/', 'signup']);
+		// this.router.navigate(['./', 'signup'], {relativeTo: this.route});		
 	}
 	onClose() {
 		console.log('user clicked X to close');
-		this.router.navigateByUrl('/');
+	    // this.router.navigate(['./auth/', 'signup']);
+
+		//this.router.navigateByUrl('/');
 	}
 
 	ngOnInit() {

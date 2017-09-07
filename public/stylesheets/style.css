@@ -1,53 +1,250 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif}
-body, html {
-    height: 100%;
-    line-height: 1.8;
-    box-sizing:border-box;
-    overflow: scroll;
-		overflow-x: hidden;
-		
-		/* moved from bgimg-1 */
-		/* TBD experiment with other backgrounds - see .bgimg-1 */
-		background-position: center;
-    background-size: cover;
-    background-image: url("../img/woodgrain.jpg"); 
-    min-height: 100vh;
+body {
+  background: url("../img/wood3.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
-}
-::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-}
-/* Full height image header */
-.bgimg-1 {
-    background-position: center;
-  
-/*  moved to <body> - use this for photo background or texture (below) */
-/*    background-size: cover;*/
-/*    background-image: url("../img/wood3.jpg");*/
+/*  get input from lisa*/
 /*    background-image: url("../img/wood4.jpg");*/
 /*    background-image: url("../img/wood5.jpg");*/
-    /* background-image: url("../img/woodgrain.jpg"); */
+/*    background-image: url("../img/wood6.jpg");*/
+/*    background-image: url("../img/woodgrain.jpg");*/
   
 /*  or a texture background...*/
-/*
-  background-color: #21202c;
-  background-image: url("../img/real-carbon-fibre.png");
-*/
+/*  background-color: #21202c;*/
+/*  background-image: url("../img/real-carbon-fibre.png");*/
+  
 /*
   background-color: #45403c;
   background-image: url("../img/navy.png");
 */
+  
 /*
   background-color: #efcda2;
   background-image: url("../img/white-linen.png");
 */
 
-  min-height: 100%;
+  
 }
-/* .w3-bar .w3-button, .bottomNav p { */
-.w3-bar .w3-bar-item, .bottomNav p {
-    padding: 16px;  
+
+/*experiment with hiding small cards for small screen*/
+.smallCard {
+/*  display: none;*/
+
 }
+
+
+body, html {
+    height: 100%;
+    line-height: 1.8;
+    box-sizing:border-box;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+}
+
+/*add to bootstrap classes*/
+/* TBD add overriding class instead of using important? */
+.navbar, .footer {
+  background-color: black!important; /* could use transparent if not using fixed navbar */
+  opacity: .7;
+  padding: 0;
+  padding-left: 10px;
+  margin-left: 0;
+  box-sizing: border-box;
+}
+.footer {
+  font-size: 125%;
+  text-transform: uppercase;
+}
+
+.navbar-brand {
+  letter-spacing: 4px;
+  padding: 4px 8px;
+  margin: 0;
+}
+.navbar li {
+  padding-left: 10px;
+}
+.footer p {
+  padding: 8px 8px;
+  margin: 0;
+}
+.navbar a, .navbar button, .footer p {
+  color: white!important;
+}
+.navbar a:hover {
+  color: darkgray!important;
+  background-color: white;
+  opacity: .7;
+}
+/*equiv to right float on flex items (rtl = Right To Left)*/
+.navbar-collapse  {
+  direction: rtl;
+}
+.navbar-toggler {
+  border-style: none;
+  border-radius: 0;
+}
+.col-12, .col-md-3, .col-sm-6 {
+  max-width: 300px;
+  margin: auto;
+}
+.deckList .col-12,.deckList .col-md-3,.deckList .col-sm-6 {
+  min-height: 20vh;
+}
+.topOfDecks .col-12,.topOfDecks .col-md-3,.topOfDecks .col-sm-6 {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  color: white;
+}
+.topOfDecks .btn-group {
+  width: 100%;
+}
+.topOfDecks button {
+  background-color: black;
+}
+.centerIt {
+  margin: 0 auto!important;
+}
+
+
+.hidden {
+  display: none !important;
+}
+.aspect {
+/*  for aspect ratio*/
+  /*width: 100%;*/ /* not working in ang */
+  width: 250px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  padding-top: 135%;
+}
+.deckTitle {
+  color: white;
+  text-align:center;
+  padding-top: 10%;
+  background-color: transparent;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.deckSelect, .liveGame {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+.card, .liveCard, .spreadCards, .deck {
+  background-color: #4444a7;
+  text-align: center;
+  border-radius: 1.5vw;
+
+/*for aspect ratio  */
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.card, .liveCard, .spreadCards {
+  border: 1px solid #e6e5e5;
+  padding: 9%;
+}
+
+.card, .liveCard {
+  font-size: 2vw;
+}
+
+.spreadCards {
+  font-size: 1.5vw;
+}
+.deck {
+  border: calc(10px + .7vw) solid #e6e5e5;
+  font-size: calc(16px + .5vw);
+  line-height: 1.2;
+/*  padding: 2%;*/
+  padding: 5px;
+}
+/*TBD revise - use something other than % to center*/
+.deck-icons, .progress {
+/*  width: 100%;*/
+  position: absolute;
+  bottom: 2%;
+  left: 2%;
+  right: 2%;
+/*
+  padding: 2px;
+  margin: 2%;
+*/
+}
+.deck-modify i, .deck-modify:hover i {
+  color: limegreen;
+}
+.deck-remove i, .deck-remove:hover i {
+  color: red;
+}
+.deck-fav i, .deck-fav:hover i , .footer i{
+  color: yellow;
+}
+.play-deck i, .play-deck:hover i, .deck-new i, .deck-new:hover i {
+  color: #6397f8;
+}
+a[class^="deck-"], .play-deck {
+  margin: auto;
+  padding: 2px;
+  font-size: calc(10px + 1em);
+}
+a[class^="deck-"] {
+  width: 25%;
+}
+a[class^="deck-"]:hover, .play-deck:hover {
+  opacity: .8;
+}
+.getStarted {
+  text-align: center;
+  position: absolute;
+  bottom: 10%;
+  left: 2%;
+  right: 2%;
+  margin: auto;
+}
+.cardText {
+  line-height: 1.2;
+}
+
+/*sidebar*/
+.sidebar {
+  background-color: black;
+    position: absolute;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  z-index:10;
+ }
+
+.sidebar a {
+  padding: 15px;
+  line-height: 30px;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+}
+.sidebar a:first-child {
+    text-align: right;
+    text-transform: uppercase;
+}
+
+.sidebar a:hover {
+    text-decoration: none;
+    color: #a8a6a6;
+}
+
 .cardSet {
   display: flex;
   justify-content: center; /* align horizontal */
@@ -55,22 +252,15 @@ body, html {
   height: 100%;
   width: 95vw;
   max-width: 1200px;
+/*  margin: 65px auto 0 auto;*/
   margin: 0 auto;
-/*  display: block;*/
-}
-.container {
-  width: 100%;
-/*  margin-top: 35px;*/
-}
-.aspect{
-/*  for aspect ratio*/
-  width: 100%;
-  position: relative;
-  padding-top: 135%;
 }
 .smallCard, .lgCard, .symbol {
   float: left;
 }
+
+/*this works for deck to play*/
+
 .lgCard {
   width: 30%;
   margin: 1%;
@@ -83,6 +273,7 @@ body, html {
   width: 7%;
   fill: #4444a7;
 }
+
 .symbol:hover {
   fill: white;
 }
@@ -91,35 +282,6 @@ body, html {
 }
 /*TBD: make font-size dynamic depending on length of text. Also adjust top margin or figure out how
 to center text vertically w/o messing up scrolling*/
-.card, .liveCard {
-  background-color: #4444a7;
-  font-size: 2vw;
-  padding: 9%;
-  text-align: center;
-/*  border: 3px solid #cccccc;*/
-  border-radius: 1.5vw;
-/*  for aspect ratio*/
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-/*
-  overflow: hidden;
-  overflow-y: scroll;  
-*/
-}
-/*
-TBD: look at https://www.transparenttextures.com/
-for background for back side of cards
-*/
-.card {
-/*  background-color: #3e3e7c;*/
-/*  background-image:  url("../img/twinkle-twinkle.png");*/
-}
-.liveCard {
-/*  background-color: rgb(63, 108, 91);*/
-}
 .empty {
   background-color: transparent;
   border: 2px dotted white;
@@ -131,12 +293,13 @@ for background for back side of cards
 .displayModal {
   display: block;
 }
-.hide {
-  visibility: hidden;
-}
 .cardText span {
   font-weight: 800;
 }
+.cardText {
+  position: relative;
+}
+
 .questionSide {
   background-image:  url("../img/twinkle-twinkle.png");
 }
@@ -145,35 +308,14 @@ for background for back side of cards
     -webkit-box-shadow: 6px 8px 10px rgba(0, 0, 0, .8);
     box-shadow: 6px 8px 10px rgba(0, 0, 0, .8);
 }
-.bottomNav {
-  position: fixed;
-  bottom: 0;
-  background-color: transparent;
-}
-.bottomNav a {
-  margin: 0 auto;
-  width: 100%;
-}
-.bottomNav p {
-  float: right;
-  margin: 0;
-}
-/*
-.modal {
-  width: 100%; 
-  margin: 0 auto;
-}
-*/
 .thumbs {
   justify-content: center;
   background-color: transparent;
-/*  max-width: 500px;*/
 }
-// TBD change to svg
+/* TBD change to svg?*/
 .qMark a {
   width: 100%;
   cursor: pointer;
-/*  height: 10vw;*/
 }
 .qMark i {
   font-size: 5em;
@@ -209,13 +351,28 @@ for background for back side of cards
 .liveCard .cardText {
   height: 75%;
 }
-.w3-button:hover {
-  opacity: .7;
-}
 .lgCard a {
   width: 100%;
   height: 100%;
 }
-.bottomNav {
-  box-shadow: none;
+.topOfDecks {
+
+}
+.highlight:hover {
+  cursor: pointer;
+  text-decoration-line: underline!important;
+  color: black!important;
+}
+
+.lgCard .questionSide:hover .gameTip {
+  visibility: visible;
+}
+.gameTip {
+  visibility: hidden;
+  position:absolute; 
+  left:0; 
+  right:0; 
+  bottom:0;
+  color: gray;
+/*  font-size: 1em;*/
 }

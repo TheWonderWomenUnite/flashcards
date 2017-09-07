@@ -8,7 +8,8 @@ import { UtilsService } from "../shared/utils.service";
 
 @Component({
     selector: 'app-deck-detail',
-    templateUrl: './deck-detail.component.html'    
+    templateUrl: './deck-detail.component.html',
+    styleUrls: ['./deck-detail.component.css']
 })
 
 export class DeckDetailComponent implements OnInit {
@@ -30,8 +31,9 @@ export class DeckDetailComponent implements OnInit {
 
   ngOnInit() {
     // Go get the progress bar img string
-    this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-    this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+//DMZ temp comment out for testing
+    // this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+    // this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
 
   }  
 
