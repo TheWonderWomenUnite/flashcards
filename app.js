@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var dotEnv = require('dotenv');
 
 var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
@@ -12,8 +13,12 @@ var deckRoutes = require('./routes/deck');
 var cardRoutes = require('./routes/card');
 
 var app = express();
+
+dotEnv.config();
+var url=process.env.MLAB_URI;
 mongoose.set('debug', true);
-mongoose.connect('localhost:27017/flashcards');
+//mongoose.connect('localhost:27017/flashcards');
+mongoose.connect(url);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
