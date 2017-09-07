@@ -34,26 +34,42 @@
 
     <div class="cardSet">
       <div id="lastQuestion" class="smallCard d-none d-md-block">
+
+					<!-- <div class="col-xs-3 flash-card" id="left-card">
+							<div *ngIf="previousCard" class="flashcard-text">{{ previousCard.side1 }}</div>
+						</div> -->
+		
+
+
         <div class="aspect">
           <div class="card questionSide">
-            <div class="cardText">
-                <p></p>
-              </div>
+						<div class="cardText">
+								<p *ngIf="previousCard" >{{ previousCard.side1 }}</p>
+						</div>
           </div>
         </div>
       </div>
 <!--      TBD: figure out how to add drop shadow to SVG symbols ?-->
 <!--      TBD: look more into svg - not sure if some of this path stuff & xlmns refs belong someplace else-->
       <div class="flip symbol">
+
+				<a (click)="onSlideLeft()">
+					
         <svg id="goBack" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> 
           <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z"/>
-        </svg>
+				</svg>
+
+				</a>
+
       </div>
       <div id="curQuestion" class="lgCard">
         <div class="aspect">
           <div class="liveCard questionSide">
             <div class="cardText">
-              <p></p>
+								<a *ngIf="faceUp && currentCard" class="flashcard-text" (click)="showAnswer()">{{ currentCard.side1 }}</a>
+								<a *ngIf="!faceUp && currentCard" class="flashcard-text" (click)="faceup=true">{{ currentCard.side2 }}</a>
+			
+              <!-- <p></p> -->
               <div class="gameTip">
                 <small> Click to see answer...</small>
               </div>
@@ -74,15 +90,23 @@
         </div>
       </div>
       <div class="symbol">
+
+				<a (click)="onSlideRight()">
+
+
         <svg id="skipToNextQ" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> 
           <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z"/>
         </svg>
-      </div>
+
+				</a>
+			
+
+			</div>
       <div id="nextQuestion" class="smallCard d-none d-md-block">
         <div class="aspect">
           <div class="card questionSide">
             <div class="cardText">
-              <p></p>
+              <p *ngIf="nextCard">{{ nextCard.side1 }}</p>
             </div>
           </div>
         </div>
@@ -92,17 +116,12 @@
 <!-- footer?? -->
 <footer class="footer navbar fixed-bottom">
 	<div class="container">
-		<p class="text-muted">{{ deck.name }} - {{ deck.category }} <i class="fa fa-star"></i></p>
-		<!-- <p>Progress: </p> -->
+		<!-- TBD: make star dynamic - use Lisa's onFavorite() -->
+		<p class="text-muted"><i class="fa fa-star"></i>&nbsp;{{ deck.name }} - {{ deck.category }}</p>
+		<!-- TBD: get progress bar inline with text -->
 			<div class="imgContainer" style="display:inline">
 				<p>Progress: </p>
 				<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-				
-
-				<!-- <div class="progress" title="Progress...">
-					<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-				</div> -->
-
 				
 				<!-- <img src="{{displayBar}}" /> -->
 				<!-- <button class="btn reset-button" 

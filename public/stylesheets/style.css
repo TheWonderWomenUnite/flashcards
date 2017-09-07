@@ -51,6 +51,7 @@ body, html {
 /* TBD add overriding class instead of using important? */
 .navbar, .footer {
   background-color: black!important; /* could use transparent if not using fixed navbar */
+  opacity: .7;
   padding: 0;
   padding-left: 10px;
   margin-left: 0;
@@ -153,11 +154,11 @@ body, html {
   border: 1px solid #e6e5e5;
   padding: 9%;
 }
-/*
+
 .card, .liveCard {
   font-size: 2vw;
 }
-*/
+
 .spreadCards {
   font-size: 1.5vw;
 }
