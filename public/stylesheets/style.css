@@ -116,6 +116,9 @@ body, html {
 .hidden {
   display: none !important;
 }
+.lgCard .aspect, .smallCard .aspect {
+  width: 100%;
+}
 .aspect {
 /*  for aspect ratio*/
   /*width: 100%;*/ /* not working in ang */
@@ -375,4 +378,8 @@ to center text vertically w/o messing up scrolling*/
   bottom:0;
   color: gray;
 /*  font-size: 1em;*/
+}
+.liveGame .row {
+  width: 100%;
+  
 }
