@@ -1,5 +1,5 @@
 <!-- <div class="container-fluid"> -->
-  
+<div (loggedIn)="onLoggedIn($event)">  
 
 <!--navbar - fixed on top or not? -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
@@ -17,7 +17,9 @@
           <a routerLink="/makeflashcards" class="nav-link">MAKE FLASH CARDS<i class="fa fa-pencil-square-o"></i> </a>
         </li>
         <li class="nav-item">
-          <a [routerLink]="['/auth']" class="nav-link">LOG IN/SIGN UP</a>
+          <!-- TBD/Question for Lisa: I wanted to put (loggedIn)="onLoggedIn($event)" somewhere in here...but not working -->
+          <!-- I'm trying to work from Udemy example #63 but since I don't have <app-signin> in this file, I don't know if the example is applicable -->
+          <a [routerLink]="['/auth']" class="nav-link">{{loginPrompt}}</a>
         </li>
   <!--
         <li class="nav-item">
