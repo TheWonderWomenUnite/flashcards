@@ -279,6 +279,7 @@ a[class^="deck-"]:hover, .play-deck:hover {
 
 .symbol:hover {
   fill: white;
+  cursor: pointer;
 }
 .flip svg {
   transform: rotate(180deg);
@@ -303,13 +304,13 @@ to center text vertically w/o messing up scrolling*/
   position: relative;
 }
 
-.questionSide {
+.questionSide, .answerSide {
   background-image:  url("../img/twinkle-twinkle.png");
 }
 .questionSide, .answerSide {
-    -moz-box-shadow: 6px 8px 10px rgba(0, 0, 0,0.8);
-    -webkit-box-shadow: 6px 8px 10px rgba(0, 0, 0, .8);
-    box-shadow: 6px 8px 10px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 16px 18px 20px rgba(0, 0, 0,0.8);
+    -webkit-box-shadow: 16px 18px 20px rgba(0, 0, 0, .8);
+    box-shadow: 16px 18px 20px rgba(0, 0, 0, .8);
 }
 .thumbs {
   justify-content: center;
@@ -334,7 +335,8 @@ to center text vertically w/o messing up scrolling*/
 .thumbs a:first-child svg {
   fill: #ff0000;
 }
-.thumbs svg:hover, .qMark:hover {
+.thumbs svg:hover {
+  cursor: pointer;
   opacity: 1;
 }
 .thumbs a:last-child svg {
@@ -366,8 +368,11 @@ to center text vertically w/o messing up scrolling*/
   text-decoration-line: underline!important;
   color: black!important;
 }
+.lgCard .questionSide .cardText:hover {
+  cursor: pointer;
+}
 
-.lgCard .questionSide:hover .gameTip {
+.lgCard .questionSide .cardText:hover .gameTip {
   visibility: visible;
 }
 .gameTip {
