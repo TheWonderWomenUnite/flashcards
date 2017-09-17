@@ -31,17 +31,8 @@
 
 <div id="playCards" class="container liveGame">
   <div class = "row">
-
-
     <div class="cardSet">
       <div id="lastQuestion" class="smallCard d-none d-md-block">
-
-					<!-- <div class="col-xs-3 flash-card" id="left-card">
-							<div *ngIf="previousCard" class="flashcard-text">{{ previousCard.side1 }}</div>
-						</div> -->
-		
-
-
         <div class="aspect">
           <div class="card questionSide">
 						<div class="cardText">
@@ -67,19 +58,15 @@
         <div class="aspect">
           <div [ngClass]="{'liveCard': true, 'questionSide': showQSide, 'answerSide': showASide}">
             <div class="cardText" (click)="showAnswer()">
-								<!-- <a *ngIf="faceUp && currentCard" class="flashcard-text" (click)="showAnswer()">{{ currentCard.side1 }}</a> -->
-								<a *ngIf="faceUp && currentCard" class="flashcard-text">{{ currentCard.side1 }}</a>
-								<a *ngIf="!faceUp && currentCard" class="flashcard-text" (click)="faceup=true">{{ currentCard.side2 }}</a>
-			
-              <!-- <p></p> -->
-              <div class="gameTip">
-                <small> Click to see answer...</small>
-              </div>
-            </div>
-            <!-- <div class="thumbs" [ngStyle]="{'display': displayThumbs}"> -->
-								<!-- <div [ngClass]="{'thumbs': true, 'hidden': hideThumbs}"> -->
-										<div class="thumbs">
-												<a (click)="onThumbsUpOrDown(false)">
+							<!-- <a *ngIf="faceUp && currentCard" class="flashcard-text" (click)="showAnswer()">{{ currentCard.side1 }}</a> -->
+							<a *ngIf="faceUp && currentCard" class="flashcard-text">{{ currentCard.side1 }}</a>
+							<a *ngIf="!faceUp && currentCard" class="flashcard-text" (click)="faceup=true">{{ currentCard.side2 }}</a>
+							<div class="gameTip">
+								<small> Click to see answer...</small>
+							</div>
+						</div>
+						<div class="thumbs">
+							<a (click)="onThumbsUpOrDown(false)">
                 <svg id="thumbsDown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.178 8.333c0-.466-.826-1.333-2.426-1.333-2.502 0-3.408 1.5-6.752 1.5v4.964c1.766.271 3.484.817 4.344 3.802.239.831.39 1.734 1.187 1.734 1.188 0 1.297-2.562.844-4.391.656-.344 1.875-.468 2.489-.442.886.036 1.136-.409 1.136-.745 0-.505-.416-.675-.677-.755-.305-.094-.444-.404-.016-.461.418-.056.63-.328.63-.61 0-.323-.277-.66-.844-.705-.348-.027-.434-.312-.016-.406.351-.08.549-.326.549-.591 0-.314-.279-.654-.913-.771-.383-.07-.421-.445-.016-.477.345-.027.481-.146.481-.313z"/>
                 </svg>
@@ -94,17 +81,11 @@
         </div>
       </div>
       <div class="symbol">
-
 				<a (click)="onSlideRight()">
-
-
-        <svg id="skipToNextQ" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> 
-          <path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z"/>
-        </svg>
-
+					<svg id="skipToNextQ" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> 
+						<path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z"/>
+					</svg>
 				</a>
-			
-
 			</div>
       <div id="nextQuestion" class="smallCard d-none d-md-block">
         <div class="aspect">
@@ -124,23 +105,15 @@
 	<div class="container">
 		<!-- TBD: make star dynamic - use Lisa's onFavorite() -->
 		<p class="text-muted"><i class="fa fa-star"></i>&nbsp;{{ deck.name }} - {{ deck.category }}</p>
-		<!-- TBD: get progress text next to bar - inline -->
-			<!-- <div class="imgContainer" style="display:inline"> -->
 				<div class="imgContainer">
 					<p>Progress:</p>
-				<div class="progress progressInFtr" title="Progress...">
-					<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-				</div>
-
-				
-
+					<div class="progress progressInFtr" title="Progress...">
+						<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
 				<!-- <img src="{{displayBar}}" /> -->
 				<!-- <button class="btn reset-button" 
 					(click)="onResetProgressBar()">Reset Progress</button> -->
-
 				</div>	
-
-				<!-- <p class="text-muted">grav. here instead?</p> -->
 	</div>
 </footer>
 
