@@ -31,6 +31,9 @@ export class DeckPlayComponent implements ngOnInit {
   nextCard: Card;
   previousCard: Card;
 
+  // Q for Lisa: for now I used font-awesome icons instead of these png files because they 
+  // were quickest for me to implement the sizing
+  // Let me know if you prefer these imgs and I will figure out sizing them in footer, etc
   const backButton = "../img/back_button.png";
   const thumbsUp = "../img/thumbsUp.png";
   const thumbsDown = "../img/thumbsDown.png";

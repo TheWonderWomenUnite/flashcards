@@ -1,13 +1,13 @@
 <!-- TBD fix aspect issue on card size -->
 
-<div class="row">
+<!-- <div class="row">
 	<div class="col-xs-1">
 		<a (click)="onGoBack()"><img src="{{backButton}}" /></a>
 	</div>
 	<div class="col-xs-1">
 		<a (click)="onHelp()"><img src="{{questionMark}}" /></a>
 	</div>
-</div>
+</div> -->
 	<!-- <div class="col-xs-3 col-xs-offset-2 title-row">
 		<h2>
 		{{ deck.name }}
@@ -103,17 +103,26 @@
 <!-- footer?? -->
 <footer class="footer navbar fixed-bottom">
 	<div class="container">
+
 		<!-- TBD: make star dynamic - use Lisa's onFavorite() -->
-		<p class="text-muted"><i class="fa fa-star"></i>&nbsp;{{ deck.name }} - {{ deck.category }}</p>
-				<div class="imgContainer">
-					<p>Progress:</p>
-					<div class="progress progressInFtr" title="Progress...">
-						<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-				<!-- <img src="{{displayBar}}" /> -->
-				<!-- <button class="btn reset-button" 
-					(click)="onResetProgressBar()">Reset Progress</button> -->
-				</div>	
+		<div class="gameInfo">
+			<i class="fa fa-star"></i>
+			<p class="text-muted">&nbsp;{{ deck.name }} - {{ deck.category }}</p>
+		</div>
+		<div class="icons">
+			<a (click)="onGoBack()"><i class="fa fa-arrow-circle-left"></i></a>
+			<a (click)="onHelp()"><i class="fa fa-question-circle"></i></a>
+		</div>
+		<div class="imgContainer">
+			<div class="progress progressInFtr" title="Progress...">
+				<div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+			<a><p>Reset Progress</p></a>
+		<!-- <img src="{{displayBar}}" /> -->
+		<!-- <button class="btn reset-button" 
+			(click)="onResetProgressBar()">Reset Progress</button> -->
+		</div>	
+
 	</div>
 </footer>
 

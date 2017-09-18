@@ -76,11 +76,12 @@ body, html {
 .navbar a, .navbar button, .footer p {
   color: white!important;
 }
-.navbar a:hover {
-  color: darkgray!important;
+.navbar a:hover, .footer a:hover p {
+  color: #535252!important;
   background-color: white;
-  opacity: .7;
+  opacity: .8;
 }
+
 /*equiv to right float on flex items (rtl = Right To Left)*/
 .navbar-collapse  {
   direction: rtl;
@@ -183,12 +184,12 @@ body, html {
   margin: 2%;
 */
 }
-.imgContainer p {
+.imgContainer a {
   display: inline-block;  
 }
 .progressInFtr {
   display: inline-block;
-  width: 200px;
+  width: 15vw;
 }
 .deck-modify i, .deck-modify:hover i {
   color: limegreen;
@@ -196,8 +197,33 @@ body, html {
 .deck-remove i, .deck-remove:hover i {
   color: red;
 }
-.deck-fav i, .deck-fav:hover i , .footer i{
+.deck-fav i, .deck-fav:hover i , .gameInfo i{
   color: yellow;
+}
+.gameInfo i, .gameInfo p {
+  display: inline-block;
+}
+.gameInfo i{
+  font-size: calc(10px + 1vw);
+  
+  /* font-size: 150%;   */
+  font-size: 3vw;  
+}
+.icons i {
+  /* font-size: 250%; */
+  font-size: calc(14px + 2vw);
+}
+.icons i {
+  color: #A026F5;
+}
+.icons a:hover i {
+  opacity: 1;
+}
+.icons a {
+  padding: 0 4px;
+}
+.footer .icons a:hover {
+  background-color: transparent;
 }
 .play-deck i, .play-deck:hover i, .deck-new i, .deck-new:hover i {
   color: #6397f8;
