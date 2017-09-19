@@ -30,6 +30,8 @@ export class DeckPlayComponent implements ngOnInit {
   currentCard: Card;
   nextCard: Card;
   previousCard: Card;
+  isFavorite = false;
+  progressPct = 0;
 
   // Q for Lisa: for now I used font-awesome icons instead of these png files because they 
   // were quickest for me to implement the sizing
@@ -73,6 +75,8 @@ export class DeckPlayComponent implements ngOnInit {
             this.updateDeckInfo(this.deck);
             this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
             this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+            this.progressPct = this.deck.progressBar;
+            this.isFavorite = this.deck.favorite;
             this.currentCard = this.cards[this.currIndex];
             this.nextCard = this.cards[this.currIndex + 1];
             this.previousCard = this.cards[this.cards.length-1];
@@ -185,6 +189,7 @@ console.log('at start of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs)
     
     this.updateDeckInfo(this.deck);
     this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+    this.progressPct = this.deck.progressBar;
     this.goNext(true);
     console.log('at end of onThumbsUpOrDown and showASide is ' + this.showASide);
     console.log('at end of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs);
@@ -228,6 +233,7 @@ console.log('at start of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs)
     this.deck.progressBar = 0; 
     this.updateDeckInfo(this.deck);
     this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+    this.progressPct = this.deck.progressBar;
     
     }    
 

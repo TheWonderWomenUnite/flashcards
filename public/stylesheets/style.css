@@ -79,7 +79,7 @@ body, html {
 .navbar a:hover, .footer a:hover p {
   color: #535252!important;
   background-color: white;
-  opacity: .8;
+  opacity: .7;
 }
 
 /*equiv to right float on flex items (rtl = Right To Left)*/
@@ -205,9 +205,6 @@ body, html {
 }
 .gameInfo i{
   font-size: calc(10px + 1vw);
-  
-  /* font-size: 150%;   */
-  font-size: 3vw;  
 }
 .icons i {
   /* font-size: 250%; */

@@ -1,6 +1,10 @@
 .img-circle {
-    padding-top: 15px;
+    /* DMZ changed from padding-top to padding cuz padding-top distorted circle */
+    padding: 10px;
     border-radius: 50%;
+    width: calc(40px + 10vw);
+    max-width: 125px;
+    height: auto;
 }
 
 .fc-header {
