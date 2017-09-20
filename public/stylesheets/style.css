@@ -51,7 +51,7 @@ body, html {
 /* TBD add overriding class instead of using important? */
 .navbar, .footer {
   background-color: black!important; /* could use transparent if not using fixed navbar */
-  opacity: .7;
+  opacity: .8;
   padding: 0;
   padding-left: 10px;
   margin-left: 0;
@@ -70,16 +70,20 @@ body, html {
   padding-left: 10px;
 }
 .footer p {
-  padding: 8px 8px;
+  padding: 8px 2px;
   margin: 0;
 }
-.navbar a, .navbar button, .footer p {
-  color: white!important;
+.navbar-dark .navbar-nav .nav-link, .navbar button {
+  color: #C7C7C7;
 }
-.navbar a:hover, .footer a:hover p {
+.navbar a:hover {
   color: #535252!important;
   background-color: white;
-  opacity: .7;
+  opacity: 1;
+}
+.hamburger:hover {
+  background-color: darkslategray;
+  opacity: 1;
 }
 
 /*equiv to right float on flex items (rtl = Right To Left)*/
@@ -184,8 +188,18 @@ body, html {
   margin: 2%;
 */
 }
-.imgContainer a {
-  display: inline-block;  
+.progressContainer a {
+  display: inline-block; 
+  padding-left: 10px;
+}
+.progressContainer a:hover {
+  background-color: transparent;
+}
+.progressContainer a:hover i, .progressContainer a:hover p {
+  color: #B36BEE;  
+}
+.progressContainer a i, .progressContainer a p {
+  background-color: transparent;
 }
 .progressInFtr {
   display: inline-block;
@@ -211,10 +225,10 @@ body, html {
   font-size: calc(14px + 2vw);
 }
 .icons i {
-  color: #A026F5;
+  color: #992FEB;
 }
 .icons a:hover i {
-  opacity: 1;
+  color: #B36BEE;
 }
 .icons a {
   padding: 0 4px;
@@ -222,8 +236,11 @@ body, html {
 .footer .icons a:hover {
   background-color: transparent;
 }
-.play-deck i, .play-deck:hover i, .deck-new i, .deck-new:hover i {
+.play-deck i, .deck-new i {
   color: #6397f8;
+}
+.play-deck:hover i, .deck-new:hover i {
+  color: #A8C7FC;
 }
 a[class^="deck-"], .play-deck {
   margin: auto;
@@ -234,7 +251,7 @@ a[class^="deck-"] {
   width: 25%;
 }
 a[class^="deck-"]:hover, .play-deck:hover {
-  opacity: .8;
+  opacity: 1;
 }
 .getStarted {
   text-align: center;
@@ -248,34 +265,6 @@ a[class^="deck-"]:hover, .play-deck:hover {
   line-height: 1.2;
 }
 
-/*sidebar*/
-.sidebar {
-  background-color: black;
-    position: absolute;
-    top: 0;
-    width: 250px;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  z-index:10;
- }
-
-.sidebar a {
-  padding: 15px;
-  line-height: 30px;
-    display: block;
-    text-decoration: none;
-    color: #fff;
-}
-.sidebar a:first-child {
-    text-align: right;
-    text-transform: uppercase;
-}
-
-.sidebar a:hover {
-    text-decoration: none;
-    color: #a8a6a6;
-}
 
 .cardSet {
   display: flex;
@@ -421,4 +410,26 @@ to center text vertically w/o messing up scrolling*/
 .liveGame .row {
   width: 100%;
   
+}
+/*sidebar*/
+.sidebar {
+  height: 100%; 
+  width: 160px;
+  padding-top: 80px; 
+  position: fixed;
+  z-index: 1;
+  overflow: auto;
+  background-color: black;
+}
+.sidebar a {
+  font-size: 12px;
+  padding: 15px;
+  line-height: 30px;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+}
+.sidebar a:hover {
+    text-decoration: none;
+    color: #a8a6a6;
 }

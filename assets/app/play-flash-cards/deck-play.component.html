@@ -105,7 +105,7 @@
 	<div class="container">
 
 		<!-- TBD: make star dynamic - use Lisa's onFavorite() -->
-		<div class="gameInfo">
+		<div class="gameInfo hideSmall">
 			<i  [ngClass]="{'fa fa-star': isFavorite}"></i>
 			<p class="text-muted">&nbsp;{{ deck.name }} - {{ deck.category }}</p>
 		</div>
@@ -113,11 +113,14 @@
 			<a (click)="onGoBack()"><i class="fa fa-arrow-circle-left"></i></a>
 			<a (click)="onHelp()"><i class="fa fa-question-circle"></i></a>
 		</div>
-		<div class="imgContainer">
+		<div class="text-muted progressContainer">
 			<div class="progress progressInFtr" title="Progress...">
 				<div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': '' + progressPct + '%'}"></div>
 			</div>
-			<a (click)="onResetProgressBar()"><p>Reset Progress</p></a>
+			<a (click)="onResetProgressBar()">
+				&nbsp;<i class="fa fa-caret-square-o-left"></i>
+				<p class="hideSmall">Reset Progress</p>
+			</a>
 		<!-- <img src="{{displayBar}}" /> -->
 		<!-- <button class="btn reset-button" 
 			(click)="onResetProgressBar()">Reset Progress</button> -->
