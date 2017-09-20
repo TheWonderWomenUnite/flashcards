@@ -141,6 +141,12 @@ body, html {
   overflow: hidden;
   overflow-y: scroll;
 }
+.deckTitle i {
+  font-size: 150%;
+}
+.deckNotes {
+  font-size: 60%;
+}
 .deckSelect, .liveGame {
   margin-top: 20px;
   margin-bottom: 50px;
@@ -211,7 +217,7 @@ body, html {
 .deck-remove i, .deck-remove:hover i {
   color: red;
 }
-.deck-fav i, .deck-fav:hover i , .gameInfo i{
+.deck-fav i, .deck-fav:hover i , .gameInfo i, .deckTitle i{
   color: yellow;
 }
 .gameInfo i, .gameInfo p {
@@ -232,6 +238,9 @@ body, html {
 }
 .icons a {
   padding: 0 4px;
+}
+.footer a {
+  cursor: pointer;
 }
 .footer .icons a:hover {
   background-color: transparent;
@@ -309,6 +318,7 @@ to center text vertically w/o messing up scrolling*/
   border: 2px dotted white;
   box-shadow: none;
 }
+/* TBD: could change html & use Bootstrap '.d-none' class instead of this */
 .empty .cardText {
   display: none;
 }

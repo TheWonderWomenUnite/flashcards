@@ -23,6 +23,9 @@ export class DeckDetailComponent implements OnInit {
   @Input() deck: Deck;
   displayBar: String = '';
   displayHeart: String = '';
+  isFavorite = false;
+  progressPct = 0;
+
 
   constructor(private deckService: DeckService,
   		        private utilsService: UtilsService,
@@ -30,11 +33,8 @@ export class DeckDetailComponent implements OnInit {
 			        private router: Router) {}
 
   ngOnInit() {
-    // Go get the progress bar img string
-//DMZ temp comment out for testing
-    // this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-    // this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
-
+    this.progressPct = this.deck.progressBar;
+    this.isFavorite = this.deck.favorite;
   }  
 
 	onPlay() {

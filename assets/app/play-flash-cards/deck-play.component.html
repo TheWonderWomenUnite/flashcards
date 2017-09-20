@@ -43,7 +43,7 @@
       </div>
 <!--      TBD: figure out how to add drop shadow to SVG symbols ?-->
 <!--      TBD: look more into svg - not sure if some of this path stuff & xlmns refs belong someplace else-->
-      <div class="flip symbol">
+      <div [ngClass]="{'flip': true, 'symbol': true, 'invisible': showASide}">
 
 				<a (click)="onSlideLeft()">
 					
@@ -80,7 +80,7 @@
           </div>  
         </div>
       </div>
-      <div class="symbol">
+			<div [ngClass]="{'symbol': true, 'invisible': showASide}">			
 				<a (click)="onSlideRight()">
 					<svg id="skipToNextQ" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> 
 						<path d="M8.122 24l-4.122-4 8-8-8-8 4.122-4 11.878 12z"/>
@@ -104,7 +104,6 @@
 <footer class="footer navbar fixed-bottom">
 	<div class="container">
 
-		<!-- TBD: make star dynamic - use Lisa's onFavorite() -->
 		<div class="gameInfo hideSmall">
 			<i  [ngClass]="{'fa fa-star': isFavorite}"></i>
 			<p class="text-muted">&nbsp;{{ deck.name }} - {{ deck.category }}</p>
@@ -121,9 +120,6 @@
 				&nbsp;<i class="fa fa-caret-square-o-left"></i>
 				<p class="hideSmall">Reset Progress</p>
 			</a>
-		<!-- <img src="{{displayBar}}" /> -->
-		<!-- <button class="btn reset-button" 
-			(click)="onResetProgressBar()">Reset Progress</button> -->
 		</div>	
 
 	</div>
