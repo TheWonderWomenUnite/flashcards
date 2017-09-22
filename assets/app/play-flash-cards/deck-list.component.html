@@ -1,4 +1,3 @@
-<!-- <div class="col-xs-12"> -->
 <div class="deckSelect container">
 	<div class="topOfDecks row">
 		<div class="col-12 col-sm-6">
@@ -14,16 +13,13 @@
 		</div>
 	</div>
 </div>
-<!-- </div> -->
 
 <div class="deckSelect container">    
 	<div class = "deckList row">
-			<app-deck-detail
-			[deck]="deck"
-			 *ngFor="let deck of decks"></app-deck-detail>		
-			 <!-- <app-deck-detail></app-deck-detail>		 -->
- 
-		</div>
+		<app-deck-detail
+		[deck]="deck"
+			*ngFor="let deck of decks"></app-deck-detail>	
+	</div>
 </div>
 
 <!-- <div class="col-xs-8 col-xs-offset-2 deck-list"> 

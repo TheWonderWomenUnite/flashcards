@@ -16,6 +16,9 @@ export class MakeDetailComponent {
 
   displayBar = "";
 	displayHeart = "";
+	isFavorite = false;
+	favTitle = "";
+  progressPct = 0;
 
  	constructor(private deckService: DeckService,
  			        private utilsService: UtilsService,
@@ -23,15 +26,24 @@ export class MakeDetailComponent {
 			        private router: Router) { }
 
 	ngOnInit() {
-	// Go get the progress bar img string
-	this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-	this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+		// Go get the progress bar img string
+		this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+		this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+		this.progressPct = this.deck.progressBar;
+		this.isFavorite = this.deck.favorite;
+		this.favTitle = this.isFavorite ? "Click to remove 'FAVORITE' status" : "Click to mark this as a 'FAVORITE' deck";
 	}
 
+	onAddDeck() {
+		// TBD show modal to prompt for deck name, category and favorite status
+		console.log('onAddDeck called...');
+		// then either call onEdit() or use this router & require at least one card to be added?
+		this.router.navigate(['./makeflashcards', 'edit', this.deck.deckId]);
+	}
 	onDelete() {
   	// Show the delete modal
     this.display = 'block';
-    }
+  }
 
   private onModalResponse(answer:boolean) {
     // Get rid of the modal
@@ -59,7 +71,9 @@ export class MakeDetailComponent {
 	    this.deckService.updateDeck(this.deck).subscribe(
       		(deck: Deck) => {
         		console.log(deck);
-      		});
+					});
+			this.isFavorite = this.deck.favorite;
+			this.favTitle = this.isFavorite ? "Click to remove 'FAVORITE' status" : "Click to mark this as a 'FAVORITE' deck";			
 	    this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
 	}
 

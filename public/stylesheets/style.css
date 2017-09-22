@@ -13,7 +13,7 @@ body {
 /*    background-image: url("../img/woodgrain.jpg");*/
   
 /*  or a texture background...*/
-/*  background-color: #21202c;*/
+ /* background-color: yellow; */
 /*  background-image: url("../img/real-carbon-fibre.png");*/
   
 /*
@@ -132,7 +132,7 @@ body, html {
   position: relative;
   padding-top: 135%;
 }
-.deckTitle {
+.deckTitle, .deckAddNew {
   color: white;
   text-align:center;
   padding-top: 10%;
@@ -182,18 +182,17 @@ body, html {
 /*  padding: 2%;*/
   padding: 5px;
 }
-/*TBD revise - use something other than % to center*/
-.deck-icons, .progressOnCard {
-/*  width: 100%;*/
+.progressOnCard, .deck-icons {
   position: absolute;
-  bottom: 2%;
   left: 2%;
   right: 2%;
-/*
-  padding: 2px;
-  margin: 2%;
-*/
 }
+.progressOnCard {
+  bottom: 2%;
+}
+.deck-icons {
+    bottom: 12%;
+  }
 .progressContainer a {
   display: inline-block; 
   padding-left: 10px;
@@ -217,8 +216,9 @@ body, html {
 .deck-remove i, .deck-remove:hover i {
   color: red;
 }
-.deck-fav i, .deck-fav:hover i , .gameInfo i, .deckTitle i{
-  color: yellow;
+/* .deck-fav i, .deck-fav:hover i , .gameInfo i, .deckTitle i{ */
+  .deck-fav i, .deck-fav:hover i , .gameInfo i {
+    color: yellow;
 }
 .gameInfo i, .gameInfo p {
   display: inline-block;

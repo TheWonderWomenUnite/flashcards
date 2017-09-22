@@ -1,4 +1,57 @@
-<article class="panel panel-default">
+<div class="col-12 col-lg-3 col-md-4 col-sm-6">        
+    <div class="aspect">
+      <div class="deck questionSide">
+
+        <div *ngIf="!deck; then blankDeck else existingDeck"></div>
+
+        <ng-template #blankDeck>
+          <div class="deckAddNew">
+              <p>ADD NEW DECK</p> 
+              <br>
+            <div class="addDeck row">
+              <a class="play-deck" title="Make new deck!" (click)="onAddDeck()"><i class="fa fa-plus fa-4x"></i></a>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template #existingDeck>
+          <div class="deckTitle">
+            <p> {{ deck.category }} - {{ deck.name }} </p>  
+
+            <div class="deckNotes" *ngIf="deck.lastPlayed">
+                Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
+            </div>
+            <br>
+      
+              <!-- TBD: adapt to star and test when obj has sample data -->
+              <!-- <img src="{{displayHeart}}" />  -->
+            <!-- </div> -->
+      
+      
+            <div class="progress progressOnCard" title="Progress...">
+              <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': '' + progressPct + '%'}"></div>
+            </div>
+
+            <div class="deck-icons">
+              <a class="deck-modify" (click)="onEdit()" title="Add, edit or delete cards from this deck.">
+                <i class="fa fa-pencil-square-o"></i>
+              </a>
+              <a class="deck-remove" (click)="onDelete()" title="Put this deck in the trash.">
+                <i class="fa fa-trash-o"></i>
+              </a>
+              <a class="deck-fav" (click)="onFavorite()" title={{favTitle}}}>
+                <i  [ngClass]="{'fa fa-star': isFavorite}"></i>
+                <i  [ngClass]="{'fa fa-star-o': !isFavorite}"></i>
+              </a>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  
+
+<!-- <article class="panel panel-default">
     <div class="panel-body">
 	        <h4> {{ deck.category }} - {{ deck.name }} </h4> 
 	        <div *ngIf="deck.lastPlayed">
@@ -36,7 +89,7 @@
         <div class="modal-footer">
         	<button type="button" class="btn btn-default" (click)="onModalResponse(true)">Yes</button>
           	<button type="button" class="btn btn-default" (click)="onModalResponse(false)">No</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+        </div> -->
+      <!-- </div>/.modal-content -->
+    <!-- </div>/.modal-dialog -->
+  <!-- </div>/.modal -->
