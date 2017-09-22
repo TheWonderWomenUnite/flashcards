@@ -50,7 +50,7 @@ export class DeckService {
     // Call this method without a userId to get all of the unowned decks, works 
 
         console.log("GetUnOwnedDecks: going to call get with userOwned false");
-        return this.http.get('http://localhost:3000/decks/userDecks/unOwned')
+        return this.http.get('http://localhost:3000/decks/unownedDecks/')
             .map((response: Response) => {
                 const decks = response.json().obj;
                 let transformedDecks: Deck[] = [];
@@ -86,6 +86,39 @@ export class DeckService {
     
         // The deck object was not found in the array, return null    
         return null;
+    }
+
+    cloneDeck(deck: Deck) {
+
+        console.log("cloneDeck: going to call post with id "+deck.deckId);
+        const body = JSON.stringify(deck);
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const token = localStorage.getItem('token') 
+            ? '?token=' + localStorage.getItem('token') 
+            : ''; 
+        return this.http.post('http://localhost:3000/decks/clone/' + deck.deckId + token, body, {headers: headers})
+            .map((response: Response) => {
+                const result = response.json().obj;
+                const deck = new Deck(
+                    result.name,
+                    result.userOwned,
+                    result.category,
+                    result.lastPlayed,
+                    result.progressBar,
+                    result.favorite,
+                    result.user,
+                    result._id);
+                // Update this.decks array
+                this.decks.push(deck);
+                this.decksChanged.next(this.decks.slice());
+                return deck;
+            })
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
+    
+
     }
 
     addDeck(deck: Deck) {
