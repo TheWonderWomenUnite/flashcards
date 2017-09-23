@@ -21,6 +21,16 @@
   .card, .liveCard {
     font-size: calc(8px + 4vw);
   }
+  .navbar-brand {
+    display: none;
+  }
+  /* forces hamburger to stay to right while brand is hidden */
+  nav .container {    
+    direction: rtl;
+  }
+  .hideSmall {
+    display: none;
+  }
 }
 
 /*sm screen*/
@@ -47,6 +57,15 @@
   }
   .card, .liveCard {
     font-size: 2vw;
+  }
+  .navbar-brand {
+    display: unset;
+  }
+  nav .container {
+    direction: ltr;
+  }
+  .hideSmall {
+    display: unset ;
   }
 }
 

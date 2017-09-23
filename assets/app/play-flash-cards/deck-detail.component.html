@@ -2,17 +2,18 @@
   <div class="aspect">
     <div class="deck questionSide">
       <div class="deckTitle">
+        <i  [ngClass]="{'fa fa-star': isFavorite}"></i>
+        <br>
         <p> {{ deck.category }} - {{ deck.name }} </p>
 
 
-        <div *ngIf="deck.lastPlayed">
+        <div class="deckNotes" *ngIf="deck.lastPlayed">
 		        Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
 	 		  </div>
         <br>
 
         <!-- TBD: adapt to star and test when obj has sample data -->
         <img src="{{displayHeart}}" /> 
-
       </div>
 
       <div class="getStarted row">
@@ -21,8 +22,8 @@
 
       <!-- TBD implement dynamic progressBar when obj has sample data -->
       <img src="{{displayBar}}" />
-      <div class="progress" title="Progress...">
-        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      <div class="progress progressOnCard" title="Progress...">
+        <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': '' + progressPct + '%'}"></div>
       </div>
     </div>
   </div>

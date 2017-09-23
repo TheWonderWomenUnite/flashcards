@@ -24,10 +24,18 @@ export class DeckPlayComponent implements ngOnInit {
   currIndex = 0;
   faceUp = true;
   displayThumbs = 'none';
+  hideThumbs = true;
+  showQSide = true;
+  showASide = false;
   currentCard: Card;
   nextCard: Card;
   previousCard: Card;
+  isFavorite = false;
+  progressPct = 0;
 
+  // Q for Lisa: for now I used font-awesome icons instead of these png files because they 
+  // were quickest for me to implement the sizing
+  // Let me know if you prefer these imgs and I will figure out sizing them in footer, etc
   const backButton = "../img/back_button.png";
   const thumbsUp = "../img/thumbsUp.png";
   const thumbsDown = "../img/thumbsDown.png";
@@ -45,6 +53,7 @@ export class DeckPlayComponent implements ngOnInit {
               private utilsService: UtilsService) { }
 
 	ngOnInit() {
+    
 		this.route.params
 			.subscribe((params: Params) =>{
 
@@ -66,6 +75,8 @@ export class DeckPlayComponent implements ngOnInit {
             this.updateDeckInfo(this.deck);
             this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
             this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+            this.progressPct = this.deck.progressBar;
+            this.isFavorite = this.deck.favorite;
             this.currentCard = this.cards[this.currIndex];
             this.nextCard = this.cards[this.currIndex + 1];
             this.previousCard = this.cards[this.cards.length-1];
@@ -73,8 +84,8 @@ export class DeckPlayComponent implements ngOnInit {
                         " next = "+this.nextCard.side1+
                         " prev = "+this.previousCard.side1);
             });
-				});
-
+        });        
+        console.log('at end of ngOnInit and hideThumbs is ' + this.hideThumbs);
   	}
 
   goNext(forward: boolean) {
@@ -85,7 +96,11 @@ export class DeckPlayComponent implements ngOnInit {
 
     this.faceUp = true;
     this.displayThumbs = 'none';
+    this.showQSide = true;
+    this.showASide = false;
+    this.hideThumbs = true;
     const lastCard = this.cards.length - 1;
+
 
     // First advance or retreat the currIndex, if it is at the end, loop back to 
 
@@ -118,6 +133,7 @@ export class DeckPlayComponent implements ngOnInit {
       this.previousCard = this.cards[this.currIndex - 1];
       this.nextCard = this.cards[this.currIndex + 1];
     }
+    console.log('at end of goNext and hideThumbs is ' + this.hideThumbs)
   }
 
   onSlideLeft() {
@@ -131,9 +147,14 @@ export class DeckPlayComponent implements ngOnInit {
   } 
 
   showAnswer() {
-    
+    console.log('in showAnswer')
+    console.log(this.faceUp);
+    console.log(this.displayThumbs);
+    this.showASide = true;
+    this.showQSide = false;
     this.faceUp = false;
-    this.displayThumbs = 'block';
+    // this.displayThumbs = 'block';
+    this.hideThumbs = false;
   }
 
   onThumbsUpOrDown(upOrDown: boolean) {
@@ -144,7 +165,7 @@ export class DeckPlayComponent implements ngOnInit {
     // done with the card)
     // Note: Length will never be 0 because you can't get here 
     // if there aren't any cards
-
+console.log('at start of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs);
     const incNumber = ((1/this.cards.length) * 100);
 
     console.log("Number of cards = "+ this.cards.length+ 
@@ -161,9 +182,18 @@ export class DeckPlayComponent implements ngOnInit {
       this.deck.progressBar = 0; 
     }
 
+    this.showQSide = true;
+    this.showASide = false;
+    this.faceUp = true;
+    this.hideThumbs = true;
+    
     this.updateDeckInfo(this.deck);
     this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+    this.progressPct = this.deck.progressBar;
     this.goNext(true);
+    console.log('at end of onThumbsUpOrDown and showASide is ' + this.showASide);
+    console.log('at end of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs);
+    
   }
 
 
@@ -203,6 +233,7 @@ export class DeckPlayComponent implements ngOnInit {
     this.deck.progressBar = 0; 
     this.updateDeckInfo(this.deck);
     this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+    this.progressPct = this.deck.progressBar;
     
     }    
 

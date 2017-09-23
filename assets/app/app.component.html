@@ -1,11 +1,12 @@
 <!-- <div class="container-fluid"> -->
-  
+<div (loggedIn)="onLoggedIn($event)">  
 
-<!--navbar - fixed on top or not? -->
+  <!-- TBD problem if you click on 'Play' when you are already in 'Play' -->
+<!--navbar  -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
   <div class="container">
-    <p class="navbar-brand" >ULTIMATE FLASH CARDS</p>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <p class="navbar-brand">ULTIMATE FLASH CARDS</p>
+    <button (click)="toggleSidebar()" class="hamburger navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -17,7 +18,9 @@
           <a routerLink="/makeflashcards" class="nav-link">MAKE FLASH CARDS<i class="fa fa-pencil-square-o"></i> </a>
         </li>
         <li class="nav-item">
-          <a [routerLink]="['/auth']" class="nav-link">LOG IN/SIGN UP</a>
+          <!-- TBD/Question for Lisa: I wanted to put (loggedIn)="onLoggedIn($event)" somewhere in here...but not working -->
+          <!-- I'm trying to work from Udemy example #63 but since I don't have <app-signin> in this file, I don't know if the example is applicable -->
+          <a [routerLink]="['/auth']" class="nav-link">{{loginPrompt}}</a>
         </li>
   <!--
         <li class="nav-item">
@@ -30,16 +33,18 @@
   </nav>
   
 <!--sidebar (toggles) -->
-<!-- TBD revise/implement with bootstrap instead of toggling with 'hidden' class?-->
-<!-- see https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_navbar_collapse&stacked=h -->
+<!-- TBD need to finish: trigger 'hidden' class with showSidebar var?-->
 <!-- also - use click on hamburger to close sidebar -->
 
-<!-- <nav class="sidebar d-lg-none hidden" id="side">
-  <a routerLink="/playflashcards">PLAY FLASH CARDS</a>
-  <a routerLink="/makeflashcards">MAKE FLASH CARDS</a>
-  <a [routerLink]="['/auth']">LOG IN/SIGN UP</a> -->
-<!--  <a href="#" class="disabled">Disabled</a>-->
-<!-- </nav> -->
+<nav [ngClass]="{'sidebar': true, 'd-lg-none': true, 'hidden': hideSidebar}">
+  <!-- LEFT OFF HERE: trying to call method instead of using 
+    routerLinks - to set hideSidebar to true then navigate -->
+  <!-- <a class="sidebarItem" (click)="onPlayCards()">PLAY FLASH CARDS</a>
+  <a class="sidebarItem" (click)="onMakeCards()">MAKE FLASH CARDS</a> -->
+  <a class="sidebarItem" routerLink="/playflashcards">PLAY FLASH CARDS</a>
+  <a class="sidebarItem" routerLink="/makeflashcards">MAKE FLASH CARDS</a>
+  <a class="sidebarItem" [routerLink]="['/auth']">LOG IN/SIGN UP</a>
+</nav>
   
 <br>
 
