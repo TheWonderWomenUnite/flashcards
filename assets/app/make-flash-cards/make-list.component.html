@@ -3,20 +3,10 @@
 		<button class="btn btn-primary" 
 				(click)="onAddDeck()">Add a deck</button>
 	</div>
-
 	<div class="col-xs-6">
-		<div class="dropdown">
-		    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort by
-		    <span class="caret"></span></button>
-		    <ul class="dropdown-menu">
-		      <li><a (click)="onSortBy('category')">Category</a></li>
-		      <li><a (click)="onSortBy('lastplayed')">Last Played</a></li>
-		      <li><a (click)="onSortBy('favorite')">Favorite</a></li>
-		    </ul>
-		  </div>
+	<ss-multiselect-dropdown [options]="sortOptions" [texts]="sortTexts" [settings]="dropSettings" [(ngModel)]="optionChoice" (ngModelChange)="onSortBy($event)"></ss-multiselect-dropdown>
 	</div>
 </div>
-
 <div class="row">
 	<div class="col-xs-12 deck-list"> 
 	    <app-make-detail
@@ -24,3 +14,32 @@
 	        *ngFor="let deck of decks"></app-make-detail>
 	</div>
 </div>
+
+<div class="backdrop" [ngStyle]="{'display': display}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button 
+            type="button" 
+            class="close" 
+            aria-label="Close"
+            (click)="onModalResponse(0)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Add a Deck</h4>
+        </div>
+        <div class="modal-body">
+          <p>Do you want to add a new deck or clone one?</p>
+        </div>
+        <div class="modal-footer">
+        	<button type="button" class="btn btn-default" (click)="onModalResponse(1)">Add New</button>
+          <!-- 
+          	<button type="button" class="btn btn-default" (click)="onModalResponse(2)">Clone</button>
+          -->
+          	<ss-multiselect-dropdown *ngIf="cloneDrop" [options]="cloneDeckList" [texts]="cloneTexts" [settings]="dropSettings" [(ngModel)]="cloneChoice" (ngModelChange)="onClone($event)"></ss-multiselect-dropdown>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+

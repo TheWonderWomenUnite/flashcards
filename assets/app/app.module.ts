@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorComponent } from './errors/error.component';
@@ -53,6 +55,7 @@ import { UtilsService } from './shared/utils.service';
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
+    MultiselectDropdownModule,
     AppRoutingModule
   ],
   providers: [AuthService, ErrorService, DeckService, CardService, UtilsService],

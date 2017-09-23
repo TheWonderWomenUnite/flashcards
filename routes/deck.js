@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 
 var User = require('../models/user');
 var Deck = require('../models/deck');
+var Card = require('../models/card');
 
 // A general get function to return all decks
 router.get('/', function (req, res, next) {
@@ -123,6 +124,7 @@ router.post('/clone/:id', function(req, res, next) {
     
     User.findById(decoded.user._id, function(err, user) {
         if (err) {
+            console.log("Couldn't find user")
             return res.status(500).json({ 
                 title: 'Error finding user', 
                 error: err });
@@ -136,6 +138,7 @@ router.post('/clone/:id', function(req, res, next) {
                     error: err });
             }
             
+            console.log("deck.cards = "+deck.cards);
             // The deck to be cloned was found and now we can copy it
             var newDeck = new Deck({
                 name: deck.name,
@@ -157,21 +160,31 @@ router.post('/clone/:id', function(req, res, next) {
                 // Update the user 
                 user.decks.push(deck);
                 user.save();
-            
-                // Now copy the cards
-                for (let card of deck.cards) {
-                    var newCard = new Card({
-                        side1: card.side1,
-                        side2: card.side2,
-                        deck: deck._id
-                    });
-                    newDeck.cards.push(newCard);
-                    newDeck.save();
-                }
 
+                // Now copy the cards
+                Card.find({deck: req.params.id}, function (err, cards) {
+                    if (err) {
+                        return res.status(500).json({
+                            title: 'Error finding cards for this deck',
+                            error: err
+                        });
+                    }
+                    console.log("cards = "+cards);
+                    for (let card of cards) {
+                        var newCard = new Card({
+                            side1: card.side1,
+                            side2: card.side2,
+                            deck: deck._id
+                        });
+                        deck.cards.push(newCard);
+                    }
+                    deck.save(); 
+
+                });
+   
                 res.status(201).json({
                     message: 'Success',
-                    obj: result
+                    obj: newDeck
                 });
             }); // end of newDeck.save
         }); // end of Deck.findById
