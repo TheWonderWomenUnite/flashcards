@@ -25,22 +25,28 @@ export class DeckListComponent implements OnInit {
 
     ngOnInit() {
 
-        // Get the current userId from local storage 
-        // this.userId = localStorage.getItem('UserId');
-        // console.log("DeckList -> ngOnInit: UserId = "+this.userId);
-
-        // Now, get the userId from the params, as we are now being
-        // routed to here
+        // Get the userId from the params, if there is no userId it is 
+        // anonymous play
         this.route.params
             .subscribe((params: Params) =>{
                 // Get the user Id from the route parameters
                 this.userId = params['id'];
-                this.deckService.getDecks(this.userId)
-                    .subscribe(
-                        (decks: Deck[]) => {
-                        console.log(decks);
-                        this.decks = decks;
-                    });
+                if (this.userId) {
+                    this.deckService.getDecks(this.userId)
+                        .subscribe(
+                            (decks: Deck[]) => {
+                            console.log(decks);
+                            this.decks = decks;
+                        });
+                }
+                else {
+                    this.deckService.getUnownedDecks()
+                        .subscribe(
+                            (decks: Deck[]) => {
+                            console.log(decks);
+                            this.decks = decks;
+                        });
+                }
             });            
     }
 
@@ -53,19 +59,4 @@ export class DeckListComponent implements OnInit {
         // back to a general welcome screen
     }
 
-    /*
-    This was temporarily here to test the deck service
-    To add it back in, add an "add deck" button to the template
-    onAdd() {
-        // Add a new deck for this user
-        const newName = this.utilsService.randomString(20);
-        const newCategory = this.utilsService.randomString(15);
-        const newDeck = new Deck(newName, true, newCategory, Date.now(), 42, true, this.userId);
-        
-        this.deckService.addDeck(newDeck).subscribe(
-            (deck: Deck) => {
-                console.log(deck);
-            });
-    }
-    */
 }

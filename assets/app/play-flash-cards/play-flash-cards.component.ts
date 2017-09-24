@@ -13,28 +13,33 @@ import { DeckListComponent } from './deck-list.component';
 export class PlayFlashCardsComponent implements ngOnInit {
 // The main component for the PlayFlashCards Module
 	userName: string = '';
-	userEmail: string = '';
-    gravHash: string = '';
+  gravHash: string = '';
+  anonymousGravPic = "../img/Wonder_Woman.jpg";
+  
+	constructor(private route: ActivatedRoute,
+				      private router: Router,
+			  	    private authService: AuthService) { }
 
-  	constructor(private route: ActivatedRoute,
-  				private router: Router,
-  			  	private authService: AuthService) { }
+  ngOnInit() {
 
-  	ngOnInit() {
+    const UserId = localStorage.getItem('UserId');
+    console.log("UserId = "+UserId);
 
-		const UserId = localStorage.getItem('UserId');
-
-		console.log("UserId = "+UserId);
-
-       	this.authService.getUser(UserId)
-            .subscribe(
-                (user: User) => {
-                    console.log(user);
-                    this.userName = this.authService.getUserName();
- 				    this.gravHash = this.authService.getGravHash();
- 				    // Now route to the deck-list
-		    		this.router.navigate(['./', 'decklist', UserId], {relativeTo: this.route});
-                }
-            );
-		}  
+    if (UserId) {
+      this.authService.getUser(UserId)
+        .subscribe(
+        (user: User) => {
+          console.log(user);
+          this.userName = this.authService.getUserName();
+  				this.gravHash = this.authService.getGravHash();
+  				// Now route to the deck-list
+  	    	this.router.navigate(['./', 'decklist', UserId], {relativeTo: this.route});
+          }
+        );
+      }
+    else {
+      this.userName = "Anonymous";
+      this.router.navigate(['./', 'decklist'], {relativeTo: this.route});
+      }  
+	}  
 }

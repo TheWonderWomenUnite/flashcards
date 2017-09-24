@@ -42,36 +42,4 @@ export class DeckDetailComponent implements OnInit {
 
 	}
 
-	onEdit() {
-    // This is here to test the deck service - edit a deck with 
-    // a bunch of random data
-  	console.log("DeckDetail-> onEdit: deck Id is "+this.deck.deckId);
-
-  	const editDeck = new Deck(
-  		this.utilsService.randomString(12), 
-  		true, 
-  		this.utilsService.randomString(12),
-      Date.now(),
-      Math.floor((Math.random() * 10) + 1),
-      false,
-      this.deck.userId,
-      this.deck.deckId);
-  	
-  	this.deckService.updateDeck(editDeck).subscribe(
-  	  (deck: Deck) => {
-  	    console.log(deck);
-  	  });
-	}
-
-	  onDelete() {
-      // This is here to test the deck service - delete a deck
-      // given an ID
-      console.log("DeckDetail-> onDelete: deck Id = "+this.deck.deckId);
-	    this.deckService.deleteDeck(this.deck).subscribe(
-	      (deck: Deck) => {
-	        console.log(deck);
-       		this.router.navigate('', {relativeTo: this.route});
-	      });
-
-	  }
 }
