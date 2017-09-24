@@ -3,8 +3,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Deck } from "../models/deck.model";
 import { DeckService } from "../shared/deck.service";
-import { DeckDetailComponent } from './deck.component';
+// import { DeckDetailComponent } from './deck.component';
+// DMZ changed
+import { DeckDetailComponent } from './deck-detail.component';
 import { UtilsService } from "../shared/utils.service";
+
 
 @Component({
     selector: 'app-deck-list',

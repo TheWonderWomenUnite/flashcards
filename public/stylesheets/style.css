@@ -1,4 +1,7 @@
-body,h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif}
+body,h1,h2,h3,h4,h5,h6 {
+  font-family: "Poppins", sans-serif;
+  color: white;
+}
 body {
   background: url("../img/wood3.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -73,10 +76,10 @@ body, html {
   padding: 8px 2px;
   margin: 0;
 }
-.navbar-dark .navbar-nav .nav-link, .navbar button {
+.navbar-dark .navbar-nav .nav-link, .navbar button, nav button {
   color: #C7C7C7;
 }
-.navbar a:hover {
+.navbar a:hover, nav a:hover {
   color: #535252!important;
   background-color: white;
   opacity: 1;
@@ -107,7 +110,8 @@ body, html {
   color: white;
 }
 .topOfDecks .btn-group {
-  width: 100%;
+/* .topOfDecks { */
+    width: 100%;
 }
 .topOfDecks button {
   background-color: black;
@@ -124,9 +128,8 @@ body, html {
   width: 100%;
 }
 .aspect {
-/*  for aspect ratio*/
   /*width: 100%;*/ /* not working in ang */
-  width: 250px;
+  width: 240px;
   margin-top: 15px;
   margin-bottom: 15px;
   position: relative;
@@ -151,6 +154,13 @@ body, html {
   margin-top: 20px;
   margin-bottom: 50px;
 }
+/* .deckSelect.container {
+  display: flex;
+}
+.deckList.row {
+  display: flex;
+  flex-wrap: wrap;
+} */
 .card, .liveCard, .spreadCards, .deck {
   background-color: #4444a7;
   text-align: center;
@@ -216,9 +226,11 @@ body, html {
 .deck-remove i, .deck-remove:hover i {
   color: red;
 }
-/* .deck-fav i, .deck-fav:hover i , .gameInfo i, .deckTitle i{ */
-  .deck-fav i, .deck-fav:hover i , .gameInfo i {
+.deck-fav i, .deck-fav:hover i , .gameInfo i, .deckTitle .fav {
     color: yellow;
+}
+.deck-modify:hover i, .deck-fav:hover i, .deck-remove:hover i {
+  cursor: pointer;
 }
 .gameInfo i, .gameInfo p {
   display: inline-block;
@@ -430,11 +442,12 @@ to center text vertically w/o messing up scrolling*/
   z-index: 1;
   overflow: auto;
   background-color: black;
+  opacity: .8;
 }
 .sidebar a {
-  font-size: 12px;
+  font-size: 15px;
   padding: 15px;
-  line-height: 30px;
+  line-height: 15px;
   display: block;
   text-decoration: none;
   color: #fff;
@@ -442,4 +455,10 @@ to center text vertically w/o messing up scrolling*/
 .sidebar a:hover {
     text-decoration: none;
     color: #a8a6a6;
+}
+.modal {
+  color: black;
+}
+nav a, nav button {
+  cursor: pointer;
 }

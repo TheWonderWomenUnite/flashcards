@@ -7,7 +7,8 @@ import { UtilsService } from "../shared/utils.service";
 
 @Component({
   selector: 'app-make-detail',
-  templateUrl: './make-detail.component.html'    
+	templateUrl: './make-detail.component.html',
+	styleUrls: ['./make-detail.component.css']  
 })
 
 export class MakeDetailComponent {
@@ -57,12 +58,10 @@ export class MakeDetailComponent {
           //this.router.navigate(['./makeflashcards/', 'makelist', this.deck.userId]);            
         });
     }
-
   }
 
 	onEdit() {
 		this.router.navigate(['./makeflashcards', 'edit', this.deck.deckId]);
-
 	}
 
 	onFavorite() {
@@ -73,8 +72,7 @@ export class MakeDetailComponent {
         		console.log(deck);
 					});
 			this.isFavorite = this.deck.favorite;
-			this.favTitle = this.isFavorite ? "Click to remove 'FAVORITE' status" : "Click to mark this as a 'FAVORITE' deck";			
+			this.favTitle = this.isFavorite ? "Remove 'FAVORITE' status" : "Mark this deck as a 'FAVORITE'";			
 	    this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
 	}
-
 }

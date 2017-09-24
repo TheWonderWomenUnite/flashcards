@@ -12,40 +12,30 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a routerLink="/playflashcards" class="nav-link">PLAY FLASH CARDS <i class="fa fa-th"></i> <span class="sr-only">(current)</span></a>
+          <a (click)="onPlayCards()" class="nav-link">PLAY FLASH CARDS <i class="fa fa-th"></i> <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a routerLink="/makeflashcards" class="nav-link">MAKE FLASH CARDS <i class="fa fa-pencil-square-o"></i> </a>
+          <a (click)="onMakeCards()" class="nav-link">MAKE FLASH CARDS <i class="fa fa-pencil-square-o"></i> </a>
         </li>
         <li class="nav-item">
           <!-- TBD/Question for Lisa: I wanted to put (loggedIn)="onLoggedIn($event)" somewhere in here...but not working -->
           <!-- I'm trying to work from Udemy example #63 but since I don't have <app-signin> in this file, I don't know if the example is applicable -->
-          <a [routerLink]="['/auth']" class="nav-link">{{loginPrompt}}</a>
+          <a *ngIf="isLoggedIn" [routerLink]="['/auth/signout']" class="nav-link">LOG OUT</a>
+          <a *ngIf="!isLoggedIn" [routerLink]="['/auth/signin']" class="nav-link">LOG IN/SIGN UP</a>
         </li>
-  <!--
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-  -->
       </ul>
     </div>
     </div>
   </nav>
   
 <!--sidebar (toggles) -->
-<!-- TBD need to finish: trigger 'hidden' class with showSidebar var?-->
-<!-- also - use click on hamburger to close sidebar -->
-
 <nav [ngClass]="{'sidebar': true, 'd-lg-none': true, 'hidden': hideSidebar}">
-  <!-- LEFT OFF HERE: trying to call method instead of using 
-    routerLinks - to set hideSidebar to true then navigate -->
-  <!-- <a class="sidebarItem" (click)="onPlayCards()">PLAY FLASH CARDS</a>
-  <a class="sidebarItem" (click)="onMakeCards()">MAKE FLASH CARDS</a> -->
-  <a class="sidebarItem" routerLink="/playflashcards">PLAY FLASH CARDS</a>
-  <a class="sidebarItem" routerLink="/makeflashcards">MAKE FLASH CARDS</a>
+  <a (click)="onPlayCards()" class="sidebarItem">PLAY FLASH CARDS</a>
+  <a (click)="onMakeCards()" class="sidebarItem">MAKE FLASH CARDS</a>
   <a class="sidebarItem" [routerLink]="['/auth']">LOG IN/SIGN UP</a>
 </nav>
   
+<br>
 <br>
 
 

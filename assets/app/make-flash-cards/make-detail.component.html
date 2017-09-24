@@ -39,7 +39,7 @@
               <a class="deck-remove" (click)="onDelete()" title="Put this deck in the trash.">
                 <i class="fa fa-trash-o"></i>
               </a>
-              <a class="deck-fav" (click)="onFavorite()" title={{favTitle}}}>
+              <a class="deck-fav" (click)="onFavorite()" title={{favTitle}}>
                 <i  [ngClass]="{'fa fa-star': isFavorite}"></i>
                 <i  [ngClass]="{'fa fa-star-o': !isFavorite}"></i>
               </a>
@@ -51,45 +51,32 @@
   </div>
   
 
-<!-- <article class="panel panel-default">
-    <div class="panel-body">
-	        <h4> {{ deck.category }} - {{ deck.name }} </h4> 
-	        <div *ngIf="deck.lastPlayed">
-		        Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
-	 		</div>
-			<img src="{{displayHeart}}" /> 
-	        <img src="{{displayBar}}" />
-    </div>
-	<footer class="panel-footer">
-		<div class="config">
-			<a (click)="onEdit()">Edit</a>
-			<a (click)="onDelete()">Delete</a>
-			<a (click)="onFavorite()">Favorite</a>
-		</div>
-	</footer>    
-</article>
-
+<!-- TBD stuff for modal -->
 <div class="backdrop" [ngStyle]="{'display': display}"></div>
-  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button 
-            type="button" 
-            class="close" 
-            aria-label="Close"
-            (click)="onModalResponse(false)">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title">Delete Deck</h4>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure?</p>
-        </div>
-        <div class="modal-footer">
-        	<button type="button" class="btn btn-default" (click)="onModalResponse(true)">Yes</button>
-          	<button type="button" class="btn btn-default" (click)="onModalResponse(false)">No</button>
-        </div> -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button 
+          type="button" 
+          class="close" 
+          aria-label="Close"
+          (click)="onModalResponse(false)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Delete Deck</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onModalResponse(true)">Yes</button>
+          <button type="button" class="btn btn-default" (click)="onModalResponse(false)">No</button>
+      </div>
+    </div>
+  </div>
+</div>
       <!-- </div>/.modal-content -->
     <!-- </div>/.modal-dialog -->
   <!-- </div>/.modal -->
+

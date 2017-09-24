@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'my-app',
@@ -8,8 +10,18 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   loginPrompt = 'LOG IN/SIGN UP';
+  isLoggedIn = false;
   title = 'app works!';
   hideSidebar = true;
+
+	constructor(private route: ActivatedRoute,
+    private router: Router,
+      private authService: AuthService) { }
+
+  ngOnInit() {
+    console.log("status is " + this.authService.isLoggedIn());
+    this.isLoggedIn = this.authService.isLoggedIn();  
+  }
 
   // TBD - Q for Lisa: trying to get event emitter from signin to call this
   onLoggedIn(loginData: {status: boolean}) {
@@ -21,12 +33,15 @@ export class AppComponent {
     this.hideSidebar = !this.hideSidebar;
   }
 
-  // DMZ added these in place of routerLinks in order to handle toggling of sidebar
   onPlayCards() {
+    console.log('play fc clicked');
+    console.log(this.route);
     this.hideSidebar = true;
     this.router.navigate(['./playflashcards/']);
   }
   onMakeCards() {
+    console.log('make fc clicked');
+    console.log(this.route);
     this.hideSidebar = true;
     this.router.navigate(['./makeflashcards/']);
   }
