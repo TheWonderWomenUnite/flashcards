@@ -5,10 +5,11 @@
     </h1>
     <br>
     <h5>
-      Click 'PLAY FLASH CARDS' now to try out a game...
+        <a (click)="onPlayCards()"> Try out a flash cards game with <span>PLAY FLASH CARDS</span>span> or...</a>
     </h5>
     <h5>
-      or click 'LOG IN /SIGN UP' to create and use your own flash cards
+      <!-- TBD make dynamic with logout if user already logged in -->
+      <a [routerLink]="['/auth/signin']">Create and play your own flash card games with <span>LOG IN /SIGN UP</span></a>
     </h5>
   </div>
 </div>

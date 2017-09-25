@@ -8,3 +8,13 @@
 .script {
   font-family: "Rock Salt", cursive;  
 }
+h5 {
+  cursor: pointer;
+}
+h5:hover span {
+  color: #6E93F8;
+}
+h5 a {
+  text-decoration-line: none;
+  color:white;
+}
