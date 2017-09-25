@@ -34,10 +34,8 @@
         </div>
         <div class="modal-footer">
         	<button type="button" class="btn btn-default" (click)="onModalResponse(1)">Add New</button>
-          <!-- 
-          	<button type="button" class="btn btn-default" (click)="onModalResponse(2)">Clone</button>
-          -->
-          	<ss-multiselect-dropdown *ngIf="cloneDrop" [options]="cloneDeckList" [texts]="cloneTexts" [settings]="dropSettings" [(ngModel)]="cloneChoice" (ngModelChange)="onClone($event)"></ss-multiselect-dropdown>
+           	<button type="button" class="btn btn-default" (click)="onModalResponse(2)">Clone</button>
+           	<ss-multiselect-dropdown *ngIf="cloneDrop" [options]="cloneDeckList" [texts]="cloneTexts" [settings]="dropSettings" [(ngModel)]="cloneChoice" (ngModelChange)="onClone($event)"></ss-multiselect-dropdown>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

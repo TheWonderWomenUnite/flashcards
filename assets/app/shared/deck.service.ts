@@ -12,8 +12,7 @@ export class DeckService {
     private decks: Deck[] = [];
     decksChanged = new Subject<Deck[]>();
 
-    constructor(private http: Http, private errorService: ErrorService) {
-        }
+    constructor(private http: Http, private errorService: ErrorService) {}
 
     getDecks(userId: string) {
     // Call this method with a user Id to get all of the decks
