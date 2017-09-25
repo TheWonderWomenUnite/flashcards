@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 
 var User = require('../models/user');
 var Deck = require('../models/deck');
+var Card = require('../models/card');
 
 // A general get function to return all decks
 router.get('/', function (req, res, next) {
@@ -121,6 +122,7 @@ router.post('/clone/:id', function(req, res, next) {
     // First get the user
     var decoded = jwt.decode(req.query.token);
     
+    // (This is the currently logged in user)
     User.findById(decoded.user._id, function(err, user) {
         if (err) {
             return res.status(500).json({ 
@@ -128,7 +130,7 @@ router.post('/clone/:id', function(req, res, next) {
                 error: err });
         }
 
-        // Now get the deck
+        // Now get the deck to be cloned
         Deck.findById(req.params.id, function(err, deck) {     
             if (err) {
                 return res.status(500).json({ 
@@ -146,6 +148,7 @@ router.post('/clone/:id', function(req, res, next) {
                 favorite: false,
                 user: user._id 
             });
+
             newDeck.save(function(err, deck) {
                 if (err) {
                     return res.status(500).json({ 
@@ -157,26 +160,48 @@ router.post('/clone/:id', function(req, res, next) {
                 // Update the user 
                 user.decks.push(deck);
                 user.save();
-            
-                // Now copy the cards
-                for (let card of deck.cards) {
-                    var newCard = new Card({
-                        side1: card.side1,
-                        side2: card.side2,
-                        deck: deck._id
-                    });
-                    newDeck.cards.push(newCard);
-                    newDeck.save();
-                }
 
+                // Now copy the cards
+                Card.find({deck: req.params.id}, function (err, cards) {
+                    if (err) {
+                        return res.status(500).json({
+                            title: 'Error finding cards for this deck',
+                            error: err
+                        });
+                    }
+                    for (let card of cards) {
+                        console.log("In the for loop, card Id = "+card._id);
+                        var newCard = new Card({
+                            side1: card.side1,
+                            side2: card.side2,
+                            deck: deck._id
+                        });
+
+                        newCard.save(function(err, result) {
+                            if (err) {
+                                return res.status(500).json({
+                                title: 'Error saving card',
+                                error: err
+                                });
+                            }
+                            deck.cards.push(newCard);
+                            });
+                           
+                        }
+                    deck.save(); 
+                    
+                });
+   
                 res.status(201).json({
                     message: 'Success',
-                    obj: result
+                    obj: newDeck
                 });
             }); // end of newDeck.save
         }); // end of Deck.findById
     }); // end of User.findById
 }); // end of router.Post
+
+
 
 // Use this route to update deck details like name, category, userOwned, 
 // lastPlayed, progressBar, and favorite.
@@ -246,16 +271,6 @@ router.delete('/:id', function(req, res, next) {
                 error: {message: 'Deck not found'}
             }); 
         }    
-
-        /*
-        // If this is an unowned deck then you don't need to do this
-        if (deck.user != decoded.user._id) {
-            return res.status(401).json({
-                title: 'Not Authenticated',
-                error: {message: 'Users do not match'}
-            });
-        }
-        */
 
         deck.remove(function(err, result) {
             if (err) {
