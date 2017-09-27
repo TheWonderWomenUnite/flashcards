@@ -51,7 +51,7 @@
   </div>
   
 
-<!-- TBD stuff for modal -->
+<!-- TBD stuff for confirmation modal -->
 <div class="backdrop" [ngStyle]="{'display': display}"></div>
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
   <div class="modal-dialog" role="document">
@@ -72,6 +72,42 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)="onModalResponse(true)">Yes</button>
           <button type="button" class="btn btn-default" (click)="onModalResponse(false)">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- TBD stuff for Add New Deck modal -->
+<div class="backdrop" [ngStyle]="{'display': displayAddDeck}"></div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayAddDeck}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button 
+          type="button" 
+          class="close" 
+          aria-label="Close"
+          (click)="onModalResponse(false)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add a New Deck</h4>
+      </div>
+
+      <div class="modal-body">
+				<input 
+        type="text" 
+        placeholder="Category"
+        [(ngModel)]="newCategory" />
+				<input 
+        type="text" 
+        placeholder="Deck Name"
+        [(ngModel)]="newDeckName" />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onAddNewDeck(true)">Add Deck</button>
+          <button type="button" class="btn btn-default" (click)="onAddNewDeck(false)">Cancel</button>
       </div>
     </div>
   </div>

@@ -13,13 +13,16 @@ import { UtilsService } from "../shared/utils.service";
 
 export class MakeDetailComponent {
   @Input() deck: Deck;
-  display = 'none';
+	display = 'none';
+	displayAddDeck = 'none';
 
   displayBar = "";
 	displayHeart = "";
 	isFavorite = false;
 	favTitle = "";
-  progressPct = 0;
+	progressPct = 0;
+	newCategory = "";
+	newDeckName = "";
 
  	constructor(private deckService: DeckService,
  			        private utilsService: UtilsService,
@@ -36,11 +39,27 @@ export class MakeDetailComponent {
 	}
 
 	onAddDeck() {
-		// TBD show modal to prompt for deck name, category and favorite status
-		console.log('onAddDeck called...');
-		// then either call onEdit() or use this router & require at least one card to be added?
-		this.router.navigate(['./makeflashcards', 'edit', this.deck.deckId]);
+  	// Show the delete modal
+    this.displayAddDeck = 'block';
 	}
+
+	private onAddNewDeck(answer:boolean) {
+    // Get rid of the modal
+		this.displayAddDeck = 'none';
+		console.log('adding deck for: ' + this.newCategory + ' and ' this.newDeckName)
+    if answer {
+			// TBD ask Lisa for help here
+      // Add general info for new deck
+      this.deckService.addDeck(this.deck).subscribe(
+        (deck: Deck) => {
+          console.log(deck);
+				// then either call onEdit() or something close to this router & require at least one card to be added?
+				// TBD think this will need same url as onEdit once that works...
+				//this.router.navigate(['./makeflashcards', 'edit', this.deck.deckId]);
+			});
+    }
+  }
+
 	onDelete() {
   	// Show the delete modal
     this.display = 'block';
