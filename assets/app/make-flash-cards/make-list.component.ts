@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs/subscription';
 
+import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
+
 import { Deck } from "../models/deck.model";
 import { DeckService } from "../shared/deck.service";
 import { MakeDetailComponent } from './make-detail.component';
@@ -14,6 +16,7 @@ import { MakeDetailComponent } from './make-detail.component';
 
 export class MakeListComponent implements OnInit, OnDestroy {
     decks: Deck[];
+    cloneDecks: Deck[];
     userId: string;
     subscription: Subscription;
 

@@ -4,11 +4,15 @@
 			<div class="btn-group">
 				<button class="centerIt btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort by
 				<span class="caret"></span></button>
-				<ul class="dropdown-menu">
-					<li><a (click)="onSortBy('category')">Category</a></li>
-					<li><a (click)="onSortBy('lastplayed')">Last Played</a></li>
-					<li><a (click)="onSortBy('favorite')">Favorite</a></li>
-				</ul>
+				<!-- <div class="col-xs-6"> -->
+					<!-- <ss-multiselect-dropdown 
+						[options]="sortOptions" 
+						[texts]="sortTexts" 
+						[settings]="dropSettings" 
+						[(ngModel)]="optionChoice" 
+						(ngModelChange)="onSortBy($event)">
+					</ss-multiselect-dropdown> -->
+				<!-- </div> -->
 			</div>
 		</div>
 	</div>
