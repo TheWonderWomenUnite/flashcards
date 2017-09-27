@@ -65,18 +65,24 @@ export class MakeDetailComponent {
     this.display = 'block';
   }
 
-  private onModalResponse(answer:boolean) {
+  private onModalResponse(answer) {
     // Get rid of the modal
-    this.display = 'none';
-    if answer {
+		this.display = 'none';
+		
+		// Create new deck
+    if (answer === 1) {
       // Delete the deck
       this.deckService.deleteDeck(this.deck).subscribe(
         (deck: Deck) => {
           console.log(deck);
           // Navigate back to the list
           //this.router.navigate(['./makeflashcards/', 'makelist', this.deck.userId]);            
-        });
-    }
+				});
+				
+		// Clone a deck
+    } else if (answer === 2) {
+			console.log('user wants to clone a deck');
+		}
   }
 
 	onEdit() {
