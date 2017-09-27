@@ -43,11 +43,13 @@ export class MakeDetailComponent {
     this.displayAddDeck = 'block';
 	}
 
-	private onAddNewDeck(answer:boolean) {
+	private onAddNewDeck(answer:number) {
     // Get rid of the modal
 		this.displayAddDeck = 'none';
-		console.log('adding deck for: ' + this.newCategory + ' and ' this.newDeckName)
-    if answer {
+		console.log('adding/cloning deck for: ' + this.newCategory + ' and ' this.newDeckName)
+
+		// Add a new deck
+    if (answer === 1) {
 			// TBD ask Lisa for help here
       // Add general info for new deck
       this.deckService.addDeck(this.deck).subscribe(
@@ -57,7 +59,13 @@ export class MakeDetailComponent {
 				// TBD think this will need same url as onEdit once that works...
 				//this.router.navigate(['./makeflashcards', 'edit', this.deck.deckId]);
 			});
-    }
+						
+			// Clone a deck
+		} else if (answer === 2) {
+			// TBD check with lisa on what to incorp
+			console.log('user wants to clone a deck');
+		}
+
   }
 
 	onDelete() {
@@ -65,12 +73,12 @@ export class MakeDetailComponent {
     this.display = 'block';
   }
 
-  private onModalResponse(answer) {
+  private onModalResponse(answer:boolean) {
     // Get rid of the modal
 		this.display = 'none';
+		console.log('onModalResponse just called');
 		
-		// Create new deck
-    if (answer === 1) {
+    if (answer) {
       // Delete the deck
       this.deckService.deleteDeck(this.deck).subscribe(
         (deck: Deck) => {
@@ -78,10 +86,6 @@ export class MakeDetailComponent {
           // Navigate back to the list
           //this.router.navigate(['./makeflashcards/', 'makelist', this.deck.userId]);            
 				});
-				
-		// Clone a deck
-    } else if (answer === 2) {
-			console.log('user wants to clone a deck');
 		}
   }
 
