@@ -16,15 +16,33 @@ import { MakeDetailComponent } from './make-detail.component';
 
 export class MakeListComponent implements OnInit, OnDestroy {
     decks: Deck[];
-    cloneDecks: Deck[];
     userId: string;
     subscription: Subscription;
+
+    // Attributes for the "sort by" drop down
+    optionChoice: number[];
+    sortOptions: IMultiSelectOption[];
+    sortTexts: IMultiSelectTexts = { defaultTitle: 'Sort By' };
+
+
+    // These settings limit dropdown to one choice (for both drop downs)
+    dropSettings: IMultiSelectSettings = {
+        selectionLimit: 1,
+        autoUnselect: true
+        };
+
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private deckService: DeckService) {
     }
     ngOnInit() {
+        this.sortOptions = [
+            { id: 1, name: 'Category' },
+            { id: 2, name: 'Last Played' },
+            { id: 3, name: 'Favorites' },
+        ];
+
         this.userId = localStorage.getItem('UserId');
         console.log("UserId = "+this.userId);
         this.subscription = this.deckService.decksChanged.
@@ -56,7 +74,19 @@ export class MakeListComponent implements OnInit, OnDestroy {
         // back to a general welcome screen
     }
 
-    onSortBy(sortOrder:string) {
-        console.log("Sort by "+sortOrder);
+    // onSortBy(sortOrder:string) {
+    onSortBy() {
+        console.log("Sort decks by "+this.optionChoice);
+        switch(this.optionChoice[0]) {
+            case 1:
+                // Sort decks by category
+                break;
+            case 2:
+                // Sort decks by last played
+                break;
+            case 3:
+                // Sort decks by favorites
+                break;
+        }
     }
 }
