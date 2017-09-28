@@ -160,7 +160,7 @@ export class MakeEditComponent implements OnInit {
     (<FormArray>this.deckForm.get('cards')).push(
       new FormGroup({
         'side1': new FormControl(null, Validators.required),
-        'side2': new FormControl(null, Validators.required),
+        'side2': new FormControl(null, Validators.required)
       })
     );
   }

@@ -1,29 +1,21 @@
-<!-- <div class="col-xs-12"> -->
 <div class="deckSelect container">
 	<div class="topOfDecks row">
-		<div class="col-12 col-sm-6">
-			<div class="btn-group">
-				<button class="centerIt btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort by
-				<span class="caret"></span></button>
-				<ul class="dropdown-menu">
-					<li><a (click)="onSortBy('category')">Category</a></li>
-					<li><a (click)="onSortBy('lastplayed')">Last Played</a></li>
-					<li><a (click)="onSortBy('favorite')">Favorite</a></li>
-				</ul>
-			</div>
-		</div>
+		<ss-multiselect-dropdown 
+			[options]="sortOptions" 
+			[texts]="sortTexts" 
+			[settings]="dropSettings" 
+			[(ngModel)]="optionChoice" 
+			(ngModelChange)="onSortBy($event)">
+		</ss-multiselect-dropdown>
 	</div>
 </div>
-<!-- </div> -->
 
 <div class="deckSelect container">    
 	<div class = "deckList row">
-			<app-deck-detail
-			[deck]="deck"
-			 *ngFor="let deck of decks"></app-deck-detail>		
-			 <!-- <app-deck-detail></app-deck-detail>		 -->
- 
-		</div>
+		<app-deck-detail
+		[deck]="deck"
+			*ngFor="let deck of decks"></app-deck-detail>	
+	</div>
 </div>
 
 <!-- <div class="col-xs-8 col-xs-offset-2 deck-list"> 

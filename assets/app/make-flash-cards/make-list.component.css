@@ -2,3 +2,6 @@
 	position: relative;
 	padding-top: 50px;
 }
+.topOfDecks.row {
+	justify-content: center;
+}

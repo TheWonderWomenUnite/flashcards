@@ -1,4 +1,30 @@
-<div class="row">
+<div class="deckSelect container">
+	<div class="topOfDecks row">
+		<ss-multiselect-dropdown 
+			[options]="sortOptions" 
+			[texts]="sortTexts" 
+			[settings]="dropSettings" 
+			[(ngModel)]="optionChoice" 
+			(ngModelChange)="onSortBy($event)">
+		</ss-multiselect-dropdown>
+	</div>
+</div>
+
+<div class="deckSelect container">    
+	<div class = "deckList row">
+
+		<!-- this creates the first 'Add new deck' card -->
+		<app-make-detail></app-make-detail>
+		
+		<!-- this loops through existing decks -->
+		<app-make-detail
+		[deck]="deck"
+			*ngFor="let deck of decks"></app-make-detail>	
+	</div>
+</div>
+
+
+<!-- <div class="row">
 	<div class="col-xs-6">
 		<button class="btn btn-primary" 
 				(click)="onAddDeck()">Add a deck</button>
@@ -13,31 +39,6 @@
 	       [deck]="deck"
 	        *ngFor="let deck of decks"></app-make-detail>
 	</div>
-</div>
 
-<div class="backdrop" [ngStyle]="{'display': display}"></div>
-  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button 
-            type="button" 
-            class="close" 
-            aria-label="Close"
-            (click)="onModalResponse(0)">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title">Add a Deck</h4>
-        </div>
-        <div class="modal-body">
-          <p>Do you want to add a new deck or clone one?</p>
-        </div>
-        <div class="modal-footer">
-        	<button type="button" class="btn btn-default" (click)="onModalResponse(1)">Add New</button>
-           	<button type="button" class="btn btn-default" (click)="onModalResponse(2)">Clone</button>
-           	<ss-multiselect-dropdown *ngIf="cloneDrop" [options]="cloneDeckList" [texts]="cloneTexts" [settings]="dropSettings" [(ngModel)]="cloneChoice" (ngModelChange)="onClone($event)"></ss-multiselect-dropdown>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+</div>
 

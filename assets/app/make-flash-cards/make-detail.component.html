@@ -1,42 +1,119 @@
-<article class="panel panel-default">
-    <div class="panel-body">
-	        <h4> {{ deck.category }} - {{ deck.name }} </h4> 
-	        <div *ngIf="deck.lastPlayed">
-		        Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
-	 		</div>
-			<img src="{{displayHeart}}" /> 
-	        <img src="{{displayBar}}" />
-    </div>
-	<footer class="panel-footer">
-		<div class="config">
-			<a (click)="onEdit()">Edit</a>
-			<a (click)="onDelete()">Delete</a>
-			<a (click)="onFavorite()">Favorite</a>
-		</div>
-	</footer>    
-</article>
+<div class="col-12 col-lg-3 col-md-4 col-sm-6">        
+    <div class="aspect">
+      <div class="deck questionSide">
 
+        <div *ngIf="!deck; then blankDeck else existingDeck"></div>
+
+        <ng-template #blankDeck>
+          <div class="deckAddNew">
+              <p>ADD NEW DECK</p> 
+              <br>
+            <div class="addDeck row">
+              <a class="play-deck" title="Make new deck!" (click)="onAddDeck()"><i class="fa fa-plus fa-4x"></i></a>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template #existingDeck>
+          <div class="deckTitle">
+            <p> {{ deck.category }} - {{ deck.name }} </p>  
+
+            <div class="deckNotes" *ngIf="deck.lastPlayed">
+                Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
+            </div>
+            <br>
+      
+              <!-- TBD: adapt to star and test when obj has sample data -->
+              <!-- <img src="{{displayHeart}}" />  -->
+            <!-- </div> -->
+      
+      
+            <div class="progress progressOnCard" title="Progress...">
+              <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': '' + progressPct + '%'}"></div>
+            </div>
+
+            <div class="deck-icons">
+              <a class="deck-modify" (click)="onEdit()" title="Add, edit or delete cards from this deck.">
+                <i class="fa fa-pencil-square-o"></i>
+              </a>
+              <a class="deck-remove" (click)="onDelete()" title="Put this deck in the trash.">
+                <i class="fa fa-trash-o"></i>
+              </a>
+              <a class="deck-fav" (click)="onFavorite()" title={{favTitle}}>
+                <i  [ngClass]="{'fa fa-star': isFavorite}"></i>
+                <i  [ngClass]="{'fa fa-star-o': !isFavorite}"></i>
+              </a>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  
+
+<!-- TBD stuff for confirmation modal -->
 <div class="backdrop" [ngStyle]="{'display': display}"></div>
-  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button 
-            type="button" 
-            class="close" 
-            aria-label="Close"
-            (click)="onModalResponse(false)">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title">Delete Deck</h4>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure?</p>
-        </div>
-        <div class="modal-footer">
-        	<button type="button" class="btn btn-default" (click)="onModalResponse(true)">Yes</button>
-          	<button type="button" class="btn btn-default" (click)="onModalResponse(false)">No</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button 
+          type="button" 
+          class="close" 
+          aria-label="Close"
+          (click)="onModalResponse(false)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Delete Deck</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onModalResponse(true)">Yes</button>
+          <button type="button" class="btn btn-default" (click)="onModalResponse(false)">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- TBD stuff for Add New Deck modal -->
+<div class="backdrop" [ngStyle]="{'display': displayAddDeck}"></div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayAddDeck}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button 
+          type="button" 
+          class="close" 
+          aria-label="Close"
+          (click)="onModalResponse(false)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add a New Deck</h4>
+      </div>
+
+      <div class="modal-body">
+				<input 
+        type="text" 
+        placeholder="Category"
+        [(ngModel)]="newCategory" />
+				<input 
+        type="text" 
+        placeholder="Deck Name"
+        [(ngModel)]="newDeckName" />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onAddNewDeck(1)">Add New Deck</button>
+        <button type="button" class="btn btn-default" (click)="onAddNewDeck(2)">Clone a Deck</button>
+        <button type="button" class="btn btn-default" (click)="onAddNewDeck(3)">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+      <!-- </div>/.modal-content -->
+    <!-- </div>/.modal-dialog -->
+  <!-- </div>/.modal -->
+
