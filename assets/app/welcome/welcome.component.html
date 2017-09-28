@@ -1,0 +1,15 @@
+<div class="jumbotron-fluid vertical-center">
+  <div class="container">
+    <h1 class="script">
+      Welcome to Ultimate Flash Cards!
+    </h1>
+    <br>
+    <h5>
+        <a (click)="onPlayCards()"> Try out a flash cards game with <span>PLAY FLASH CARDS</span> or...</a>
+    </h5>
+    <h5>
+      <!-- TBD make dynamic with logout if user already logged in -->
+      <a [routerLink]="['/auth/signin']">Create and play your own flash card games with <span>LOG IN /SIGN UP</span></a>
+    </h5>
+  </div>
+</div>

@@ -1,17 +1,13 @@
 <div>
 	<div class="fc-header">
-		<div class="col-xs-3 col-xs-offset-3">
-			<h4>Hello, {{ userName }}</h4>
-		</div>
-		<div class="col-xs-6">
+		<div class="col-xs-6 hideXSmall">
 			<img class="img-circle"
 				 src="https://www.gravatar.com/avatar/{{gravHash}}.jpg" />
 		</div>
-	</div>
-	<div class="col-xs-3">
-		<app-make-list></app-make-list>
-	</div>
-	<div class="col-xs-9">
-		<router-outlet></router-outlet>
+		<div class="hideSmall col-xs-3 col-xs-offset-3">
+				<h6>Hello, {{ userName }}</h6>
+		</div>
 	</div>
 </div>	
+<app-make-list></app-make-list>
+<router-outlet></router-outlet>

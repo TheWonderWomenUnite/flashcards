@@ -1,13 +1,19 @@
 <div>
 	<div class="fc-header">
-		<div class="col-xs-6">
+		<div class="col-xs-6 hideXSmall">
 			<img class="img-circle"
 				 src="https://www.gravatar.com/avatar/{{gravHash}}.jpg" />
 		</div>
-		<div class="col-xs-3 col-xs-offset-3">
+		<div class="hideSmall col-xs-3 col-xs-offset-3">
 				<h6>Hello, {{ userName }}</h6>
 		</div>
 	</div>
-	<!-- <router-outlet></router-outlet> -->
 </div>	
+
+<!-- TBD? LEFT OFF HERE DMZ tried to get this to work similarly to the way
+ the ref to app component works in make-flash-cards.html because
+	make flash cards works if user clicks it in the menu when MFC is already displayed -->
+<!-- <app-deck-list></app-deck-list> -->
+
+<!--  uses ngOnInit to navigate to decklist -->
 <router-outlet></router-outlet>

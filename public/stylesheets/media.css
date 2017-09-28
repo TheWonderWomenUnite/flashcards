@@ -28,7 +28,7 @@
   nav .container {    
     direction: rtl;
   }
-  .hideSmall {
+  .hideSmall, .hideXSmall {
     display: none;
   }
 }
@@ -42,6 +42,9 @@
   }
   .symbol {
     width: 10%;
+  }
+  .hideXSmall {
+    display: unset ;
   }
 }
 

@@ -22,6 +22,8 @@ import { MakeDetailComponent } from './make-flash-cards/make-detail.component';
 import { MakeEditComponent } from './make-flash-cards/make-edit.component';
 import { MakeStartComponent } from './make-flash-cards/make-start.component';
 
+import { WelcomeComponent } from './welcome/welcome.component';
+
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { LogoutComponent } from "./auth/logout.component";
 import { SignupComponent } from "./auth/signup.component";
@@ -48,7 +50,8 @@ import { UtilsService } from './shared/utils.service';
     AuthenticationComponent,
     LogoutComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
