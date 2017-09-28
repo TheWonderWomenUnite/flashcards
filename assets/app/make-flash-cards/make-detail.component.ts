@@ -90,6 +90,7 @@ export class MakeDetailComponent {
   }
 
 	onEdit() {
+		console.log(this.deck.deckId);
 		this.router.navigate(['./makeflashcards', 'edit', this.deck.deckId]);
 	}
 
