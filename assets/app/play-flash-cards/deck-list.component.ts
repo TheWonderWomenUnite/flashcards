@@ -5,8 +5,6 @@ import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
 
 import { Deck } from "../models/deck.model";
 import { DeckService } from "../shared/deck.service";
-// import { DeckDetailComponent } from './deck.component';
-// DMZ changed
 import { DeckDetailComponent } from './deck-detail.component';
 import { UtilsService } from "../shared/utils.service";
 
@@ -89,19 +87,4 @@ export class DeckListComponent implements OnInit {
         }
     }
     
-    /*
-    This was temporarily here to test the deck service
-    To add it back in, add an "add deck" button to the template
-    onAdd() {
-        // Add a new deck for this user
-        const newName = this.utilsService.randomString(20);
-        const newCategory = this.utilsService.randomString(15);
-        const newDeck = new Deck(newName, true, newCategory, Date.now(), 42, true, this.userId);
-        
-        this.deckService.addDeck(newDeck).subscribe(
-            (deck: Deck) => {
-                console.log(deck);
-            });
-    }
-    */
 }
