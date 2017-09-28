@@ -20,7 +20,7 @@
         <li class="nav-item">
           <!-- TBD/Question for Lisa: I wanted to put (loggedIn)="onLoggedIn($event)" somewhere in here...but not working -->
           <!-- I'm trying to work from Udemy example #63 but since I don't have <app-signin> in this file, I don't know if the example is applicable -->
-          <a *ngIf="isLoggedIn" [routerLink]="['/auth/signout']" class="nav-link">LOG OUT</a>
+          <a *ngIf="isLoggedIn" [routerLink]="['/auth/logout']" class="nav-link">LOG OUT</a>
           <a *ngIf="!isLoggedIn" [routerLink]="['/auth/signin']" class="nav-link">LOG IN/SIGN UP</a>
         </li>
       </ul>
