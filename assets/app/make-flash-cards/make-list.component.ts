@@ -135,17 +135,46 @@ export class MakeListComponent implements OnInit, OnDestroy {
 //     }
  
 
+    // TBD would be nice to have this code in one place -
+    // currently it's in make-list and deck-list
     onSortBy() {
-        console.log("Sort decks by "+this.optionChoice);
+        console.log("Sort decks by " + this.optionChoice);
+        console.log(this.decks);
+
+        // First sort deck by deck name so that sorts within switch cases
+        // below will sort by name within category/favs etc
+        // (otherwise you have to use more complex/less readable sorts in switch below)
+        this.decks.sort((a, b) => a.name.localeCompare(b.name));
+
         switch(this.optionChoice[0]) {
             case 1:
                 // Sort decks by category
+                this.decks.sort((a, b) => a.category.localeCompare(b.category));
                 break;
             case 2:
                 // Sort decks by last played
+                this.decks.sort((a, b) => 
+                        ((a.lastPlayed === null) && (b.lastPlayed === null)) 
+                            ? 0
+                            : ((a.lastPlayed === null) 
+                                ? 1 
+                                : (Date.parse(b.lastPlayed) - Date.parse(a.lastPlayed))
+                ));
+                    
+
+                // this.decks.sort(function(a, b) {
+                //     if ((a.lastPlayed === null) && (b.lastPlayed === null)) {
+                //         return 0;
+                //     } else if (a.lastPlayed === null) {
+                //         return 1;
+                //     } else {
+                //         return (Date.parse(b.lastPlayed) - Date.parse(a.lastPlayed));
+                //     }
+                // });
                 break;
             case 3:
                 // Sort decks by favorites
+                this.decks.sort((a, b) => (!a.favorite && b.favorite) ? 1 : 0 );
                 break;
             }    
 
