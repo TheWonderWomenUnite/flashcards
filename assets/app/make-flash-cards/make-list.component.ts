@@ -55,7 +55,7 @@ export class MakeListComponent implements OnInit, OnDestroy {
         this.sortOptions = [
             { id: 1, name: 'Category' },
             { id: 2, name: 'Last Played' },
-            { id: 3, name: 'Favorites' },
+            { id: 3, name: 'Favorites' }
         ];
 
         this.userId = localStorage.getItem('UserId');
@@ -160,17 +160,6 @@ export class MakeListComponent implements OnInit, OnDestroy {
                                 ? 1 
                                 : (Date.parse(b.lastPlayed) - Date.parse(a.lastPlayed))
                 ));
-                    
-
-                // this.decks.sort(function(a, b) {
-                //     if ((a.lastPlayed === null) && (b.lastPlayed === null)) {
-                //         return 0;
-                //     } else if (a.lastPlayed === null) {
-                //         return 1;
-                //     } else {
-                //         return (Date.parse(b.lastPlayed) - Date.parse(a.lastPlayed));
-                //     }
-                // });
                 break;
             case 3:
                 // Sort decks by favorites
