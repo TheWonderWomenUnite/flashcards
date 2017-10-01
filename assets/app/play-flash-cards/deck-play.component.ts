@@ -32,6 +32,7 @@ export class DeckPlayComponent implements ngOnInit {
   previousCard: Card;
   isFavorite = false;
   progressPct = 0;
+  anonymousPlay = false;
 
   // Q for Lisa: for now I used font-awesome icons instead of these png files because they 
   // were quickest for me to implement the sizing
@@ -43,8 +44,8 @@ export class DeckPlayComponent implements ngOnInit {
   const questionMark = "../img/questionMark.png";
   const rightCaret = "../img/right_caret.png";
   const leftCaret = "../img/left_caret.png";
-  displayBar = "";
-  displayHeart = "";
+  //displayBar = "";
+  //displayHeart = "";
 
 	constructor(private route: ActivatedRoute,
               private router: Router,
@@ -60,6 +61,7 @@ export class DeckPlayComponent implements ngOnInit {
         // Get the deck Id from the route parameters
 				const deckId = params['id'];
         this.deck = this.deckService.getDeck(deckId);
+        this.anonymousPlay = !this.deck.userOwned;
 
         // Get the cards for this deck;
         console.log("Going to get cards");
@@ -71,12 +73,18 @@ export class DeckPlayComponent implements ngOnInit {
             this.deckShuffle();
          		console.log(this.cards);
             this.faceUp = true;
-            this.deck.lastPlayed = Date.now();
-            this.updateDeckInfo(this.deck);
-            this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-            this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
-            this.progressPct = this.deck.progressBar;
-            this.isFavorite = this.deck.favorite;
+            //this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+            //this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+
+            if (this.anonymousPlay) {
+              this.progressPct = 0;
+            }
+            else {
+              this.deck.lastPlayed = Date.now();
+              this.updateDeckInfo(this.deck);
+              this.progressPct = this.deck.progressBar;
+              this.isFavorite = this.deck.favorite;
+            }
             this.currentCard = this.cards[this.currIndex];
             this.nextCard = this.cards[this.currIndex + 1];
             this.previousCard = this.cards[this.cards.length-1];
@@ -165,77 +173,72 @@ export class DeckPlayComponent implements ngOnInit {
     // done with the card)
     // Note: Length will never be 0 because you can't get here 
     // if there aren't any cards
-console.log('at start of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs);
+    console.log('at start of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs);
     const incNumber = ((1/this.cards.length) * 100);
 
     console.log("Number of cards = "+ this.cards.length+ 
       " incNumber = "+ incNumber+
       " before math, prog bar = "+this.deck.progressBar);
 
-    this.deck.progressBar = (upOrDown) ? 
-      this.deck.progressBar + incNumber : 
-      this.deck.progressBar - incNumber;
+    this.progressPct = (upOrDown) ? 
+    this.progressPct + incNumber : 
+    this.progressPct - incNumber;
 
-    if (this.deck.progressBar > 100) {
-      this.deck.progressBar = 100; 
-    } else if (this.deck.progressBar < 0) {
-      this.deck.progressBar = 0; 
+    if (this.progressPct > 100) {
+      this.progressPct = 100; 
+    } else if (this.progressPct < 0) {
+      this.progressPct = 0; 
     }
+
+    if (!this.anonymousPlay) {
+      this.deck.progressBar = this.progressPct;
+      this.updateDeckInfo(this.deck);      
+    } 
 
     this.showQSide = true;
     this.showASide = false;
     this.faceUp = true;
     this.hideThumbs = true;
-    
-    this.updateDeckInfo(this.deck);
-    this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-    this.progressPct = this.deck.progressBar;
+    //this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
     this.goNext(true);
     console.log('at end of onThumbsUpOrDown and showASide is ' + this.showASide);
     console.log('at end of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs);
     
   }
 
-
-
-/*
-  onAdd() {
-    // Add a new card to this deck - keeping for testing purposes
-
-    const side1 = this.utilsService.randomString(10);
-    const side2 = this.utilsService.randomString(10);
-    const newCard = new Card(side1, side2, this.deck.deckId);
-    this.cardService.addCard(newCard).subscribe(
-      (card: Card) => {
-        console.log(card);
-        // Update my local card array
-        this.cards.push(card);
-      });
-  } 
-*/
+  // Users cannot update this here now - they must do it in makeflashcards  
+  /*
   onFavorite() {
     // Toggle favorite for this deck
+
     this.deck.favorite = !this.deck.favorite;
     this.updateDeckInfo(this.deck);
     this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
 
     }
+  */
 
   onHelp() {
 
     }
 
   onGoBack() {
+    if (this.anonymousPlay) {
+      this.router.navigate(['./playflashcards/', 'decklist']);      
+      }
+    else {
       this.router.navigate(['./playflashcards/', 'decklist', this.deck.userId]);
+      }
     }
 
   onResetProgressBar() {
-    this.deck.progressBar = 0; 
-    this.updateDeckInfo(this.deck);
-    this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-    this.progressPct = this.deck.progressBar;
-    
-    }    
+    this.progressPct = 0;
+    if (!this.anonymousPlay) {
+      this.deck.progressBar = 0; 
+      this.updateDeckInfo(this.deck);
+    }
+    //this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+  }    
 
   updateDeckInfo() {
     // Update the database with new info for the deck. This is called 

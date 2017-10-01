@@ -47,22 +47,28 @@ export class DeckListComponent implements OnInit {
             { id: 3, name: 'Favorites' },
         ];
 
-        // Get the current userId from local storage 
-        // this.userId = localStorage.getItem('UserId');
-        // console.log("DeckList -> ngOnInit: UserId = "+this.userId);
-
-        // Now, get the userId from the params, as we are now being
-        // routed to here
+        // Get the userId from the params, if there is no userId it is 
+        // anonymous play
         this.route.params
             .subscribe((params: Params) =>{
                 // Get the user Id from the route parameters
                 this.userId = params['id'];
-                this.deckService.getDecks(this.userId)
-                    .subscribe(
-                        (decks: Deck[]) => {
-                        console.log(decks);
-                        this.decks = decks;
-                    });
+                if (this.userId) {
+                    this.deckService.getDecks(this.userId)
+                        .subscribe(
+                            (decks: Deck[]) => {
+                            console.log(decks);
+                            this.decks = decks;
+                        });
+                }
+                else {
+                    this.deckService.getUnownedDecks()
+                        .subscribe(
+                            (decks: Deck[]) => {
+                            console.log(decks);
+                            this.decks = decks;
+                        });
+                }
             });            
     }
 

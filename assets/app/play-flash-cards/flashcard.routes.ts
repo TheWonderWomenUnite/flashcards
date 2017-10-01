@@ -8,6 +8,7 @@ import { DeckListComponent } from './deck-list.component';
 // Routes are relative to "/play-flash-cards"
 export const flashcard_routes: Routes = [
 	{ path: '', redirectTo: 'PlayFlashCardsComponent', pathMatch: 'full' },
+	{ path: 'decklist', component: DeckListComponent },
 	{ path: 'decklist/:id', component: DeckListComponent },
 	{ path: 'play/:id', component: DeckPlayComponent }
 ];

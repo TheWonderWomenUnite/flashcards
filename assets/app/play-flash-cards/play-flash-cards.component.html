@@ -3,6 +3,8 @@
 		<div class="col-xs-6 hideXSmall">
 			<img class="img-circle"
 				 src="https://www.gravatar.com/avatar/{{gravHash}}.jpg" />
+			<img *ngIf="!gravHash" class="img-circle"
+				 src="{{anonymousGravPic}}" />
 		</div>
 		<div class="hideSmall col-xs-3 col-xs-offset-3">
 				<h6>Hello, {{ userName }}</h6>
