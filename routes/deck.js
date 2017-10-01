@@ -43,6 +43,27 @@ router.get('/userDecks/:userId', function (req, res, next) {
     });
 });
 
+/*
+
+Using populate with the find to get the card records - should we do this?
+router.get('/userDecks/:userId', function (req, res, next) {
+
+    var userId = req.params.userId;
+    Deck.find({user: userId}).populate('cards').exec(function (err, decks) {
+        if (err) {
+            return res.status(500).json({
+                title: 'Error finding decks',
+                error: err
+            });
+        }
+        res.status(200).json({
+            message: 'Success',
+            obj: decks
+        });
+    });
+});
+*/
+
 // Find all decks with userOwned: false
 router.get('/unownedDecks/', function (req, res, next) {
 
