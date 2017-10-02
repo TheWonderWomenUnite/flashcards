@@ -5,7 +5,7 @@ import { MakeFlashCardsComponent } from './make-flash-cards.component';
 import { MakeEditComponent } from './make-edit.component';
 import { MakeAddComponent } from './make-add.component';
 import { MakeListComponent } from './make-list.component';
-import { MakeStartComponent } from './make-start.component';
+// import { MakeStartComponent } from './make-start.component';
 
 // Routes are relative to "/make-flash-cards"
 // The default path is the MakeFlashCardsComponent which goes to the list
@@ -13,8 +13,8 @@ import { MakeStartComponent } from './make-start.component';
 // edit takes the deckId as the parameter
 
 export const makecard_routes: Routes = [
-		{ path: '', redirectTo: 'MakeStartComponent', pathMatch: 'full' },
-		{ path: 'start', component: MakeStartComponent },
+    { path: '', redirectTo: 'MakeFlashCardsComponent', pathMatch: 'full' },
+		{ path: 'makelist/:id', component: MakeListComponent },
 		{ path: 'edit/:id', component: MakeEditComponent },
 		{ path: 'add', component: MakeEditComponent }
 	];

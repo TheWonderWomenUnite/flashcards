@@ -32,6 +32,7 @@ export class MakeFlashCardsComponent implements OnInit {
 									console.log(user);
 									this.userName = this.authService.getUserName();
 									this.gravHash = this.authService.getGravHash();
+    							this.router.navigate(['./', 'makelist', UserId], {relativeTo: this.route});
 							}
 					);
 	}

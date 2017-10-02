@@ -31,11 +31,13 @@ export class MakeDetailComponent {
 
 	ngOnInit() {
 		// Go get the progress bar img string
-		this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-		this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
-		this.progressPct = this.deck.progressBar;
-		this.isFavorite = this.deck.favorite;
-		this.favTitle = this.isFavorite ? "Click to remove 'FAVORITE' status" : "Click to mark this as a 'FAVORITE' deck";
+    if (this.deck) {
+  		this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+  		this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+	  	this.progressPct = this.deck.progressBar;
+		  this.isFavorite = this.deck.favorite;
+		  this.favTitle = this.isFavorite ? "Click to remove 'FAVORITE' status" : "Click to mark this as a 'FAVORITE' deck";
+    }
 	}
 
 	onAddDeck() {
