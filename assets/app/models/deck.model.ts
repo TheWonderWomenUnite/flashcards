@@ -16,7 +16,7 @@ export class Deck {
     constructor(public name: string,               
       public userOwned: boolean,
       public category: string,
-      public lastPlayed: date,
+      public lastPlayed: Date,
 			public progressBar: number,
 			public favorite: boolean,
       public userId?: string,

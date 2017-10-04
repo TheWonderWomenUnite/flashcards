@@ -45,7 +45,6 @@ import { UtilsService } from './shared/utils.service';
     MakeListComponent,
     MakeDetailComponent,
     MakeEditComponent,
-    MakeStartComponent,
     AuthenticationComponent,
     LogoutComponent,
     SignupComponent,
@@ -63,4 +62,4 @@ import { UtilsService } from './shared/utils.service';
   providers: [AuthService, ErrorService, DeckService, CardService, UtilsService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

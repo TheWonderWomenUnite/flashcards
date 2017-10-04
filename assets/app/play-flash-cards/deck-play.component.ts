@@ -17,7 +17,7 @@ import { UtilsService } from '../shared/utils.service';
     styleUrls: ['./deck-play.component.css']
 })
 
-export class DeckPlayComponent implements ngOnInit {
+export class DeckPlayComponent implements OnInit {
 
   deck: Deck;
   cards: Card[];
@@ -37,13 +37,13 @@ export class DeckPlayComponent implements ngOnInit {
   // Q for Lisa: for now I used font-awesome icons instead of these png files because they 
   // were quickest for me to implement the sizing
   // Let me know if you prefer these imgs and I will figure out sizing them in footer, etc
-  const backButton = "../img/back_button.png";
-  const thumbsUp = "../img/thumbsUp.png";
-  const thumbsDown = "../img/thumbsDown.png";
+  //const backButton = "../img/back_button.png";
+  //const thumbsUp = "../img/thumbsUp.png";
+  //const thumbsDown = "../img/thumbsDown.png";
 
-  const questionMark = "../img/questionMark.png";
-  const rightCaret = "../img/right_caret.png";
-  const leftCaret = "../img/left_caret.png";
+  //const questionMark = "../img/questionMark.png";
+  //const rightCaret = "../img/right_caret.png";
+  //const leftCaret = "../img/left_caret.png";
   //displayBar = "";
   //displayHeart = "";
 
@@ -80,8 +80,8 @@ export class DeckPlayComponent implements ngOnInit {
               this.progressPct = 0;
             }
             else {
-              this.deck.lastPlayed = Date.now();
-              this.updateDeckInfo(this.deck);
+              this.deck.lastPlayed = new Date();
+              this.updateDeckInfo();
               this.progressPct = this.deck.progressBar;
               this.isFavorite = this.deck.favorite;
             }
@@ -111,7 +111,7 @@ export class DeckPlayComponent implements ngOnInit {
 
     // First advance or retreat the currIndex, if it is at the end, loop back to 
 
-    if forward {
+    if (forward) {
       if (this.currIndex == lastCard) {
         this.currIndex = 0;
       } else {
@@ -182,7 +182,7 @@ export class DeckPlayComponent implements ngOnInit {
 
     if (!this.anonymousPlay) {
       this.deck.progressBar = this.progressPct;
-      this.updateDeckInfo(this.deck);      
+      this.updateDeckInfo();      
     } 
 
     this.showQSide = true;
@@ -213,7 +213,7 @@ export class DeckPlayComponent implements ngOnInit {
     this.progressPct = 0;
     if (!this.anonymousPlay) {
       this.deck.progressBar = 0; 
-      this.updateDeckInfo(this.deck);
+      this.updateDeckInfo();
     }
     //this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
   }    
@@ -244,11 +244,11 @@ export class DeckPlayComponent implements ngOnInit {
     // Shuffle the deck so the cards are presented in a different order
     // than they are in the database
 
-    tempCard: Card;
+    var tempCard: Card;
 
     for (var i = this.cards.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var tempCard = this.cards[i];
+        tempCard = this.cards[i];
         this.cards[i] = this.cards[j];
         this.cards[j] = tempCard;
       }

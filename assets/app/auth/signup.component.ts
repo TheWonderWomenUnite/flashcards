@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from './auth.service';
 import { User } from '../models/user.model';
@@ -13,7 +13,9 @@ import { User } from '../models/user.model';
 export class SignupComponent implements OnInit {
 	  myForm: FormGroup;
 
-	  constructor(private authService: AuthService, private router: Router) {} 
+	  constructor(private authService: AuthService,
+                private route: ActivatedRoute,
+                private router: Router) {} 
 
   	ngOnInit() {
 		  this.myForm = new FormGroup({
@@ -42,7 +44,7 @@ export class SignupComponent implements OnInit {
 				  );
 		  this.myForm.reset();
 		  // This will take the user back to the signin page?
-		  this.router.navigate('', {relativeTo: this.route});
+		  this.router.navigate([''], {relativeTo: this.route});
 	  }
 
 	  onSwitchToSignin() {

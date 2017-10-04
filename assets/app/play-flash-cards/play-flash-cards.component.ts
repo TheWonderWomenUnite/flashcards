@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { DeckListComponent } from './deck-list.component';
 
+import { User } from '../models/user.model';
+
 @Component({
   selector: 'app-play-flash-cards',
   templateUrl: './play-flash-cards.component.html',
