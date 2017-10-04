@@ -47,7 +47,6 @@ export class DeckService {
 
     getUnownedDecks() {
     // Call this method without a userId to get all of the unowned decks, works 
-
         console.log("GetUnOwnedDecks: going to call get with userOwned false");
         return this.http.get('http://localhost:3000/decks/unownedDecks/')
             .map((response: Response) => {
@@ -121,7 +120,7 @@ export class DeckService {
     }
 
     addDeck(deck: Deck) {
-    // Call this method to add a deck
+        // Call this method to add a deck
 
         console.log("addDeck: Going to call post with userId = "+deck.userId);        
         const body = JSON.stringify(deck);

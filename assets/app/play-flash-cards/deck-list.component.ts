@@ -8,7 +8,6 @@ import { DeckService } from "../shared/deck.service";
 import { DeckDetailComponent } from './deck-detail.component';
 import { UtilsService } from "../shared/utils.service";
 
-
 @Component({
     selector: 'app-deck-list',
     templateUrl: './deck-list.component.html',
@@ -26,14 +25,11 @@ export class DeckListComponent implements OnInit {
     sortOptions: IMultiSelectOption[];
     sortTexts: IMultiSelectTexts = { defaultTitle: 'Sort By' };
 
-
     // These settings limit dropdown to one choice (for both drop downs)
     dropSettings: IMultiSelectSettings = {
         selectionLimit: 1,
         autoUnselect: true
         };
-
-
 
     constructor(private route: ActivatedRoute,
                 private deckService: DeckService,

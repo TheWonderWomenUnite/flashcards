@@ -5,7 +5,6 @@ import { MakeFlashCardsComponent } from './make-flash-cards.component';
 import { MakeEditComponent } from './make-edit.component';
 import { MakeAddComponent } from './make-add.component';
 import { MakeListComponent } from './make-list.component';
-// import { MakeStartComponent } from './make-start.component';
 
 // Routes are relative to "/make-flash-cards"
 // The default path is the MakeFlashCardsComponent which goes to the list

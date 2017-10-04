@@ -20,7 +20,6 @@ import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.com
 import { MakeListComponent } from './make-flash-cards/make-list.component';
 import { MakeDetailComponent } from './make-flash-cards/make-detail.component';
 import { MakeEditComponent } from './make-flash-cards/make-edit.component';
-import { MakeStartComponent } from './make-flash-cards/make-start.component';
 
 import { WelcomeComponent } from './welcome/welcome.component';
 

@@ -109,7 +109,6 @@ export class DeckPlayComponent implements ngOnInit {
     this.hideThumbs = true;
     const lastCard = this.cards.length - 1;
 
-
     // First advance or retreat the currIndex, if it is at the end, loop back to 
 
     if forward {
@@ -155,13 +154,9 @@ export class DeckPlayComponent implements ngOnInit {
   } 
 
   showAnswer() {
-    console.log('in showAnswer')
-    console.log(this.faceUp);
-    console.log(this.displayThumbs);
     this.showASide = true;
     this.showQSide = false;
     this.faceUp = false;
-    // this.displayThumbs = 'block';
     this.hideThumbs = false;
   }
 
@@ -175,11 +170,6 @@ export class DeckPlayComponent implements ngOnInit {
     // if there aren't any cards
     console.log('at start of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs);
     const incNumber = ((1/this.cards.length) * 100);
-
-    console.log("Number of cards = "+ this.cards.length+ 
-      " incNumber = "+ incNumber+
-      " before math, prog bar = "+this.deck.progressBar);
-
     this.progressPct = (upOrDown) ? 
     this.progressPct + incNumber : 
     this.progressPct - incNumber;
@@ -206,19 +196,7 @@ export class DeckPlayComponent implements ngOnInit {
     
   }
 
-  // Users cannot update this here now - they must do it in makeflashcards  
-  /*
-  onFavorite() {
-    // Toggle favorite for this deck
-
-    this.deck.favorite = !this.deck.favorite;
-    this.updateDeckInfo(this.deck);
-    this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
-
-    }
-  */
-
-  onHelp() {
+ onHelp() {
 
     }
 

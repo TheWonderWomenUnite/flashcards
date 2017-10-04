@@ -10,8 +10,7 @@ import { DeckListComponent } from './deck-list.component';
   styleUrls: ['./play-flash-cards.component.css']
 })
 
-// Ask Lisa: should this be ngOnInit or OnInit? It's just OnInit in mfc
-export class PlayFlashCardsComponent implements ngOnInit {
+export class PlayFlashCardsComponent implements OnInit {
 	// The main component for the PlayFlashCards Module
 	userName: string = '';
 	userEmail: string = '';
@@ -21,7 +20,7 @@ export class PlayFlashCardsComponent implements ngOnInit {
 							private router: Router,
 							private authService: AuthService) { }
 
-	ngOnInit() {
+ngOnInit() {
 //TBD if component already init, it's not working when called again
 			const UserId = localStorage.getItem('UserId');
 			console.log('in pfc ngoninit');

@@ -103,7 +103,7 @@ export class CardService {
     }
 
     deleteCard(card: Card) {
-    // Call this method to delete a card        
+        // Call this method to delete a card        
         // Update this.cards array
         this.cards.splice(this.cards.indexOf(card), 1);
         console.log("deleteCard: calling delete with cardId = "+card.cardId);                
