@@ -32,8 +32,8 @@ export class MakeDetailComponent {
 	ngOnInit() {
 		// Go get the progress bar img string
     if (this.deck) {
-  		this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-  		this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+  		// this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+  		// this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
 	  	this.progressPct = this.deck.progressBar;
 		  this.isFavorite = this.deck.favorite;
 		  this.favTitle = this.isFavorite ? "Click to remove 'FAVORITE' status" : "Click to mark this as a 'FAVORITE' deck";
@@ -48,7 +48,7 @@ export class MakeDetailComponent {
 	private onAddNewDeck(answer:number) {
     // Get rid of the modal
 		this.displayAddDeck = 'none';
-		console.log('adding/cloning deck for: ' + this.newCategory + ' and ' this.newDeckName)
+		console.log('adding/cloning deck for: ' + this.newCategory + ' and ' + this.newDeckName);
 
 		// Add a new deck
     if (answer === 1) {
@@ -105,6 +105,6 @@ export class MakeDetailComponent {
 					});
 			this.isFavorite = this.deck.favorite;
 			this.favTitle = this.isFavorite ? "Remove 'FAVORITE' status" : "Mark this deck as a 'FAVORITE'";			
-	    this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+	    // this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
 	}
 }

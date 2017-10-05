@@ -40,7 +40,7 @@ export class MakeEditComponent implements OnInit {
                 this.cards = cards; 
                 console.log("have the cards, calling initform");
                 this.initForm(); 
-                }
+                });
               }  
             else {
               this.initForm();
@@ -143,7 +143,7 @@ export class MakeEditComponent implements OnInit {
   private onModalResponse(answer:boolean) {
     // Get rid of the modal
     this.display = 'none';
-    if answer {
+    if (answer) {
       // They want to leave even though there are changes
       // Just throwing away the changes
       this.onExit();

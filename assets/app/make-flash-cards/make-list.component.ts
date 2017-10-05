@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs/subscription';
 
-import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
+import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 
 import { Deck } from "../models/deck.model";
 import { DeckService } from "../shared/deck.service";
@@ -30,15 +30,9 @@ export class MakeListComponent implements OnInit, OnDestroy {
     // When cloneDrop is true, display the dropdown to choose a deck to clone
     cloneDrop: boolean = false;
     cloneChoice: number[];
-    cloneDeckList: IMultiSelectOption = [];
+    // cloneDeckList: IMultiSelectOption = [];
+    cloneDeckList: IMultiSelectOption[];
     cloneTexts: IMultiSelectTexts = { defaultTitle: 'Deck to Clone' };
-
-
-    // Attributes for the "sort by" drop down
-    optionChoice: number[];
-    sortOptions: IMultiSelectOption[];
-    sortTexts: IMultiSelectTexts = { defaultTitle: 'Sort By' };
-
 
 
     // These settings limit dropdown to one choice (for both drop downs)
