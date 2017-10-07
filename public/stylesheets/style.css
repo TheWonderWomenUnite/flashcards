@@ -462,3 +462,6 @@ to center text vertically w/o messing up scrolling*/
 nav a, nav button {
   cursor: pointer;
 }
+.script {
+  font-family: "Rock Salt", cursive;  
+}
