@@ -5,9 +5,7 @@
   display: flex;
   align-items: center;
 }
-.script {
-  font-family: "Rock Salt", cursive;  
-}
+
 h5 {
   cursor: pointer;
 }
