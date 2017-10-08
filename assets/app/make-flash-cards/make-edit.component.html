@@ -1,5 +1,6 @@
-<div class="deckSelect container">
-	<div class="topOfDecks row">
+<div class="deckSelect editCards container">
+	<!-- TBD ask lisa if any sort needed here -->
+	<!-- <div class="topOfDecks row"> -->
 		<!-- <ss-multiselect-dropdown 
 			[options]="sortOptions" 
 			[texts]="sortTexts" 
@@ -7,11 +8,7 @@
 			[(ngModel)]="optionChoice" -->
 			<!-- (ngModelChange)="onSortBy($event)"> -->
 		<!-- </ss-multiselect-dropdown> -->
-
-	<!-- </div>
-</div> -->
-
-
+	<!-- </div>  -->
 
 
 
@@ -27,15 +24,18 @@
 					<button 
 						type="submit" 
 						class="btn btn-success"
-						[disabled]="!deckForm.valid">Save</button>	
+						[disabled]="!deckForm.valid">Save deck changes</button>	
 					<button 
 						type="button" 
 						class="btn btn-danger"
-						(click)="onCancel()">Cancel</button>	
+						(click)="onCancel()">Cancel changes</button>	
 				</div>
 			</div>
 
 			<!-- Fields for Deck Name and Category -->
+			<!-- TBD: ask lisa - 1) do we want to allow user to change their existing deck name/category
+			or is this just for adding a new deck (which we now handle in modal)? 
+			currently putting deck name/cat in footer -->
 			<!-- <div class="row">
 				<div class="col-xs-6">
 					<div class="form-group">
@@ -60,7 +60,7 @@
 			</div> -->
 
 			<!-- List of cards for this deck -->
-			<hr>
+			<!-- <hr> -->
 			<!-- <div class="row">
 				<div class="col-xs-12">
 					<button 
@@ -72,17 +72,53 @@
 			</div>	 -->
 
 			<div class="deckSelect container">    
-				<div class = "deckList row">
+				<div class = "deckList row" formArrayName="cards">
 			
-					<!-- TBD: this is same issue as in add new DECK so
-						 get input from lisa about fixing it in make-list & then apply same here for card -->
+					<!-- TBD: ask lisa about 'add new card' - whether it can be on every card
+						or if it's simpler to keep it front (as we do with add new deck).
+						If up front, this is same issue as in add new DECK & lisa mentioned
+						it needs to be changed and not call component TWICE (for blank, then ex. data) -->
 					<!-- this creates the first 'Add new card' option -->
 					<!-- <app-make-card-detail [card]=""></app-make-card-detail> -->
 					
-					<!-- this loops through existing cards -->
-					<app-make-card-detail
+					<!-- TBD: maybe later use component for the detail -->
+					<!-- (not sure how simple it is to tie to the form code that's already here) -->
+					<!-- <app-make-card-detail
 					[card]="card"
-						*ngFor="let card of cards"></app-make-card-detail>	
+						*ngFor="let card of cards"></app-make-card-detail>	 -->
+
+
+
+					<!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12"  formArrayName="cards" *ngFor="let cardCtrl of getControls(); let i = index" [formGroupName]="i">         -->
+					<div class="col-12 col-lg-4 col-md-6 col-sm-12" *ngFor="let cardCtrl of getControls(); let i = index" [formGroupName]="i">        
+						<div class="editAspect">
+							<div class="card questionSide">
+								<div class="editText">
+									<label for="cardQuestion">QUESTION:</label>
+									<textarea class="form-control" id="cardQuestion" rows="4"	formControlName="side1">{{ card.side1 }}</textarea>
+									<label for="cardAnswer">ANSWER:</label>
+									<textarea class="form-control" id="cardAnswer" rows="3">{{ card.side2 }}</textarea>
+								</div>
+							</div>
+							
+							<div class="cardIcons">
+								<a class="card-modify" (click)="onEdit()" title="Edit this card.">
+									<i class="fa fa-pencil-square-o"></i>
+								</a>
+								<a class="card-remove" (click)="onDelete()" title="Delete this card.">
+									<i class="fa fa-trash-o"></i>
+								</a>
+								<a class="card-add" (click)="onAdd()" title="Add a new card after this card.">
+									<i class="fa fa-plus"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+							
+
+
+
+
 				</div>
 			</div>
 			
@@ -117,8 +153,25 @@
 			<!-- End of Card List -->
 
 		</form>
-	</div>
 </div>
+
+
+<!-- footer?? -->
+<footer class="footer navbar fixed-bottom">
+	<div class="container">
+
+		<div class="gameInfo hideSmall">
+			<!-- <i  [ngClass]="{'fa fa-star': isFavorite}"></i> -->
+			<p class="text-muted">&nbsp;{{ deck.name }} - {{ deck.category }}</p>
+		</div>
+		<!-- <div class="icons">
+			<a (click)="onGoBack()"><i class="fa fa-arrow-circle-left"></i></a>
+			<a (click)="onHelp()"><i class="fa fa-question-circle"></i></a>
+		</div> -->
+	</div>
+</footer>
+
+
 
 <!-- Modal for when the user wants to cancel after they have made changes -->
 

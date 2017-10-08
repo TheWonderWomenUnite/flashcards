@@ -174,6 +174,7 @@ export class MakeEditComponent implements OnInit {
   }
 
   getControls() {
+    console.log((<FormArray>this.deckForm.get('cards')).controls);
     return (<FormArray>this.deckForm.get('cards')).controls;
   }
 

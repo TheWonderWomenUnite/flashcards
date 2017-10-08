@@ -1,44 +1,24 @@
-  <!-- <div class="container">
-    <div class = "row"> -->
-      <!-- <div class="col-12 col-lg-3 col-md-4 col-sm-6">         -->
-        <div class="col-12 col-lg-4 col-md-6 col-sm-12">        
-          <div class="editAspect">
-
-
-    
-            <!-- <div class="spreadCards questionSide"> -->
-                
-          <div class="card questionSide">
-            <!-- LEFT OFF HERE DMZ -->
-            <div class="editText">
-            <!-- <div class="cardInfo"> -->
-              <!-- <p>Q: Which character in The Office went to Shorecrest High School in real life?</p> -->
-              <label for="cardQuestion">QUESTION:</label>
-              <textarea class="form-control" id="cardQuestion" rows="4">sdlkfjwleijsldjflsh fshkh skjhdfkjshdkfh skjdh fkjsj hdkfjhskdjfhkshfuek  kdhhf ks dhfk hskdjf</textarea>
-  
-              <!-- <br> -->
-              <!-- <p>A: Dwight Shrute?</p> -->
-              <label for="cardAnswer">ANSWER:</label>
-              <textarea class="form-control" id="cardAnswer" rows="3"></textarea>
-
-              
-            </div>
-          </div>
-          
-<!--          TBD change class names from 'deck' to 'card-' & add to css-->
-          <div class="cardIcons">
-            <a class="card-modify" (click)="onEdit()" title="Edit this card.">
-              <i class="fa fa-pencil-square-o"></i>
-            </a>
-            <a class="card-remove" (click)="onDelete()" title="Delete this card.">
-              <i class="fa fa-trash-o"></i>
-            </a>
-            <a class="card-add" (click)="onAdd()" title="Add a new card after this card.">
-              <i class="fa fa-plus"></i>
-            </a>
-          </div>
-
-        </div>
+<div class="col-12 col-lg-4 col-md-6 col-sm-12">        
+  <div class="editAspect">
+    <div class="card questionSide">
+      <div class="editText">
+        <label for="cardQuestion">QUESTION:</label>
+        <textarea class="form-control" id="cardQuestion" rows="4">{{ card.side1 }}</textarea>
+        <label for="cardAnswer">ANSWER:</label>
+        <textarea class="form-control" id="cardAnswer" rows="3">{{ card.side2 }}</textarea>
       </div>
-    <!-- </div>
-  </div> -->
+    </div>
+    
+    <div class="cardIcons">
+      <a class="card-modify" (click)="onEdit()" title="Edit this card.">
+        <i class="fa fa-pencil-square-o"></i>
+      </a>
+      <a class="card-remove" (click)="onDelete()" title="Delete this card.">
+        <i class="fa fa-trash-o"></i>
+      </a>
+      <a class="card-add" (click)="onAdd()" title="Add a new card after this card.">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div>
+  </div>
+</div>
