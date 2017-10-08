@@ -128,14 +128,21 @@ body, html {
   width: 100%;
 }
 .aspect {
-  /*width: 100%;*/ /* not working in ang */
+  /*width: 100%;*/ /* trouble gettng this to work in ang */
   width: 240px;
   margin-top: 15px;
   margin-bottom: 15px;
   position: relative;
   padding-top: 135%;
 }
-.deckTitle, .deckAddNew {
+.editAspect {
+  width: 270px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  padding-top: 135%;
+}
+.deckTitle, .deckAddNew, .cardIcons, .cardAddNew {
   color: white;
   text-align:center;
   padding-top: 10%;
@@ -192,7 +199,7 @@ body, html {
 /*  padding: 2%;*/
   padding: 5px;
 }
-.progressOnCard, .deck-icons {
+.progressOnCard, .deckIcons {
   position: absolute;
   left: 2%;
   right: 2%;
@@ -200,9 +207,16 @@ body, html {
 .progressOnCard {
   bottom: 2%;
 }
-.deck-icons {
-    bottom: 12%;
-  }
+.deckIcons {
+  bottom: 12%;
+}
+.cardIcons {
+  bottom: 0;
+  font-size: calc(30px + .5vw);
+  left: 0;
+  right: 0;
+  position: absolute;
+}
 .progressContainer a {
   display: inline-block; 
   padding-left: 10px;
@@ -220,17 +234,23 @@ body, html {
   display: inline-block;
   width: 15vw;
 }
-.deck-modify i, .deck-modify:hover i {
+.deck-modify i, .card-modify i {
   color: limegreen;
 }
-.deck-remove i, .deck-remove:hover i {
+.deck-remove i, .card-remove i {
   color: red;
 }
-.deck-fav i, .deck-fav:hover i , .gameInfo i, .deckTitle .fav {
+.deck-fav i, .gameInfo i, .deckTitle .fav {
     color: yellow;
 }
-.deck-modify:hover i, .deck-fav:hover i, .deck-remove:hover i {
+.deck-modify:hover i, 
+.deck-fav:hover i, 
+.deck-remove:hover i, 
+.card-modify:hover i, 
+.card-remove:hover i,
+.card-add:hover i {
   cursor: pointer;
+  font-weight: 800;
 }
 .gameInfo i, .gameInfo p {
   display: inline-block;
@@ -257,7 +277,7 @@ body, html {
 .footer .icons a:hover {
   background-color: transparent;
 }
-.play-deck i, .deck-new i {
+.play-deck i, .deck-new i, .card-add i {
   color: #6397f8;
 }
 .play-deck:hover i, .deck-new:hover i {
@@ -394,6 +414,26 @@ to center text vertically w/o messing up scrolling*/
   overflow: hidden;
   overflow-y: scroll;
   padding: 5px;
+}
+.card .editText {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-size: calc(16px + .3vw);
+  height: 88%;
+  line-height: 1.2;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 5px;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+.card .editText label {
+  font-size: 75%;
+}
+.card .editText textarea {
+  font-size: 100%;
+  resize: none;
 }
 .card .cardText {
   height: 88%;

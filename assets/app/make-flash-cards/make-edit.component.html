@@ -1,5 +1,24 @@
-<div class="row">
-	<div class="col-xs-12">
+<div class="deckSelect container">
+	<div class="topOfDecks row">
+		<!-- <ss-multiselect-dropdown 
+			[options]="sortOptions" 
+			[texts]="sortTexts" 
+			[settings]="dropSettings" 
+			[(ngModel)]="optionChoice" -->
+			<!-- (ngModelChange)="onSortBy($event)"> -->
+		<!-- </ss-multiselect-dropdown> -->
+
+	<!-- </div>
+</div> -->
+
+
+
+
+
+
+
+<!-- <div class="row">
+	<div class="col-xs-12"> -->
 		<form *ngIf="readyForm" [formGroup]="deckForm" (ngSubmit)="onSubmit()">
 
 			<!-- Buttons for saving or cancelling -->
@@ -17,7 +36,7 @@
 			</div>
 
 			<!-- Fields for Deck Name and Category -->
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-xs-6">
 					<div class="form-group">
 						<label for="name">Deck Name</label>
@@ -38,11 +57,11 @@
 							formControlName="category">
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 			<!-- List of cards for this deck -->
-			<!-- <hr>
-			<div class="row">
+			<hr>
+			<!-- <div class="row">
 				<div class="col-xs-12">
 					<button 
 						type="button"
@@ -50,9 +69,25 @@
 						(click)="onAddCard()">
 						Add Card</button>		
 				</div>
-			</div>	
+			</div>	 -->
 
-			<div class="row">
+			<div class="deckSelect container">    
+				<div class = "deckList row">
+			
+					<!-- TBD: this is same issue as in add new DECK so
+						 get input from lisa about fixing it in make-list & then apply same here for card -->
+					<!-- this creates the first 'Add new card' option -->
+					<!-- <app-make-card-detail [card]=""></app-make-card-detail> -->
+					
+					<!-- this loops through existing cards -->
+					<app-make-card-detail
+					[card]="card"
+						*ngFor="let card of cards"></app-make-card-detail>	
+				</div>
+			</div>
+			
+
+			<!-- <div class="row">
 				<div class="col-xs-12" formArrayName="cards">
 					<div class="row" 
 					*ngFor="let cardCtrl of getControls(); let i = index"

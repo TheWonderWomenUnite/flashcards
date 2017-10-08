@@ -1,0 +1,12 @@
+.deck-list {
+	position: relative;
+	padding-top: 50px;
+}
+.topOfDecks.row {
+	justify-content: center;
+}
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
