@@ -89,26 +89,26 @@
 
 
 
-					<!-- <div class="col-12 col-lg-4 col-md-6 col-sm-12"  formArrayName="cards" *ngFor="let cardCtrl of getControls(); let i = index" [formGroupName]="i">         -->
 					<div class="col-12 col-lg-4 col-md-6 col-sm-12" *ngFor="let cardCtrl of getControls(); let i = index" [formGroupName]="i">        
 						<div class="editAspect">
-							<div class="card questionSide">
+							<!-- <div class="card questionSide"> -->
+							<div [ngClass]="{'card':true, 'questionSide':true, 'liveEdit': isLive(i)}">
 								<div class="editText">
-									<label for="cardQuestion">QUESTION:</label>
-									<textarea class="form-control" id="cardQuestion" rows="4"	formControlName="side1">{{ card.side1 }}</textarea>
-									<label for="cardAnswer">ANSWER:</label>
-									<textarea class="form-control" id="cardAnswer" rows="3">{{ card.side2 }}</textarea>
+									<label for="cardQuestion_{{ i }}">QUESTION:</label>
+									<textarea class="form-control" id="cardQuestion_{{ i }}" rows="4"	formControlName="side1"></textarea>
+									<label for="cardAnswer_{{ i }}">ANSWER:</label>
+									<textarea class="form-control" id="cardAnswer_{{ i }}" rows="3" formControlName="side2"></textarea>
 								</div>
 							</div>
 							
 							<div class="cardIcons">
-								<a class="card-modify" (click)="onEdit()" title="Edit this card.">
+								<a class="card-modify" (click)="onEdit(i)" title="Edit this card.">
 									<i class="fa fa-pencil-square-o"></i>
 								</a>
-								<a class="card-remove" (click)="onDelete()" title="Delete this card.">
+								<a class="card-remove" (click)="onDeleteCard(i)" title="Delete this card.">
 									<i class="fa fa-trash-o"></i>
 								</a>
-								<a class="card-add" (click)="onAdd()" title="Add a new card after this card.">
+								<a class="card-add" (click)="onAddCard(i)" title="Add a new card after this card.">
 									<i class="fa fa-plus"></i>
 								</a>
 							</div>

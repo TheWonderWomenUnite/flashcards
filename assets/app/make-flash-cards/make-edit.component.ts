@@ -24,6 +24,7 @@ export class MakeEditComponent implements OnInit {
   cards: Card[];
   id: string;
   display = 'none'; // For the are you sure modal
+  liveCard = 0;
 
 	constructor(private route: ActivatedRoute,
       			  private deckService: DeckService,
@@ -41,6 +42,8 @@ export class MakeEditComponent implements OnInit {
               this.cardService.getCards(this.deck.deckId)
                 .subscribe((cards: Card[]) => {
                 this.cards = cards; 
+                this.liveEditArr = Array(cards.length).fill(false);
+                console.log('in init and live');
                 console.log("have the cards, calling initform");
                 this.initForm(); 
                 });
@@ -154,14 +157,22 @@ export class MakeEditComponent implements OnInit {
 
   }
 
+  isLive(index: number) {
+    return (this.liveCard === index);
+  }
+  onEdit(index: number) {
+    this.liveCard = index;
+    document.getElementById("cardQuestion_" + index).focus();
+  }
   onExit() {
     this.router.navigate(['./makeflashcards/', 'start']);
   }
 
-  onAddCard() {
-
-    (<FormArray>this.deckForm.get('cards')).push(
-      new FormGroup({
+  onAddCard(index: number) {
+    // (<FormArray>this.deckForm.get('cards')).push(
+      console.log('inserting at ' + (index + 1));
+      (<FormArray>this.deckForm.get('cards')).insert((index),
+        new FormGroup({
         'side1': new FormControl(null, Validators.required),
         'side2': new FormControl(null, Validators.required)
       })

@@ -441,6 +441,10 @@ to center text vertically w/o messing up scrolling*/
 .liveCard .cardText {
   height: 75%;
 }
+.liveEdit {
+  border: 4px solid white;
+}
+.liveEdit textarea:focus
 .lgCard a {
   width: 100%;
   height: 100%;
