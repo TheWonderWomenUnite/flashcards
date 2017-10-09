@@ -11,26 +11,27 @@
 	<!-- </div>  -->
 
 
-
-
-
 <!-- <div class="row">
 	<div class="col-xs-12"> -->
 		<form *ngIf="readyForm" [formGroup]="deckForm" (ngSubmit)="onSubmit()">
 
 			<!-- Buttons for saving or cancelling -->
-			<div class="row">
-				<div class="col-xs-12">
-					<button 
-						type="submit" 
-						class="btn btn-success"
-						[disabled]="!deckForm.valid">Save deck changes</button>	
-					<button 
-						type="button" 
-						class="btn btn-danger"
-						(click)="onCancel()">Cancel changes</button>	
+			<!-- <div class="deckSelect container"> -->
+				<div class="row">
+					<div class="col-12 col-md-4">
+						<button 
+							type="submit" 
+							class="btn btn-success"
+							[disabled]="!deckForm.valid">Save deck changes</button>	
+					</div>
+					<div class="col-12 col-md-4">
+						<button 
+							type="button" 
+							class="btn btn-danger"
+							(click)="onCancel()">Cancel changes</button>	
+					</div>
 				</div>
-			</div>
+			<!-- </div> -->
 
 			<!-- Fields for Deck Name and Category -->
 			<!-- TBD: ask lisa - 1) do we want to allow user to change their existing deck name/category
@@ -75,21 +76,9 @@
 				<div class = "deckList row" formArrayName="cards">
 			
 					<!-- TBD: ask lisa about 'add new card' - whether it can be on every card
-						or if it's simpler to keep it front (as we do with add new deck).
-						If up front, this is same issue as in add new DECK & lisa mentioned
-						it needs to be changed and not call component TWICE (for blank, then ex. data) -->
-					<!-- this creates the first 'Add new card' option -->
-					<!-- <app-make-card-detail [card]=""></app-make-card-detail> -->
-					
-					<!-- TBD: maybe later use component for the detail -->
-					<!-- (not sure how simple it is to tie to the form code that's already here) -->
-					<!-- <app-make-card-detail
-					[card]="card"
-						*ngFor="let card of cards"></app-make-card-detail>	 -->
+						or if it's simpler to keep it front (as we do with add new deck).-->
 
-
-
-					<div class="col-12 col-lg-4 col-md-6 col-sm-12" *ngFor="let cardCtrl of getControls(); let i = index" [formGroupName]="i">        
+					<div class="col-12 col-lg-4 col-md-6" *ngFor="let cardCtrl of getControls(); let i = index" [formGroupName]="i">        
 						<div class="editAspect">
 							<!-- <div class="card questionSide"> -->
 							<div [ngClass]="{'card':true, 'questionSide':true, 'liveEdit': isLive(i)}">
