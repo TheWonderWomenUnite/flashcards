@@ -58,6 +58,7 @@ export class MakeDetailComponent {
         (deck: Deck) => {
           console.log(deck);
 				// then either call onEdit() or something close to this router & require at least one card to be added?
+				// or will deck list immed refresh to show new deck?
 				// TBD think this will need same url as onEdit once that works...
 				//this.router.navigate(['./makeflashcards', 'edit', this.deck.deckId]);
 			});

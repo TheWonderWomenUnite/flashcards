@@ -13,6 +13,9 @@ export class AppComponent {
   isLoggedIn = false;
   title = 'app works!';
   hideSidebar = true;
+  userName: string = '';
+	gravHash: string = '';
+
 
 	constructor(private route: ActivatedRoute,
     private router: Router,
@@ -21,7 +24,24 @@ export class AppComponent {
   ngOnInit() {
     console.log("status is " + this.authService.isLoggedIn());
     this.isLoggedIn = this.authService.isLoggedIn();  
+
+    // TBD ask lisa about this - for gravitar in menubar??
+    if (this.isLoggedIn) {
+        const UserId = localStorage.getItem('UserId');
+        console.log("UserId = "+UserId);
+
+        // Get the user info so you can display name and gravatar
+        this.authService.getUser(UserId)
+            .subscribe(
+                (user: User) => {
+                    console.log(user);
+                    this.userName = this.authService.getUserName();
+                    this.gravHash = this.authService.getGravHash();
+                }
+            );
+    }
   }
+
 
   // TBD - Q for Lisa: trying to get event emitter from signin to call this
   onLoggedIn(loginData: {status: boolean}) {

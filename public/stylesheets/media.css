@@ -28,7 +28,7 @@
   nav .container {    
     direction: rtl;
   }
-  .hideSmall, .hideXSmall {
+  .hideSmall, .hideXSmall, .hideMedium {
     display: none;
   }
 }
@@ -74,6 +74,9 @@
 
 /*lg screen*/
 @media (min-width: 992px) {
+  .hideMedium {
+    display: unset ;
+  }
 
 }
 

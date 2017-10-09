@@ -17,8 +17,8 @@ var app = express();
 dotEnv.config();
 var url=process.env.MLAB_URI;
 mongoose.set('debug', true);
-mongoose.connect('localhost:27017/flashcards');
-//mongoose.connect(url);
+// mongoose.connect('localhost:27017/flashcards');
+mongoose.connect(url);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
