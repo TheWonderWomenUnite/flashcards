@@ -21,6 +21,8 @@ export class MakeListComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     // When display is block, display the add deck modal
     display = 'none';
+    //DMZ to add
+    sortingBy = 1;
 
     // Attributes for the "sort by" drop down
     optionChoice: number[];
@@ -56,6 +58,8 @@ export class MakeListComponent implements OnInit, OnDestroy {
         console.log("UserId = "+this.userId);
         this.subscription = this.deckService.decksChanged.
             subscribe((decks: Deck[]) => {
+                // DMZ call sort decks fcn with param
+                // best add sort to deck.service then you can call from both make & play
             console.log("Hi from decksChanged");
             this.decks = decks;
             });
@@ -134,12 +138,13 @@ export class MakeListComponent implements OnInit, OnDestroy {
     onSortBy() {
         console.log("Sort decks by " + this.optionChoice);
         console.log(this.decks);
+        this.sortingBy = this.optionChoice[0];
 
         // First sort deck by deck name so that sorts within switch cases
         // below will sort by name within category/favs etc
         // (otherwise you have to use more complex/less readable sorts in switch below)
         this.decks.sort((a, b) => a.name.localeCompare(b.name));
-
+//create fcn sort decks & send param for sortby method
         switch(this.optionChoice[0]) {
             case 1:
                 // Sort decks by category

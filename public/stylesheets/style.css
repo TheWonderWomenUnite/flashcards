@@ -529,10 +529,10 @@ nav a, nav button {
 .img-circle {
   /* DMZ changed from padding-top to padding cuz padding-top distorted circle */
    /* TBD ask Lisa about adding a component for gravitar so we aren't duplicating it in pfc and mfc */
-  padding: 10px;
+  padding: 15px;
   border-radius: 50%;
   width: calc(40px + 10vw);
-  max-width: 100px;
+  max-width: 140px;
   height: auto;
 }
 
