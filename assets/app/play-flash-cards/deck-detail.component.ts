@@ -8,7 +8,8 @@ import { UtilsService } from "../shared/utils.service";
 
 @Component({
     selector: 'app-deck-detail',
-    templateUrl: './deck-detail.component.html'    
+    templateUrl: './deck-detail.component.html',
+    styleUrls: ['./deck-detail.component.css']
 })
 
 export class DeckDetailComponent implements OnInit {
@@ -22,6 +23,9 @@ export class DeckDetailComponent implements OnInit {
   @Input() deck: Deck;
   displayBar: String = '';
   displayHeart: String = '';
+  isFavorite = false;
+  progressPct = 0;
+
 
   constructor(private deckService: DeckService,
   		        private utilsService: UtilsService,
@@ -29,10 +33,8 @@ export class DeckDetailComponent implements OnInit {
 			        private router: Router) {}
 
   ngOnInit() {
-    // Go get the progress bar img string
-    this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-    this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
-
+    this.progressPct = this.deck.progressBar;
+    this.isFavorite = this.deck.favorite;
   }  
 
 	onPlay() {
@@ -40,36 +42,4 @@ export class DeckDetailComponent implements OnInit {
 
 	}
 
-	onEdit() {
-    // This is here to test the deck service - edit a deck with 
-    // a bunch of random data
-  	console.log("DeckDetail-> onEdit: deck Id is "+this.deck.deckId);
-
-  	const editDeck = new Deck(
-  		this.utilsService.randomString(12), 
-  		true, 
-  		this.utilsService.randomString(12),
-      Date.now(),
-      Math.floor((Math.random() * 10) + 1),
-      false,
-      this.deck.userId,
-      this.deck.deckId);
-  	
-  	this.deckService.updateDeck(editDeck).subscribe(
-  	  (deck: Deck) => {
-  	    console.log(deck);
-  	  });
-	}
-
-	  onDelete() {
-      // This is here to test the deck service - delete a deck
-      // given an ID
-      console.log("DeckDetail-> onDelete: deck Id = "+this.deck.deckId);
-	    this.deckService.deleteDeck(this.deck).subscribe(
-	      (deck: Deck) => {
-	        console.log(deck);
-       		this.router.navigate('', {relativeTo: this.route});
-	      });
-
-	  }
 }

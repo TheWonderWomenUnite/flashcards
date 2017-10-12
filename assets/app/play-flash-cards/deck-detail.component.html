@@ -1,21 +1,32 @@
-	<article class="panel panel-default">
-	    <div class="panel-body">
-	        <h4> {{ deck.category }} - {{ deck.name }} </h4> 
-	        <div *ngIf="deck.lastPlayed">
+<div class="col-12 col-lg-3 col-md-4 col-sm-6">        
+  <div class="aspect">
+    <div class="deck questionSide">
+      <div class="deckTitle">
+        <i  [ngClass]="{'fav':true, 'fa fa-star': isFavorite}"></i>
+        <br>
+        <p> {{ deck.category }} - {{ deck.name }} </p>
+
+
+        <div class="deckNotes" *ngIf="deck.lastPlayed">
 		        Last Played: {{ deck.lastPlayed | date: 'shortDate'}} 
-	 		</div>
-			<img src="{{displayHeart}}" /> 
-	        <img src="{{displayBar}}" />
-	    </div>
-		<footer class="panel-footer">
-			<div>
-				<button class="btn btn-success" 
-					(click)="onPlay()">Play Flashcards</button>
-				<button class="btn btn-warning" 
-					(click)="onEdit()">Edit this deck</button>
-				<button class="btn btn-danger" 
-					(click)="onDelete()">Delete this deck</button>
-			</div>
-		</footer>    
-	</article>
+	 		  </div>
+        <br>
+
+        <!-- TBD: adapt to star and test when obj has sample data -->
+        <img src="{{displayHeart}}" /> 
+      </div>
+
+      <div class="getStarted row">
+        <a class="play-deck" title="Play flashcards!" (click)="onPlay()"><i class="fa fa-arrow-right fa-3x"></i></a>
+      </div>
+
+      <!-- TBD implement dynamic progressBar when obj has sample data -->
+      <img src="{{displayBar}}" />
+      <div class="progress progressOnCard" title="Progress...">
+        <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': '' + progressPct + '%'}"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 

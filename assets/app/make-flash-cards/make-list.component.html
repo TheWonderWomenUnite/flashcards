@@ -1,0 +1,44 @@
+<div class="deckSelect container">
+	<div class="topOfDecks row">
+		<ss-multiselect-dropdown 
+			[options]="sortOptions" 
+			[texts]="sortTexts" 
+			[settings]="dropSettings" 
+			[(ngModel)]="optionChoice" 
+			(ngModelChange)="onSortBy($event)">
+		</ss-multiselect-dropdown>
+	</div>
+</div>
+
+<div class="deckSelect container">    
+	<div class = "deckList row">
+
+		<!-- this creates the first 'Add new deck' card -->
+		<app-make-detail [deck]=""></app-make-detail>
+		
+		<!-- this loops through existing decks -->
+		<app-make-detail
+		[deck]="deck"
+			*ngFor="let deck of decks"></app-make-detail>	
+	</div>
+</div>
+
+
+<!-- <div class="row">
+	<div class="col-xs-6">
+		<button class="btn btn-primary" 
+				(click)="onAddDeck()">Add a deck</button>
+	</div>
+	<div class="col-xs-6">
+	<ss-multiselect-dropdown [options]="sortOptions" [texts]="sortTexts" [settings]="dropSettings" [(ngModel)]="optionChoice" (ngModelChange)="onSortBy($event)"></ss-multiselect-dropdown>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 deck-list"> 
+	    <app-make-detail
+	       [deck]="deck"
+	        *ngFor="let deck of decks"></app-make-detail>
+	</div>
+
+</div>
+-->

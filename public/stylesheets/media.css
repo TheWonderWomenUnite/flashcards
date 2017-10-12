@@ -1,55 +1,84 @@
-/*media from w3pro.css*/
+/*
+ * Custom media, based on screen sizes defined in bootstrap.css version 4
+ * xs < 576px
+ * sm >= 576px
+ * md >= 768px
+ * lg >= 992 px
+ * xl >= 1200px
+ */
 
-@media (max-width:600px){
-  .w3-modal-content{
-    margin:0 10px;
-    width:auto!important
+
+
+ @media (min-width: 100px) {
+  .lgCard {
+    width: 80%;
+    margin: 3%;
+/*    max-height: 400px;*/
   }
-  .w3-modal{
-    padding-top:30px
+  .symbol {
+    width: 10%;
   }
-  .w3-dropdown-hover.w3-mobile .w3-dropdown-content,.w3-dropdown-click.w3-mobile .w3-dropdown-content{
-    position:relative
-  }	
-  .w3-hide-small{
-    display:none!important
+  .card, .liveCard {
+    font-size: calc(8px + 4vw);
   }
-  .w3-mobile{
-    display:block;
-    width:100%!important
+  .navbar-brand {
+    display: none;
   }
-  .w3-bar-item.w3-mobile,.w3-dropdown-hover.w3-mobile,.w3-dropdown-click.w3-mobile{
-    text-align:center
+  /* forces hamburger to stay to right while brand is hidden */
+  nav .container {    
+    direction: rtl;
   }
-  .w3-dropdown-hover.w3-mobile,.w3-dropdown-hover.w3-mobile .w3-btn,.w3-dropdown-hover.w3-mobile .w3-button,.w3-dropdown-click.w3-mobile,.w3-dropdown-click.w3-mobile .w3-btn,.w3-dropdown-click.w3-mobile .w3-button{
-    width:100%
-  }}
-@media (max-width:768px){
-  .w3-modal-content{
-    width:500px
+  .hideSmall, .hideXSmall {
+    display: none;
   }
-  .w3-modal{
-    padding-top:50px
-  }}
-@media (min-width:993px){
-  .w3-modal-content{
-    width:990px
+}
+
+/*sm screen*/
+@media (min-width: 576px) {
+  .lgCard {
+    width: 75%;
+    margin: 3%;
+/*    max-width: 450px;*/
   }
-  .w3-hide-large{
-    display:none!important
+  .symbol {
+    width: 10%;
   }
-  .w3-sidebar.w3-collapse{
-    display:block!important
-  }}
-@media (max-width:992px) and (min-width:601px){
-  .w3-hide-medium{
-    display:none!important
-  }}
-@media (max-width:992px){
-  .w3-sidebar.w3-collapse{
-    display:none
+  .hideXSmall {
+    display: unset ;
   }
-  .w3-main{
-    margin-left:0!important;
-    margin-right:0!important
-  }}
+}
+
+/*md screen*/
+@media (min-width: 768px) {
+  .lgCard {
+    width: 30%;
+    margin: 1%;
+  }
+  .smallCard {
+    width: 24%;
+    margin: 5% 1% auto 1%;
+  }
+  .card, .liveCard {
+    font-size: 2vw;
+  }
+  .navbar-brand {
+    display: unset;
+  }
+  nav .container {
+    direction: ltr;
+  }
+  .hideSmall {
+    display: unset ;
+  }
+}
+
+/*lg screen*/
+@media (min-width: 992px) {
+
+}
+
+/*xl screen*/
+@media (min-width: 1200px) {
+
+}
+

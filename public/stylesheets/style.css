@@ -1,53 +1,292 @@
-body,h1,h2,h3,h4,h5,h6 {font-family: "Poppins", sans-serif}
-body, html {
-    height: 100%;
-    line-height: 1.8;
-    box-sizing:border-box;
-    overflow: scroll;
-		overflow-x: hidden;
-		
-		/* moved from bgimg-1 */
-		/* TBD experiment with other backgrounds - see .bgimg-1 */
-		background-position: center;
-    background-size: cover;
-    background-image: url("../img/woodgrain.jpg"); 
-    min-height: 100vh;
+body,h1,h2,h3,h4,h5,h6 {
+  font-family: "Poppins", sans-serif;
+  color: white;
+}
+body {
+  background: url("../img/wood3.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
-}
-::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-}
-/* Full height image header */
-.bgimg-1 {
-    background-position: center;
-  
-/*  moved to <body> - use this for photo background or texture (below) */
-/*    background-size: cover;*/
-/*    background-image: url("../img/wood3.jpg");*/
+/*  get input from lisa*/
 /*    background-image: url("../img/wood4.jpg");*/
 /*    background-image: url("../img/wood5.jpg");*/
-    /* background-image: url("../img/woodgrain.jpg"); */
+/*    background-image: url("../img/wood6.jpg");*/
+/*    background-image: url("../img/woodgrain.jpg");*/
   
 /*  or a texture background...*/
-/*
-  background-color: #21202c;
-  background-image: url("../img/real-carbon-fibre.png");
-*/
+ /* background-color: yellow; */
+/*  background-image: url("../img/real-carbon-fibre.png");*/
+  
 /*
   background-color: #45403c;
   background-image: url("../img/navy.png");
 */
+  
 /*
   background-color: #efcda2;
   background-image: url("../img/white-linen.png");
 */
 
-  min-height: 100%;
+  
 }
-/* .w3-bar .w3-button, .bottomNav p { */
-.w3-bar .w3-bar-item, .bottomNav p {
-    padding: 16px;  
+
+/*experiment with hiding small cards for small screen*/
+.smallCard {
+/*  display: none;*/
+
 }
+
+
+body, html {
+    height: 100%;
+    line-height: 1.8;
+    box-sizing:border-box;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+}
+
+/*add to bootstrap classes*/
+/* TBD add overriding class instead of using important? */
+.navbar, .footer {
+  background-color: black!important; /* could use transparent if not using fixed navbar */
+  opacity: .8;
+  padding: 0;
+  padding-left: 10px;
+  margin-left: 0;
+  box-sizing: border-box;
+}
+.footer {
+  text-transform: uppercase;
+}
+
+.navbar-brand {
+  letter-spacing: 4px;
+  padding: 4px 8px;
+  margin: 0;
+}
+.navbar li {
+  padding-left: 10px;
+}
+.footer p {
+  padding: 8px 2px;
+  margin: 0;
+}
+.navbar-dark .navbar-nav .nav-link, .navbar button, nav button {
+  color: #C7C7C7;
+}
+.navbar a:hover, nav a:hover {
+  color: #535252!important;
+  background-color: white;
+  opacity: 1;
+}
+.hamburger:hover {
+  background-color: darkslategray;
+  opacity: 1;
+}
+
+/*equiv to right float on flex items (rtl = Right To Left)*/
+.navbar-collapse  {
+  direction: rtl;
+}
+.navbar-toggler {
+  border-style: none;
+  border-radius: 0;
+}
+.col-12, .col-md-3, .col-sm-6 {
+  max-width: 300px;
+  margin: auto;
+}
+.deckList .col-12,.deckList .col-md-3,.deckList .col-sm-6 {
+  min-height: 20vh;
+}
+.topOfDecks .col-12,.topOfDecks .col-md-3,.topOfDecks .col-sm-6 {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  color: white;
+}
+.topOfDecks .btn-group {
+/* .topOfDecks { */
+    width: 100%;
+}
+.topOfDecks button {
+  background-color: black;
+}
+.centerIt {
+  margin: 0 auto!important;
+}
+
+/* might not need this... */
+.hidden {
+  display: none !important;
+}
+.lgCard .aspect, .smallCard .aspect {
+  width: 100%;
+}
+.aspect {
+  /*width: 100%;*/ /* not working in ang */
+  width: 240px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  padding-top: 135%;
+}
+.deckTitle, .deckAddNew {
+  color: white;
+  text-align:center;
+  padding-top: 10%;
+  background-color: transparent;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.deckTitle i {
+  font-size: 150%;
+}
+.deckNotes {
+  font-size: 60%;
+}
+.deckSelect, .liveGame {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+/* .deckSelect.container {
+  display: flex;
+}
+.deckList.row {
+  display: flex;
+  flex-wrap: wrap;
+} */
+.card, .liveCard, .spreadCards, .deck {
+  background-color: #4444a7;
+  text-align: center;
+  border-radius: 1.5vw;
+
+/*for aspect ratio  */
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.card, .liveCard, .spreadCards {
+  border: 1px solid #e6e5e5;
+  padding: 9%;
+}
+
+.card, .liveCard {
+  font-size: 2vw;
+}
+
+.spreadCards {
+  font-size: 1.5vw;
+}
+.deck {
+  border: calc(10px + .7vw) solid #e6e5e5;
+  font-size: calc(16px + .5vw);
+  line-height: 1.2;
+/*  padding: 2%;*/
+  padding: 5px;
+}
+.progressOnCard, .deck-icons {
+  position: absolute;
+  left: 2%;
+  right: 2%;
+}
+.progressOnCard {
+  bottom: 2%;
+}
+.deck-icons {
+    bottom: 12%;
+  }
+.progressContainer a {
+  display: inline-block; 
+  padding-left: 10px;
+}
+.progressContainer a:hover {
+  background-color: transparent;
+}
+.progressContainer a:hover i, .progressContainer a:hover p {
+  color: #B36BEE;  
+}
+.progressContainer a i, .progressContainer a p {
+  background-color: transparent;
+}
+.progressInFtr {
+  display: inline-block;
+  width: 15vw;
+}
+.deck-modify i, .deck-modify:hover i {
+  color: limegreen;
+}
+.deck-remove i, .deck-remove:hover i {
+  color: red;
+}
+.deck-fav i, .deck-fav:hover i , .gameInfo i, .deckTitle .fav {
+    color: yellow;
+}
+.deck-modify:hover i, .deck-fav:hover i, .deck-remove:hover i {
+  cursor: pointer;
+}
+.gameInfo i, .gameInfo p {
+  display: inline-block;
+}
+.gameInfo i{
+  font-size: calc(10px + 1vw);
+}
+.icons i {
+  /* font-size: 250%; */
+  font-size: calc(14px + 2vw);
+}
+.icons i {
+  color: #992FEB;
+}
+.icons a:hover i {
+  color: #B36BEE;
+}
+.icons a {
+  padding: 0 4px;
+}
+.footer a {
+  cursor: pointer;
+}
+.footer .icons a:hover {
+  background-color: transparent;
+}
+.play-deck i, .deck-new i {
+  color: #6397f8;
+}
+.play-deck:hover i, .deck-new:hover i {
+  color: #A8C7FC;
+}
+a[class^="deck-"], .play-deck {
+  margin: auto;
+  padding: 2px;
+  font-size: calc(10px + 1em);
+}
+a[class^="deck-"] {
+  width: 25%;
+}
+a[class^="deck-"]:hover, .play-deck:hover {
+  opacity: 1;
+}
+.getStarted {
+  text-align: center;
+  position: absolute;
+  bottom: 10%;
+  left: 2%;
+  right: 2%;
+  margin: auto;
+}
+.cardText {
+  line-height: 1.2;
+}
+
+
 .cardSet {
   display: flex;
   justify-content: center; /* align horizontal */
@@ -55,22 +294,15 @@ body, html {
   height: 100%;
   width: 95vw;
   max-width: 1200px;
+/*  margin: 65px auto 0 auto;*/
   margin: 0 auto;
-/*  display: block;*/
-}
-.container {
-  width: 100%;
-/*  margin-top: 35px;*/
-}
-.aspect{
-/*  for aspect ratio*/
-  width: 100%;
-  position: relative;
-  padding-top: 135%;
 }
 .smallCard, .lgCard, .symbol {
   float: left;
 }
+
+/*this works for deck to play*/
+
 .lgCard {
   width: 30%;
   margin: 1%;
@@ -83,97 +315,56 @@ body, html {
   width: 7%;
   fill: #4444a7;
 }
+
 .symbol:hover {
   fill: white;
+  cursor: pointer;
 }
 .flip svg {
   transform: rotate(180deg);
 }
 /*TBD: make font-size dynamic depending on length of text. Also adjust top margin or figure out how
 to center text vertically w/o messing up scrolling*/
-.card, .liveCard {
-  background-color: #4444a7;
-  font-size: 2vw;
-  padding: 9%;
-  text-align: center;
-/*  border: 3px solid #cccccc;*/
-  border-radius: 1.5vw;
-/*  for aspect ratio*/
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-/*
-  overflow: hidden;
-  overflow-y: scroll;  
-*/
-}
-/*
-TBD: look at https://www.transparenttextures.com/
-for background for back side of cards
-*/
-.card {
-/*  background-color: #3e3e7c;*/
-/*  background-image:  url("../img/twinkle-twinkle.png");*/
-}
-.liveCard {
-/*  background-color: rgb(63, 108, 91);*/
-}
 .empty {
   background-color: transparent;
   border: 2px dotted white;
   box-shadow: none;
 }
+/* TBD: could change html & use Bootstrap '.d-none' class instead of this */
 .empty .cardText {
   display: none;
 }
 .displayModal {
   display: block;
 }
-.hide {
-  visibility: hidden;
-}
 .cardText span {
   font-weight: 800;
 }
-.questionSide {
+.cardText {
+  position: relative;
+}
+.answerSide .thumbs {
+  display: block;
+}
+.questionSide .thumbs {
+  display: none;
+}
+.questionSide, .answerSide {
   background-image:  url("../img/twinkle-twinkle.png");
 }
 .questionSide, .answerSide {
-    -moz-box-shadow: 6px 8px 10px rgba(0, 0, 0,0.8);
-    -webkit-box-shadow: 6px 8px 10px rgba(0, 0, 0, .8);
-    box-shadow: 6px 8px 10px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 16px 18px 20px rgba(0, 0, 0,0.8);
+    -webkit-box-shadow: 16px 18px 20px rgba(0, 0, 0, .8);
+    box-shadow: 16px 18px 20px rgba(0, 0, 0, .8);
 }
-.bottomNav {
-  position: fixed;
-  bottom: 0;
-  background-color: transparent;
-}
-.bottomNav a {
-  margin: 0 auto;
-  width: 100%;
-}
-.bottomNav p {
-  float: right;
-  margin: 0;
-}
-/*
-.modal {
-  width: 100%; 
-  margin: 0 auto;
-}
-*/
 .thumbs {
   justify-content: center;
   background-color: transparent;
-/*  max-width: 500px;*/
 }
-// TBD change to svg
+/* TBD change to svg?*/
 .qMark a {
   width: 100%;
   cursor: pointer;
-/*  height: 10vw;*/
 }
 .qMark i {
   font-size: 5em;
@@ -189,7 +380,8 @@ for background for back side of cards
 .thumbs a:first-child svg {
   fill: #ff0000;
 }
-.thumbs svg:hover, .qMark:hover {
+.thumbs svg:hover {
+  cursor: pointer;
   opacity: 1;
 }
 .thumbs a:last-child svg {
@@ -209,13 +401,67 @@ for background for back side of cards
 .liveCard .cardText {
   height: 75%;
 }
-.w3-button:hover {
-  opacity: .7;
-}
 .lgCard a {
   width: 100%;
   height: 100%;
 }
-.bottomNav {
-  box-shadow: none;
+.topOfDecks {
+
+}
+.highlight:hover {
+  cursor: pointer;
+  text-decoration-line: underline!important;
+  color: black!important;
+}
+.lgCard .questionSide .cardText:hover {
+  cursor: pointer;
+}
+
+.lgCard .questionSide .cardText:hover .gameTip {
+  visibility: visible;
+}
+.gameTip {
+  visibility: hidden;
+  position:absolute; 
+  left:0; 
+  right:0; 
+  bottom:0;
+  color: gray;
+/*  font-size: 1em;*/
+}
+.liveGame .row {
+  width: 100%;
+  
+}
+/*sidebar*/
+.sidebar {
+  height: 100%; 
+  width: 160px;
+  padding-top: 80px; 
+  position: fixed;
+  z-index: 1;
+  overflow: auto;
+  background-color: black;
+  opacity: .8;
+}
+.sidebar a {
+  font-size: 15px;
+  padding: 15px;
+  line-height: 15px;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+}
+.sidebar a:hover {
+    text-decoration: none;
+    color: #a8a6a6;
+}
+.modal {
+  color: black;
+}
+nav a, nav button {
+  cursor: pointer;
+}
+.script {
+  font-family: "Rock Salt", cursive;  
 }

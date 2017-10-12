@@ -17,26 +17,35 @@ import { UtilsService } from '../shared/utils.service';
     styleUrls: ['./deck-play.component.css']
 })
 
-export class DeckPlayComponent implements ngOnInit {
+export class DeckPlayComponent implements OnInit {
 
   deck: Deck;
   cards: Card[];
   currIndex = 0;
   faceUp = true;
   displayThumbs = 'none';
+  hideThumbs = true;
+  showQSide = true;
+  showASide = false;
   currentCard: Card;
   nextCard: Card;
   previousCard: Card;
+  isFavorite = false;
+  progressPct = 0;
+  anonymousPlay = false;
 
-  const backButton = "../img/back_button.png";
-  const thumbsUp = "../img/thumbsUp.png";
-  const thumbsDown = "../img/thumbsDown.png";
+  // Q for Lisa: for now I used font-awesome icons instead of these png files because they 
+  // were quickest for me to implement the sizing
+  // Let me know if you prefer these imgs and I will figure out sizing them in footer, etc
+  //const backButton = "../img/back_button.png";
+  //const thumbsUp = "../img/thumbsUp.png";
+  //const thumbsDown = "../img/thumbsDown.png";
 
-  const questionMark = "../img/questionMark.png";
-  const rightCaret = "../img/right_caret.png";
-  const leftCaret = "../img/left_caret.png";
-  displayBar = "";
-  displayHeart = "";
+  //const questionMark = "../img/questionMark.png";
+  //const rightCaret = "../img/right_caret.png";
+  //const leftCaret = "../img/left_caret.png";
+  //displayBar = "";
+  //displayHeart = "";
 
 	constructor(private route: ActivatedRoute,
               private router: Router,
@@ -45,12 +54,14 @@ export class DeckPlayComponent implements ngOnInit {
               private utilsService: UtilsService) { }
 
 	ngOnInit() {
+    
 		this.route.params
 			.subscribe((params: Params) =>{
 
         // Get the deck Id from the route parameters
 				const deckId = params['id'];
         this.deck = this.deckService.getDeck(deckId);
+        this.anonymousPlay = !this.deck.userOwned;
 
         // Get the cards for this deck;
         console.log("Going to get cards");
@@ -62,10 +73,18 @@ export class DeckPlayComponent implements ngOnInit {
             this.deckShuffle();
          		console.log(this.cards);
             this.faceUp = true;
-            this.deck.lastPlayed = Date.now();
-            this.updateDeckInfo(this.deck);
-            this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-            this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+            //this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+            //this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
+
+            if (this.anonymousPlay) {
+              this.progressPct = 0;
+            }
+            else {
+              this.deck.lastPlayed = new Date();
+              this.updateDeckInfo();
+              this.progressPct = this.deck.progressBar;
+              this.isFavorite = this.deck.favorite;
+            }
             this.currentCard = this.cards[this.currIndex];
             this.nextCard = this.cards[this.currIndex + 1];
             this.previousCard = this.cards[this.cards.length-1];
@@ -73,8 +92,8 @@ export class DeckPlayComponent implements ngOnInit {
                         " next = "+this.nextCard.side1+
                         " prev = "+this.previousCard.side1);
             });
-				});
-
+        });        
+        console.log('at end of ngOnInit and hideThumbs is ' + this.hideThumbs);
   	}
 
   goNext(forward: boolean) {
@@ -85,11 +104,14 @@ export class DeckPlayComponent implements ngOnInit {
 
     this.faceUp = true;
     this.displayThumbs = 'none';
+    this.showQSide = true;
+    this.showASide = false;
+    this.hideThumbs = true;
     const lastCard = this.cards.length - 1;
 
     // First advance or retreat the currIndex, if it is at the end, loop back to 
 
-    if forward {
+    if (forward) {
       if (this.currIndex == lastCard) {
         this.currIndex = 0;
       } else {
@@ -118,6 +140,7 @@ export class DeckPlayComponent implements ngOnInit {
       this.previousCard = this.cards[this.currIndex - 1];
       this.nextCard = this.cards[this.currIndex + 1];
     }
+    console.log('at end of goNext and hideThumbs is ' + this.hideThumbs)
   }
 
   onSlideLeft() {
@@ -131,9 +154,10 @@ export class DeckPlayComponent implements ngOnInit {
   } 
 
   showAnswer() {
-    
+    this.showASide = true;
+    this.showQSide = false;
     this.faceUp = false;
-    this.displayThumbs = 'block';
+    this.hideThumbs = false;
   }
 
   onThumbsUpOrDown(upOrDown: boolean) {
@@ -144,67 +168,55 @@ export class DeckPlayComponent implements ngOnInit {
     // done with the card)
     // Note: Length will never be 0 because you can't get here 
     // if there aren't any cards
-
+    console.log('at start of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs);
     const incNumber = ((1/this.cards.length) * 100);
+    this.progressPct = (upOrDown) ? 
+    this.progressPct + incNumber : 
+    this.progressPct - incNumber;
 
-    console.log("Number of cards = "+ this.cards.length+ 
-      " incNumber = "+ incNumber+
-      " before math, prog bar = "+this.deck.progressBar);
-
-    this.deck.progressBar = (upOrDown) ? 
-      this.deck.progressBar + incNumber : 
-      this.deck.progressBar - incNumber;
-
-    if (this.deck.progressBar > 100) {
-      this.deck.progressBar = 100; 
-    } else if (this.deck.progressBar < 0) {
-      this.deck.progressBar = 0; 
+    if (this.progressPct > 100) {
+      this.progressPct = 100; 
+    } else if (this.progressPct < 0) {
+      this.progressPct = 0; 
     }
 
-    this.updateDeckInfo(this.deck);
-    this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+    if (!this.anonymousPlay) {
+      this.deck.progressBar = this.progressPct;
+      this.updateDeckInfo();      
+    } 
+
+    this.showQSide = true;
+    this.showASide = false;
+    this.faceUp = true;
+    this.hideThumbs = true;
+    //this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
     this.goNext(true);
+    console.log('at end of onThumbsUpOrDown and showASide is ' + this.showASide);
+    console.log('at end of onThumbsUpOrDown and hideThumbs is ' + this.hideThumbs);
+    
   }
 
-
-
-/*
-  onAdd() {
-    // Add a new card to this deck - keeping for testing purposes
-
-    const side1 = this.utilsService.randomString(10);
-    const side2 = this.utilsService.randomString(10);
-    const newCard = new Card(side1, side2, this.deck.deckId);
-    this.cardService.addCard(newCard).subscribe(
-      (card: Card) => {
-        console.log(card);
-        // Update my local card array
-        this.cards.push(card);
-      });
-  } 
-*/
-  onFavorite() {
-    // Toggle favorite for this deck
-    this.deck.favorite = !this.deck.favorite;
-    this.updateDeckInfo(this.deck);
-    this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
-
-    }
-
-  onHelp() {
+ onHelp() {
 
     }
 
   onGoBack() {
+    if (this.anonymousPlay) {
+      this.router.navigate(['./playflashcards/', 'decklist']);      
+      }
+    else {
       this.router.navigate(['./playflashcards/', 'decklist', this.deck.userId]);
+      }
     }
 
   onResetProgressBar() {
-    this.deck.progressBar = 0; 
-    this.updateDeckInfo(this.deck);
-    this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
-    
-    }    
+    this.progressPct = 0;
+    if (!this.anonymousPlay) {
+      this.deck.progressBar = 0; 
+      this.updateDeckInfo();
+    }
+    //this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
+  }    
 
   updateDeckInfo() {
     // Update the database with new info for the deck. This is called 
@@ -232,11 +244,11 @@ export class DeckPlayComponent implements ngOnInit {
     // Shuffle the deck so the cards are presented in a different order
     // than they are in the database
 
-    tempCard: Card;
+    var tempCard: Card;
 
     for (var i = this.cards.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
-        var tempCard = this.cards[i];
+        tempCard = this.cards[i];
         this.cards[i] = this.cards[j];
         this.cards[j] = tempCard;
       }

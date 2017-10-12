@@ -55,9 +55,9 @@ export class AuthService {
 		return this.currentUser.email;
 	}
 
-	getGravHash() {
+	getGravHash(): string {
         const userEmail = this.currentUser.email.trim().toLowerCase();
-	    return Md5.hashStr(userEmail);
+	    return Md5.hashStr(userEmail).toString();
 	}
 
    getUser(userId: string) {

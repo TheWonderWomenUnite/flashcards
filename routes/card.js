@@ -169,5 +169,31 @@ router.delete('/:id', function(req, res, next) {
     });
 });
 
+// Use this route to delete a deck
+
+router.delete('/allCards/:id', function(req, res, next) {
+
+    // Get the deck with id :id
+    deckId = req.params.id;
+
+    Card.remove({deck: deckId}, function(err, result) {
+        if (err) {
+            return res.status(500).json({
+                title: 'Error removing cards',
+                error: err
+            });
+
+        }
+
+         res.status(200).json({
+            message: 'Success',
+            obj: result
+        });
+
+    });    
+          
+});    
+
+
 module.exports = router;
 // a comment

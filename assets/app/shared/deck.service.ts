@@ -2,6 +2,7 @@ import { Http, Response, Headers } from "@angular/http";
 import { Injectable, EventEmitter } from "@angular/core";
 import 'rxjs/Rx';
 import { Observable } from "rxjs";
+import { Subject } from 'rxjs/Subject';
 
 import { Deck } from "../models/deck.model";
 import { ErrorService } from "../errors/error.service";
@@ -9,9 +10,9 @@ import { ErrorService } from "../errors/error.service";
 @Injectable()
 export class DeckService {
     private decks: Deck[] = [];
+    decksChanged = new Subject<Deck[]>();
 
-   constructor(private http: Http, private errorService: ErrorService) {
-    }
+    constructor(private http: Http, private errorService: ErrorService) {}
 
     getDecks(userId: string) {
     // Call this method with a user Id to get all of the decks
@@ -35,7 +36,7 @@ export class DeckService {
                     );
                 }
                 this.decks = transformedDecks;
-                return this.decks;
+                return this.decks.slice();
             })
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -46,9 +47,8 @@ export class DeckService {
 
     getUnownedDecks() {
     // Call this method without a userId to get all of the unowned decks, works 
-
         console.log("GetUnOwnedDecks: going to call get with userOwned false");
-        return this.http.get('http://localhost:3000/decks/userDecks/unOwned')
+        return this.http.get('http://localhost:3000/decks/unownedDecks/')
             .map((response: Response) => {
                 const decks = response.json().obj;
                 let transformedDecks: Deck[] = [];
@@ -86,8 +86,41 @@ export class DeckService {
         return null;
     }
 
+    cloneDeck(deck: Deck) {
+
+        console.log("cloneDeck: going to call post with id "+deck.deckId);
+        const body = JSON.stringify(deck);
+        const headers = new Headers({'Content-Type': 'application/json'});
+        const token = localStorage.getItem('token') 
+            ? '?token=' + localStorage.getItem('token') 
+            : ''; 
+        return this.http.post('http://localhost:3000/decks/clone/' + deck.deckId + token, body, {headers: headers})
+            .map((response: Response) => {
+                const result = response.json().obj;
+                const deck = new Deck(
+                    result.name,
+                    result.userOwned,
+                    result.category,
+                    result.lastPlayed,
+                    result.progressBar,
+                    result.favorite,
+                    result.user,
+                    result._id);
+                // Update this.decks array
+                this.decks.push(deck);
+                this.decksChanged.next(this.decks.slice());
+                return deck;
+            })
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json());
+            });
+    
+
+    }
+
     addDeck(deck: Deck) {
-    // Call this method to add a deck
+        // Call this method to add a deck
 
         console.log("addDeck: Going to call post with userId = "+deck.userId);        
         const body = JSON.stringify(deck);
@@ -110,6 +143,7 @@ export class DeckService {
                     result._id);
                 // Update this.decks array
                 this.decks.push(deck);
+                this.decksChanged.next(this.decks.slice());
                 return deck;
             })
             .catch((error: Response) => {
@@ -144,15 +178,15 @@ export class DeckService {
                 for (let i = 0; i < this.decks.length; i++)
                 {
                     if (this.decks[i].deckId == deck.deckId) {
-                        this.decks.name = deck.name;
-                        this.decks.userOwned = deck.userOwned;
-                        this.decks.category = deck.category;
-                        this.decks.lastPlayed = deck.lastPlayed;
-                        this.decks.progressBar = deck.progressBar;
-                        this.decks.favorite = deck.favorite;
+                        this.decks[i].name = deck.name;
+                        this.decks[i].userOwned = deck.userOwned;
+                        this.decks[i].category = deck.category;
+                        this.decks[i].lastPlayed = deck.lastPlayed;
+                        this.decks[i].progressBar = deck.progressBar;
+                        this.decks[i].favorite = deck.favorite;
                     }
                 }
-                
+                this.decksChanged.next(this.decks.slice());
                 return deck;
 
             })
@@ -164,8 +198,9 @@ export class DeckService {
     }
 
     deleteDeck(deck: Deck) {
-    // Call this method to delete a deck
+    // Call this method to delete a deck, deletes the cards for this deck as well
         this.decks.splice(this.decks.indexOf(deck), 1);
+        this.decksChanged.next(this.decks.slice());
         console.log("deleteDeck: Going to call delete with deckId = "+deck.deckId);
         const token = localStorage.getItem('token') 
             ? '?token=' + localStorage.getItem('token') 

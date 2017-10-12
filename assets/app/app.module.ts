@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorComponent } from './errors/error.component';
@@ -18,7 +20,8 @@ import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.com
 import { MakeListComponent } from './make-flash-cards/make-list.component';
 import { MakeDetailComponent } from './make-flash-cards/make-detail.component';
 import { MakeEditComponent } from './make-flash-cards/make-edit.component';
-import { MakeAddComponent } from './make-flash-cards/make-add.component';
+
+import { WelcomeComponent } from './welcome/welcome.component';
 
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { LogoutComponent } from "./auth/logout.component";
@@ -42,20 +45,21 @@ import { UtilsService } from './shared/utils.service';
     MakeListComponent,
     MakeDetailComponent,
     MakeEditComponent,
-    MakeAddComponent,
     AuthenticationComponent,
     LogoutComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
+    MultiselectDropdownModule,
     AppRoutingModule
   ],
   providers: [AuthService, ErrorService, DeckService, CardService, UtilsService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

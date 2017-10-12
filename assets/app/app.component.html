@@ -1,23 +1,63 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid"> -->
+<div (loggedIn)="onLoggedIn($event)">  
+
+  <!-- TBD problem if you click on 'Play' when you are already in 'Play' -->
+<!--navbar  -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+  <div class="container">
+    <p class="navbar-brand">ULTIMATE FLASH CARDS</p>
+    <button (click)="toggleSidebar()" class="hamburger navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a (click)="onPlayCards()" class="nav-link">PLAY FLASH CARDS <i class="fa fa-th"></i> <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a (click)="onMakeCards()" class="nav-link">MAKE FLASH CARDS <i class="fa fa-pencil-square-o"></i> </a>
+        </li>
+        <li class="nav-item">
+          <!-- TBD/Question for Lisa: I wanted to put (loggedIn)="onLoggedIn($event)" somewhere in here...but not working -->
+          <!-- I'm trying to work from Udemy example #63 but since I don't have <app-signin> in this file, I don't know if the example is applicable -->
+          <a *ngIf="isLoggedIn" [routerLink]="['/auth/logout']" class="nav-link">LOG OUT</a>
+          <a *ngIf="!isLoggedIn" [routerLink]="['/auth/signin']" class="nav-link">LOG IN/SIGN UP</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+  </nav>
   
+<!--sidebar (toggles) -->
+<nav [ngClass]="{'sidebar': true, 'd-lg-none': true, 'hidden': hideSidebar}">
+  <a (click)="onPlayCards()" class="sidebarItem">PLAY FLASH CARDS</a>
+  <a (click)="onMakeCards()" class="sidebarItem">MAKE FLASH CARDS</a>
+  <a class="sidebarItem" [routerLink]="['/auth']">LOG IN/SIGN UP</a>
+</nav>
+  
+<br>
+<br>
+
+
+
     <!-- Navbar (sit on top) -->
-     <div class="w3-top">
+     <!-- <div class="w3-top">
       <div class="w3-bar w3-text-white" id="myNavbar">
-        <p class="w3-bar-item w3-wide">ULTIMATE FLASH CARDS</p> 
+        <p class="w3-bar-item w3-wide">ULTIMATE FLASH CARDS</p>  -->
 
         <!-- Right-sided navbar links -->
-         <div class="w3-right w3-hide-small  w3-hide-medium">
+         <!-- <div class="w3-right w3-hide-small  w3-hide-medium">
           <a [routerLink]="['/auth']" class="w3-bar-item w3-button" id="main_login">LOG IN/SIGN UP</a>
           <a routerLink="/makeflashcards" class="w3-bar-item w3-button" id="main_make"><i class="fa fa-pencil-square-o"></i> MAKE FLASH CARDS</a>
           <a routerLink="/playflashcards" class="w3-bar-item w3-button" id="main_play"><i class="fa fa-th"></i> PLAY FLASH CARDS</a>
-        </div> 
+        </div>  -->
         <!-- Hide right-floated links on small screens and replace them with a menu icon -->
   
          <!-- <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large" id="menu_icon">
           <i class="fa fa-bars"></i>
         </a>  -->
-       </div>
-    </div> 
+       <!-- </div>
+    </div>  -->
   
     <!--  Welcome Section-->
     <!-- Want this to close when user makes selection. would this need to be separate component? -->
@@ -50,5 +90,15 @@
     </div>    -->
     <!-- <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"> -->
     <router-outlet></router-outlet>
-  </div>
+
+<!-- TBD: for now, moved to deck-play
+but would be best to make footer service that's context sensitive... -->
+<!-- <footer class="footer navbar fixed-bottom">
+	<div class="container">
+		<p class="text-muted">stuff here</p>
+		<p class="text-muted">more stuff?</p>
+	</div>
+</footer> -->
+        
+  <!-- </div> -->
   <app-error></app-error>

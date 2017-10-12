@@ -18,10 +18,10 @@ export const auth_routes: Routes = [
 ];
 
 //LMC: Added in the NgModule statement and the export (Not sure why these weren't there?)
-
+/*
 @NgModule({
 	imports: [RouterModule.forChild(auth_routes)],
 	exports: [RouterModule]
 })
-
+*/
 export const AuthRouting = RouterModule.forChild(auth_routes);

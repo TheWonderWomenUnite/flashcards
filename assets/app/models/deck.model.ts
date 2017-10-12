@@ -13,15 +13,14 @@
 // deckId: The unique identifier for this deck
 
 export class Deck {
-
     constructor(public name: string,               
-                public userOwned: boolean,
-                public category: string,
-               	public lastPlayed: date,
-				public progressBar: number,
-				public favorite: boolean,
-                public userId?: string,
-                public deckId?: string
-                ) {}
+      public userOwned: boolean,
+      public category: string,
+      public lastPlayed: Date,
+			public progressBar: number,
+			public favorite: boolean,
+      public userId?: string,
+      public deckId?: string
+      ) {}
 
 }

@@ -3,7 +3,6 @@
 // lastName - the User's last name
 // password - the User's password
 // email - the user's password, must be unique and enforced
-// user-deck - Reference to all of the decks for this user
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
