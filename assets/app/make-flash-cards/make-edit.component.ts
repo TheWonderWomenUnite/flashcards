@@ -160,23 +160,25 @@ export class MakeEditComponent implements OnInit {
   isLive(index: number) {
     return (this.liveCard === index);
   }
-  onEdit(index: number) {
-    this.liveCard = index;
-    document.getElementById("cardQuestion_" + index).focus();
-  }
+  // onEdit(index: number) {
+  //   this.liveCard = index;
+  //   document.getElementById("cardQuestion_" + index).focus();
+  // }
   onExit() {
     this.router.navigate(['./makeflashcards/', 'start']);
   }
 
-  onAddCard(index: number) {
+  onAddCard() {
     // (<FormArray>this.deckForm.get('cards')).push(
-      console.log('inserting at ' + (index + 1));
-      (<FormArray>this.deckForm.get('cards')).insert((index),
+      
+      (<FormArray>this.deckForm.get('cards')).insert((0),
         new FormGroup({
         'side1': new FormControl(null, Validators.required),
         'side2': new FormControl(null, Validators.required)
       })
     );
+    // document.getElementById("cardQuestion_" + index).focus();
+    document.getElementsByTagName("textarea").focus();
   }
 
   onDeleteCard(index: number) {
