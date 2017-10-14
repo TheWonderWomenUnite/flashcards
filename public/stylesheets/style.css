@@ -7,35 +7,7 @@ body {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
-
-/*  get input from lisa*/
-/*    background-image: url("../img/wood4.jpg");*/
-/*    background-image: url("../img/wood5.jpg");*/
-/*    background-image: url("../img/wood6.jpg");*/
-/*    background-image: url("../img/woodgrain.jpg");*/
-  
-/*  or a texture background...*/
- /* background-color: yellow; */
-/*  background-image: url("../img/real-carbon-fibre.png");*/
-  
-/*
-  background-color: #45403c;
-  background-image: url("../img/navy.png");
-*/
-  
-/*
-  background-color: #efcda2;
-  background-image: url("../img/white-linen.png");
-*/
-
-  
-}
-
-/*experiment with hiding small cards for small screen*/
-.smallCard {
-/*  display: none;*/
-
+  background-size: cover;  
 }
 
 
@@ -51,7 +23,7 @@ body, html {
 }
 
 /*add to bootstrap classes*/
-/* TBD add overriding class instead of using important? */
+/* TBD better to add overriding class instead of using important here */
 .navbar, .footer {
   background-color: black!important; /* could use transparent if not using fixed navbar */
   opacity: .8;
@@ -66,7 +38,6 @@ body, html {
 }
 
 .navbar-brand {
-  /* letter-spacing: 4px; */
   font-family: "Rock Salt", cursive; 
   font-size: 180%;
   padding: 4px 8px;
@@ -113,7 +84,6 @@ body, html {
   color: white;
 }
 .topOfDecks .btn-group {
-/* .topOfDecks { */
     width: 100%;
 }
 .topOfDecks button {
@@ -164,13 +134,6 @@ body, html {
   margin-top: 20px;
   margin-bottom: 50px;
 }
-/* .deckSelect.container {
-  display: flex;
-}
-.deckList.row {
-  display: flex;
-  flex-wrap: wrap;
-} */
 .card, .liveCard, .spreadCards, .deck {
   background-color: #4444a7;
   text-align: center;
@@ -199,7 +162,6 @@ body, html {
   border: calc(10px + .7vw) solid #e6e5e5;
   font-size: calc(16px + .5vw);
   line-height: 1.2;
-/*  padding: 2%;*/
   padding: 5px;
 }
 .progressOnCard, .deckIcons {
@@ -262,7 +224,6 @@ body, html {
   font-size: calc(10px + 1vw);
 }
 .icons i {
-  /* font-size: 250%; */
   font-size: calc(14px + 2vw);
 }
 .icons i {
@@ -317,7 +278,6 @@ a[class^="deck-"]:hover, .play-deck:hover {
   height: 100%;
   width: 95vw;
   max-width: 1200px;
-/*  margin: 65px auto 0 auto;*/
   margin: 0 auto;
 }
 .smallCard, .lgCard, .symbol {
@@ -384,7 +344,6 @@ to center text vertically w/o messing up scrolling*/
   justify-content: center;
   background-color: transparent;
 }
-/* TBD change to svg?*/
 .qMark a {
   width: 100%;
   cursor: pointer;
@@ -458,6 +417,9 @@ to center text vertically w/o messing up scrolling*/
   flex-wrap: wrap;
   margin: 5px auto;
 }
+.card-add i {
+  margin: 0 auto;
+}
 .deckSelect .sortBy {
   margin: 5px auto 5px 15px;
 }
@@ -488,13 +450,11 @@ to center text vertically w/o messing up scrolling*/
   right:0; 
   bottom:0;
   color: gray;
-/*  font-size: 1em;*/
 }
 .liveGame .row {
   width: 100%;
   
 }
-/*sidebar*/
 .sidebar {
   height: 100%; 
   width: 160px;
@@ -527,12 +487,10 @@ nav a, nav button {
   font-family: "Rock Salt", cursive;  
 }
 .img-circle {
-  /* DMZ changed from padding-top to padding cuz padding-top distorted circle */
-   /* TBD ask Lisa about adding a component for gravitar so we aren't duplicating it in pfc and mfc */
   padding: 15px;
   border-radius: 50%;
-  width: calc(40px + 10vw);
-  max-width: 140px;
+  width: calc(30px + 10vw);
+  max-width: 100px;
   height: auto;
 }
 

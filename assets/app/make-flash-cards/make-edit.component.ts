@@ -130,11 +130,8 @@ export class MakeEditComponent implements OnInit {
               console.log(card);
             });                              
           }
-
         });
-    
       }
-     
    }
 
   onCancel() {
@@ -154,31 +151,30 @@ export class MakeEditComponent implements OnInit {
       // Just throwing away the changes
       this.onExit();
     }
-
   }
 
   isLive(index: number) {
     return (this.liveCard === index);
   }
-  // onEdit(index: number) {
-  //   this.liveCard = index;
-  //   document.getElementById("cardQuestion_" + index).focus();
-  // }
+  
   onExit() {
     this.router.navigate(['./makeflashcards/', 'start']);
   }
 
   onAddCard() {
-    // (<FormArray>this.deckForm.get('cards')).push(
-      
-      (<FormArray>this.deckForm.get('cards')).insert((0),
-        new FormGroup({
+    // TBD Ask lisa - I'm trying to figure out how to use a callback
+    // or ng-change?? here so that setFocus only runs after the DOM is udated
+    // with the new card. Not sure how.
+  
+    (<FormArray>this.deckForm.get('cards')).insert((0),
+      new FormGroup({
         'side1': new FormControl(null, Validators.required),
         'side2': new FormControl(null, Validators.required)
       })
     );
-    // document.getElementById("cardQuestion_" + index).focus();
-    document.getElementsByTagName("textarea").focus();
+
+    // TBD not working - it puts focus on second item, not newest item
+    document.getElementsByTagName("textarea")[0].focus();
   }
 
   onDeleteCard(index: number) {
@@ -218,7 +214,5 @@ export class MakeEditComponent implements OnInit {
       'cards': cardsForm
       });  
     this.readyForm = true;        
-    } 
- 
-
+  } 
 }

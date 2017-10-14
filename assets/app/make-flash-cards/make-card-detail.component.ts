@@ -5,7 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 // import { DeckService } from "../shared/deck.service";
 // import { UtilsService } from "../shared/utils.service";
 
-// DMZ - I'm trying to adapt from make-detail
+// DMZ TBD - I THINK I CAN DROP ALL MAKE-CARD-DETAIL stuff/not using??
 import { Card } from "../models/card.model";
 import { CardService } from "../shared/card.service";
 import { UtilsService } from "../shared/utils.service";

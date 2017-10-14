@@ -35,13 +35,8 @@ ngOnInit() {
 									this.userName = this.authService.getUserName();
 									this.gravHash = this.authService.getGravHash();
 									// Now route to the deck-list
-									// this.router.navigate(['./', 'decklist', UserId], {relativeTo: this.route});
-									console.log(this.route);
-
-									// DMZ tried to use <app-deck-list> in p-f-c.html instead of <router-outlet>
-									// & thies navigate to work around problem if user is already IN play cards 
-									// and they clicked on play cards in menu -- something not working when I tried it this way, don't know what
 									this.router.navigate(['./', 'decklist', UserId], {relativeTo: this.route});
+									console.log(this.route);
 							}
 					);
 	}  
