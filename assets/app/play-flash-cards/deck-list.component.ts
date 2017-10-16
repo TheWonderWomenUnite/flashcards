@@ -49,6 +49,7 @@ export class DeckListComponent implements OnInit {
             .subscribe((params: Params) =>{
                 // Get the user Id from the route parameters
                 this.userId = params['id'];
+				console.log("Hi from deck-list, id = "+this.userId);
                 if (this.userId) {
                     this.deckService.getDecks(this.userId)
                         .subscribe(
@@ -66,11 +67,6 @@ export class DeckListComponent implements OnInit {
                         });
                 }
             });            
-    }
-
-    onGoBack() {
-        // This component should have a back button that takes you 
-        // back to a general welcome screen
     }
 
     // onSortBy(sortOrder:string) {

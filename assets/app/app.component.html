@@ -1,5 +1,5 @@
 <!-- <div class="container-fluid"> -->
-<div (loggedIn)="onLoggedIn($event)">  
+<!-- <div (loggedIn)="onLoggedIn($event)">   -->
 
   <!-- TBD problem if you click on 'Play' when you are already in 'Play' -->
 <!--navbar  -->
@@ -32,73 +32,14 @@
 <nav [ngClass]="{'sidebar': true, 'd-lg-none': true, 'hidden': hideSidebar}">
   <a (click)="onPlayCards()" class="sidebarItem">PLAY FLASH CARDS</a>
   <a (click)="onMakeCards()" class="sidebarItem">MAKE FLASH CARDS</a>
-  <a class="sidebarItem" [routerLink]="['/auth']">LOG IN/SIGN UP</a>
+  <a *ngIf="isLoggedIn" [routerLink]="['/auth/logout']" class="sidebarItem">LOG OUT</a>
+  <a *ngIf="!isLoggedIn" [routerLink]="['/auth/signin']" class="sidebarItem">LOG IN/SIGN UP</a>
 </nav>
   
 <br>
 <br>
+<router-outlet></router-outlet>
 
-
-
-    <!-- Navbar (sit on top) -->
-     <!-- <div class="w3-top">
-      <div class="w3-bar w3-text-white" id="myNavbar">
-        <p class="w3-bar-item w3-wide">ULTIMATE FLASH CARDS</p>  -->
-
-        <!-- Right-sided navbar links -->
-         <!-- <div class="w3-right w3-hide-small  w3-hide-medium">
-          <a [routerLink]="['/auth']" class="w3-bar-item w3-button" id="main_login">LOG IN/SIGN UP</a>
-          <a routerLink="/makeflashcards" class="w3-bar-item w3-button" id="main_make"><i class="fa fa-pencil-square-o"></i> MAKE FLASH CARDS</a>
-          <a routerLink="/playflashcards" class="w3-bar-item w3-button" id="main_play"><i class="fa fa-th"></i> PLAY FLASH CARDS</a>
-        </div>  -->
-        <!-- Hide right-floated links on small screens and replace them with a menu icon -->
-  
-         <!-- <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large" id="menu_icon">
-          <i class="fa fa-bars"></i>
-        </a>  -->
-       <!-- </div>
-    </div>  -->
-  
-    <!--  Welcome Section-->
-    <!-- Want this to close when user makes selection. would this need to be separate component? -->
-    <!-- <div id="welcome" class="container w3-display-left w3-text-white">
-      <h1>Welcome to Ultimate Flash Cards!</h1>
-    </div> -->
-  
-  
-      <!-- <h2>Welcome to Ultimate FlashCards!</h2>
-    <div class="row">
-      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-        <ul class="nav nav-tabs">  -->
-        <!-- Need to use property binding on routerLinkActiveOptions because it takes a javascript 
-              object, not a string -->
-        <!-- [routerLinkActiveOptions]="{exact: true}"> -->
-          <!-- <li role="presentation" 
-            routerLinkActive="active">
-            <a [routerLink]="['/auth']">Authentication</a>
-          </li>
-          <li role="presentation" 
-            routerLinkActive="active">
-            <a routerLink="/makeflashcards">Make Flash Cards</a>
-          </li> 
-          <li role="presentation" 
-            routerLinkActive="active">
-            <a routerLink="/playflashcards">Play Flash Cards</a>
-          </li>
-        </ul>
-      </div>
-    </div>    -->
-    <!-- <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2"> -->
-    <router-outlet></router-outlet>
-
-<!-- TBD: for now, moved to deck-play
-but would be best to make footer service that's context sensitive... -->
-<!-- <footer class="footer navbar fixed-bottom">
-	<div class="container">
-		<p class="text-muted">stuff here</p>
-		<p class="text-muted">more stuff?</p>
-	</div>
-</footer> -->
-        
+       
   <!-- </div> -->
   <app-error></app-error>

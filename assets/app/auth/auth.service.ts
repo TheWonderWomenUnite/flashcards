@@ -2,15 +2,17 @@ import { Http, Response, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx'; // for .map
 import { Observable } from "rxjs";
-import { ErrorService } from '../errors/error.service';
+import { Subject } from 'rxjs/Subject';
 
+import { ErrorService } from '../errors/error.service';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { User } from '../models/user.model';
 
 @Injectable()
 export class AuthService {
-	private currentUser: User;
+	private currentUser: User;   
+	userChanged = new Subject<User>();
 
 	constructor(private http: Http,
 				private errorService: ErrorService) {}
@@ -18,41 +20,67 @@ export class AuthService {
 	signup(user: User) {
 		const body = JSON.stringify(user);
 		const headers = new Headers({'Content-Type': 'application/json'});
-		console.log("about to return with post"+user);
-		console.log("Body = "+body);
 		return this.http.post('http://localhost:3000/user', body, {headers: headers})
 			.map((response: Response) => response.json())
 			.catch((error: Response) => {
-				console.log("Going to handleerror");
             	this.errorService.handleError(error.json());
             	return Observable.throw(error.json());
             });	
 	}
 
 	signin(user: User) {
+
 		const body = JSON.stringify(user);
 		const headers = new Headers({'Content-Type': 'application/json'});
 
 		return this.http.post('http://localhost:3000/user/signin', body, {headers: headers})
-			.map((response: Response) => response.json())
+			    .map((response: Response) => {
+				const responseObj = response.json();
+				localStorage.setItem('token', responseObj.token);
+				localStorage.setItem('UserId', responseObj.user._id);
+				const newUser = new User(
+					responseObj.user.email, 
+					responseObj.user.password,
+					responseObj.user.firstName,
+					responseObj.user.lastName);
+                this.currentUser = newUser;
+                this.userChanged.next(this.currentUser);
+				return this.currentUser;
+                
+			})
 			.catch((error: Response) => {
             	this.errorService.handleError(error.json());
             	return Observable.throw(error.json());
-            });	
+            });
 	}
 
 	logout() {
 		localStorage.clear();
+		const newUser = new User('','','','');
+        this.currentUser = newUser;
+		this.userChanged.next(this.currentUser);
 	}
 
 	getUserName() {
 		// Call this method in the callback for getUser to retrieve the 
 		// string that is the user's name
-		return this.currentUser.firstName+' '+this.currentUser.lastName;
+		if (this.isLoggedIn()) {
+			return this.currentUser.firstName+' '+this.currentUser.lastName;
+			}
+			else 
+			{
+				return null;
+			}
 	}
 
 	getUserEmail() {
-		return this.currentUser.email;
+		if (this.isLoggedIn()) {
+			return this.currentUser.email;
+		}
+		else 
+		{
+			return null;
+		}
 	}
 
 	getGravHash(): string {
@@ -66,23 +94,23 @@ export class AuthService {
         return this.http.get('http://localhost:3000/user/' + userId)
             .map((response: Response) => {
                 const userObj = response.json().obj;
-                const newUser = new User(userObj.email, 
+                const newUser = new User(
+					userObj.email, 
 					userObj.password,
 					userObj.firstName,
 					userObj.lastName);
                 this.currentUser = newUser;
-                console.log("getUser: currentUser is "+this.currentUser);
                 return this.currentUser;
-            });
-            /*
+            })
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json());
             });
-            */        
+                    
     }
 
 	isLoggedIn() {
-		return localStorage.getItem('token') != null;
+		const userId = localStorage.getItem('UserId');
+		return localStorage.getItem('UserId') != null;
 	}
 }

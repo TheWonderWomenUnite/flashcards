@@ -29,17 +29,14 @@ router.get('/', function (req, res, next) {
 router.get('/:userId', function (req, res, next) {
 
     var userId = req.params.userId;
-    console.log("User->get:going to call findbyId with userId: "+userId);
     User.findById(userId, function (err, user) {
         if (err) {
-            console.log("User->get:Got an error from the find");
             return res.status(500).json({
                 title: 'An error occurred',
                 error: err
             });
         }
-        console.log("User->get:Didnt get an error on the find");
-        console.log(user);
+
         res.status(200).json({
             message: 'Success',
             obj: user
@@ -95,11 +92,11 @@ router.post('/signin', function (req, res, next) {
     			error: {message: 'Invalid login credentials'}
     		}); 
     	}
-    	var token = jwt.sign({user: user}, 'secret', {expiresIn: 7200})
-    	res.status(200).json({
+    	var token = jwt.sign({user: user}, 'secret', {expiresIn: 7200});
+   		res.status(200).json({
     			message: 'Successful Login',
-    			token: token,
-    			userId: user._id
+				token: token,
+    			user: user
     		}); 
     });
 });

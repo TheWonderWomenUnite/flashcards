@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 
 export class SigninComponent implements OnInit {
 	// DMZ stuck on getting event emit to update main menu...
-	@Output() loggedIn = new EventEmitter<{status: boolean}>();
+	// @Output() loggedIn = new EventEmitter<{status: boolean}>();
 	myForm: FormGroup;
 
 	constructor(private authService: AuthService, private router: Router) {} 
@@ -24,15 +24,14 @@ export class SigninComponent implements OnInit {
 		this.authService.signin(user) 
 			.subscribe(
 				data => {
-					localStorage.setItem('token', data.token);
-					localStorage.setItem('UserId', data.userId);
-					
+				console.log("Successful login!, data: "+data);
+				
 					// TBD/Q for Lisa: I'm trying to implement Udemy's example #63 
 					// here but I can't figure out how to get
 					// app.component to receive the event so that 'LOG IN/SIGN UP'
 					// will toggle to 'LOG OUT' once user is successfully logged in
-					console.log('about to call loggedIn.emit from signin.components.ts')
-					this.loggedIn.emit({status: true});
+					//console.log('about to call loggedIn.emit from signin.components.ts')
+					// this.loggedIn.emit({status: true});
 
 					// After a successful login maybe it should go 
 					// To the play flashcards screen?

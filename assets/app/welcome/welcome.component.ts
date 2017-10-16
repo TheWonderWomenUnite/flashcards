@@ -10,7 +10,7 @@ export class WelcomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  	console.log("Hi from WelcomeComponent");
+
   }
 
 }
