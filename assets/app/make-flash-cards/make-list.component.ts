@@ -21,8 +21,11 @@ export class MakeListComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     // When display is block, display the add deck modal
     display = 'none';
-    //DMZ to add
-    sortingBy = 1;
+
+    // TBD change to global var so that user sees same order whether they're
+    // in make or play. (same code in both make-list and deck-list for now)
+    // Initially sort by category
+    sortBy = 1;
 
     // Attributes for the "sort by" drop down
     optionChoice: number[];
@@ -58,17 +61,17 @@ export class MakeListComponent implements OnInit, OnDestroy {
         console.log("UserId = "+this.userId);
         this.subscription = this.deckService.decksChanged.
             subscribe((decks: Deck[]) => {
-                // DMZ call sort decks fcn with param
-                // best add sort to deck.service then you can call from both make & play
             console.log("Hi from decksChanged");
             this.decks = decks;
+            this.sortDecks(this.sortBy);
             });
         this.deckService.getDecks(this.userId)
             .subscribe(
             (decks: Deck[]) => {
             console.log(decks);
             this.decks = decks;
-            });
+            this.sortDecks(this.sortBy);
+        });
  
     }
 
@@ -132,23 +135,25 @@ export class MakeListComponent implements OnInit, OnDestroy {
 
 //     }
  
-
-    // TBD would be nice to have this code in one place -
-    // currently it's in make-list and deck-list
     onSortBy() {
-        console.log("Sort decks by " + this.optionChoice);
+        console.log("Sort decks by " + this.optionChoice[0]);
         console.log(this.decks);
-        this.sortingBy = this.optionChoice[0];
+        this.sortBy = this.optionChoice[0];
+        this.sortDecks(this.sortBy);
+    }
 
-        // First sort deck by deck name so that sorts within switch cases
-        // below will sort by name within category/favs etc
-        // (otherwise you have to use more complex/less readable sorts in switch below)
+   // TBD would be best to have this code only in deck service -
+    // currently it's in 2 places: make-list and deck-list
+    private sortDecks(sortBy) {
+
+        // First sort deck by deck name within category(so that decks will sort 
+        // by cat + name for both the sort by 'Categ' option and 'Favs' option)
         this.decks.sort((a, b) => a.name.localeCompare(b.name));
-//create fcn sort decks & send param for sortby method
-        switch(this.optionChoice[0]) {
+        this.decks.sort((a, b) => a.category.localeCompare(b.category));
+
+        switch(sortBy) {
             case 1:
-                // Sort decks by category
-                this.decks.sort((a, b) => a.category.localeCompare(b.category));
+                // Already done above
                 break;
             case 2:
                 // Sort decks by last played
@@ -161,12 +166,10 @@ export class MakeListComponent implements OnInit, OnDestroy {
                 ));
                 break;
             case 3:
-                // Sort decks by favorites
+                // Sort decks by favorites (note that within favs decks
+                // are sorted by cat + name - see above)
                 this.decks.sort((a, b) => (!a.favorite && b.favorite) ? 1 : 0 );
                 break;
-            }    
-
-        }
-
-
+        }       
+    }
 }
