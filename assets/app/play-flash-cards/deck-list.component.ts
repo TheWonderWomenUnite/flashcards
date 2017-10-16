@@ -22,6 +22,7 @@ export class DeckListComponent implements OnInit {
 
     // Attributes for the "sort by" drop down
     optionChoice: number[];
+
     sortOptions: IMultiSelectOption[];
     sortTexts: IMultiSelectTexts = { defaultTitle: 'Sort By' };
 
@@ -37,12 +38,13 @@ export class DeckListComponent implements OnInit {
     }
 
     ngOnInit() {
+	
         this.sortOptions = [
             { id: 1, name: 'Category' },
             { id: 2, name: 'Last Played' },
             { id: 3, name: 'Favorites' },
         ];
-
+	
         // Get the userId from the params, if there is no userId it is 
         // anonymous play
         this.route.params
@@ -69,9 +71,8 @@ export class DeckListComponent implements OnInit {
             });            
     }
 
-    // onSortBy(sortOrder:string) {
     onSortBy() {
-        console.log("Sort decks by "+this.optionChoice);
+        console.log("Sort decks by "+this.optionChoice[0]);
         switch(this.optionChoice[0]) {
             case 1:
                 // Sort decks by category

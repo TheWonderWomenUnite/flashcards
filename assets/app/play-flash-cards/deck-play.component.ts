@@ -34,19 +34,6 @@ export class DeckPlayComponent implements OnInit {
   progressPct = 0;
   anonymousPlay = false;
 
-  // Q for Lisa: for now I used font-awesome icons instead of these png files because they 
-  // were quickest for me to implement the sizing
-  // Let me know if you prefer these imgs and I will figure out sizing them in footer, etc
-  //const backButton = "../img/back_button.png";
-  //const thumbsUp = "../img/thumbsUp.png";
-  //const thumbsDown = "../img/thumbsDown.png";
-
-  //const questionMark = "../img/questionMark.png";
-  //const rightCaret = "../img/right_caret.png";
-  //const leftCaret = "../img/left_caret.png";
-  //displayBar = "";
-  //displayHeart = "";
-
 	constructor(private route: ActivatedRoute,
               private router: Router,
               private cardService: CardService,
@@ -70,7 +57,7 @@ export class DeckPlayComponent implements OnInit {
             // we have our cards, shuffle them and initialize values 
             // to start the game
          		this.cards = cards;
-            this.deckShuffle();
+           this.deckShuffle();
          		console.log(this.cards);
             this.faceUp = true;
             //this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
@@ -95,7 +82,7 @@ export class DeckPlayComponent implements OnInit {
         });        
         console.log('at end of ngOnInit and hideThumbs is ' + this.hideThumbs);
   	}
-
+	
   goNext(forward: boolean) {
     // This is how you go forward or back in the deck. For right now, if you reach 
     // the end of the deck and you are going forward, loop back to the beginning.
@@ -142,17 +129,17 @@ export class DeckPlayComponent implements OnInit {
     }
     console.log('at end of goNext and hideThumbs is ' + this.hideThumbs)
   }
-
+  
   onSlideLeft() {
     // User pressed the <- arrow
-    this.goNext(false);
+    //this.goNext(false);
   } 
 
   onSlideRight() {
     // User pressed the -> arrow
-    this.goNext(true);
+    //this.goNext(true);
   } 
-
+  
   showAnswer() {
     this.showASide = true;
     this.showQSide = false;
@@ -239,7 +226,7 @@ export class DeckPlayComponent implements OnInit {
       });
 
     }
-
+	
   deckShuffle() {
     // Shuffle the deck so the cards are presented in a different order
     // than they are in the database
@@ -254,5 +241,5 @@ export class DeckPlayComponent implements OnInit {
       }
 
     }
-
+	
 }

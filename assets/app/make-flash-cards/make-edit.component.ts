@@ -140,7 +140,7 @@ export class MakeEditComponent implements OnInit {
     }  
   }
 
-  private onModalResponse(answer:boolean) {
+  onModalResponse(answer:boolean) {
     // Get rid of the modal
     this.display = 'none';
     if (answer) {

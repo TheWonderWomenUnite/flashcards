@@ -45,7 +45,7 @@ export class MakeDetailComponent {
     this.displayAddDeck = 'block';
 	}
 
-	private onAddNewDeck(answer:number) {
+	onAddNewDeck(answer:number) {
     // Get rid of the modal
 		this.displayAddDeck = 'none';
 		console.log('adding/cloning deck for: ' + this.newCategory + ' and ' + this.newDeckName);
@@ -75,7 +75,7 @@ export class MakeDetailComponent {
     this.display = 'block';
   }
 
-  private onModalResponse(answer:boolean) {
+  onModalResponse(answer:boolean) {
     // Get rid of the modal
 		this.display = 'none';
 		console.log('onModalResponse just called');
