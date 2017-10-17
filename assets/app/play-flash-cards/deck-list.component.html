@@ -1,12 +1,14 @@
 <div class="deckSelect container">
 	<div class="topOfDecks row">
-		<ss-multiselect-dropdown 
-			[options]="sortOptions" 
-			[texts]="sortTexts" 
-			[settings]="dropSettings" 
-			[(ngModel)]="optionChoice" 
-			(ngModelChange)="onSortBy()">
-		</ss-multiselect-dropdown>
+		<div class="sortBy">
+			<ss-multiselect-dropdown 
+				[options]="sortOptions" 
+				[texts]="sortTexts" 
+				[settings]="dropSettings" 
+				[(ngModel)]="optionChoice" 
+				(ngModelChange)="onSortBy($event)">
+			</ss-multiselect-dropdown>
+		</div>
 	</div>
 </div>
 

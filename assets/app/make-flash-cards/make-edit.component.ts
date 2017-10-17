@@ -6,6 +6,9 @@ import { Deck } from "../models/deck.model";
 import { Card } from "../models/card.model";
 import { DeckService } from "../shared/deck.service";
 import { CardService } from "../shared/card.service";
+import { MakeCardDetailComponent } from './make-card-detail.component';
+
+
 
 @Component({
   selector: 'app-make-edit',
@@ -21,6 +24,7 @@ export class MakeEditComponent implements OnInit {
   cards: Card[];
   id: string;
   display = 'none'; // For the are you sure modal
+  liveCard = 0;
 
 	constructor(private route: ActivatedRoute,
       			  private deckService: DeckService,
@@ -38,6 +42,8 @@ export class MakeEditComponent implements OnInit {
               this.cardService.getCards(this.deck.deckId)
                 .subscribe((cards: Card[]) => {
                 this.cards = cards; 
+                this.liveEditArr = Array(cards.length).fill(false);
+                console.log('in init and live');
                 console.log("have the cards, calling initform");
                 this.initForm(); 
                 });
@@ -124,11 +130,8 @@ export class MakeEditComponent implements OnInit {
               console.log(card);
             });                              
           }
-
         });
-    
       }
-     
    }
 
   onCancel() {
@@ -148,21 +151,30 @@ export class MakeEditComponent implements OnInit {
       // Just throwing away the changes
       this.onExit();
     }
-
   }
 
+  isLive(index: number) {
+    return (this.liveCard === index);
+  }
+  
   onExit() {
     this.router.navigate(['./makeflashcards/', 'start']);
   }
 
   onAddCard() {
-
-    (<FormArray>this.deckForm.get('cards')).push(
+    // TBD Ask lisa - I'm trying to figure out how to use a callback
+    // or ng-change?? here so that setFocus only runs after the DOM is udated
+    // with the new card. Not sure how.
+  
+    (<FormArray>this.deckForm.get('cards')).insert((0),
       new FormGroup({
         'side1': new FormControl(null, Validators.required),
         'side2': new FormControl(null, Validators.required)
       })
     );
+
+    // TBD not working - it puts focus on second item, not newest item
+    document.getElementsByTagName("textarea")[0].focus();
   }
 
   onDeleteCard(index: number) {
@@ -171,6 +183,7 @@ export class MakeEditComponent implements OnInit {
   }
 
   getControls() {
+    console.log((<FormArray>this.deckForm.get('cards')).controls);
     return (<FormArray>this.deckForm.get('cards')).controls;
   }
 
@@ -201,7 +214,5 @@ export class MakeEditComponent implements OnInit {
       'cards': cardsForm
       });  
     this.readyForm = true;        
-    } 
- 
-
+  } 
 }

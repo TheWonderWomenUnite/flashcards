@@ -20,6 +20,11 @@ export class DeckListComponent implements OnInit {
     decks: Deck[];
     userId: string;
 
+    // TBD change to global var so that user sees same order whether they're
+    // in make or play. (same code in both make-list and deck-list for now)
+    // Initially sort by category
+    sortBy = 1;    
+
     // Attributes for the "sort by" drop down
     optionChoice: number[];
 
@@ -58,6 +63,7 @@ export class DeckListComponent implements OnInit {
                             (decks: Deck[]) => {
                             console.log(decks);
                             this.decks = decks;
+                            this.sortDecks(this.sortBy);                            
                         });
                 }
                 else {
@@ -66,24 +72,60 @@ export class DeckListComponent implements OnInit {
                             (decks: Deck[]) => {
                             console.log(decks);
                             this.decks = decks;
+                            this.sortDecks(this.sortBy);                            
                         });
                 }
             });            
     }
 
+    onGoBack() {
+        // This component should have a back button that takes you 
+        // back to a general welcome screen
+    }
+
     onSortBy() {
-        console.log("Sort decks by "+this.optionChoice[0]);
-        switch(this.optionChoice[0]) {
+        console.log("Sort decks by " + this.optionChoice[0]);
+        console.log(this.decks);
+        this.sortBy = this.optionChoice[0];
+        this.sortDecks(this.sortBy);
+    }
+
+   // TBD would be best to have this code only in deck service -
+    // currently it's in 2 places: make-list and deck-list
+    private sortDecks(sortBy) {
+
+        // First sort deck by deck name within category(so that decks will sort 
+        // by cat + name for both the sort by 'Categ' option and 'Favs' option)
+        this.decks.sort((a, b) => a.name.localeCompare(b.name));
+        this.decks.sort((a, b) => a.category.localeCompare(b.category));
+
+        switch(sortBy) {
             case 1:
-                // Sort decks by category
+                // Already done above
                 break;
             case 2:
                 // Sort decks by last played
+                this.decks.sort((a, b) => {
+                    if (a.lastPlayed === null && b.lastPlayed === null)
+                        return 0;
+                    if (a.lastPlayed === null)
+                        return 1;
+
+                    // this returns NaN
+                    console.log(b.lastPlayed.valueOf() - a.lastPlayed.valueOf());
+                    // return (b.lastPlayed.valueOf() - a.lastPlayed.valueOf());
+
+                    // this not working for prod build, but working in dev;
+                    return (Date.parse(b.lastPlayed) - Date.parse(a.lastPlayed));
+                        
+                });
                 break;
+
             case 3:
-                // Sort decks by favorites
+                // Sort decks by favorites (note that within favs decks
+                // are sorted by cat + name - see above)
+                this.decks.sort((a, b) => (!a.favorite && b.favorite) ? 1 : 0 );
                 break;
-        }
+        }       
     }
-    
 }

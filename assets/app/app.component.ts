@@ -16,7 +16,13 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   title = 'app works!';
   hideSidebar = true;
+<<<<<<< HEAD
   subscription: Subscription;
+=======
+  userName: string = '';
+	gravHash: string = '';
+
+>>>>>>> edit_cards
 
 	constructor(private route: ActivatedRoute,
 				private router: Router,
@@ -31,6 +37,7 @@ export class AppComponent implements OnInit {
         });
 	
   }
+
 
   // TBD - Q for Lisa: trying to get event emitter from signin to call this
   //onLoggedIn(loginData: {status: boolean}) {

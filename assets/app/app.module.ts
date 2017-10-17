@@ -20,6 +20,7 @@ import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.com
 import { MakeListComponent } from './make-flash-cards/make-list.component';
 import { MakeDetailComponent } from './make-flash-cards/make-detail.component';
 import { MakeEditComponent } from './make-flash-cards/make-edit.component';
+import { MakeCardDetailComponent } from './make-flash-cards/make-card-detail.component';
 
 import { WelcomeComponent } from './welcome/welcome.component';
 
@@ -45,6 +46,7 @@ import { UtilsService } from './shared/utils.service';
     MakeListComponent,
     MakeDetailComponent,
     MakeEditComponent,
+    MakeCardDetailComponent,
     AuthenticationComponent,
     LogoutComponent,
     SignupComponent,
