@@ -23,6 +23,7 @@ export class MakeDetailComponent {
 	progressPct = 0;
 	newCategory = "";
 	newDeckName = "";
+	userId: string;
 
  	constructor(private deckService: DeckService,
  			        private utilsService: UtilsService,
@@ -30,7 +31,7 @@ export class MakeDetailComponent {
 			        private router: Router) { }
 
 	ngOnInit() {
-		// Go get the progress bar img string
+		this.userId = localStorage.getItem('UserId');
     if (this.deck) {
   		// this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
   		// this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
@@ -46,27 +47,30 @@ export class MakeDetailComponent {
 	}
 
 	onAddNewDeck(answer:number) {
-    // Get rid of the modal
+	    // Get rid of the modal
 		this.displayAddDeck = 'none';
 		console.log('adding/cloning deck for: ' + this.newCategory + ' and ' + this.newDeckName);
 
 		// Add a new deck
-    if (answer === 1) {
-			// TBD ask Lisa for help here
-      // Add general info for new deck
-      this.deckService.addDeck(this.deck).subscribe(
-        (deck: Deck) => {
-          console.log(deck);
-				// then either call onEdit() or something close to this router & require at least one card to be added?
-				// TBD think this will need same url as onEdit once that works...
-				//this.router.navigate(['./makeflashcards', 'edit', this.deck.deckId]);
-			});
+		if (answer === 1) {
+			const newDeck = new Deck(this.newDeckName,               
+			true,
+			this.newCategory,
+			Date.now(),
+			0,
+			false,
+			this.userId); 
+		this.deckService.addDeck(newDeck).subscribe(
+			(deck: Deck) => {
+				console.log(deck);
+				this.router.navigate(['./makeflashcards', 'edit', deck.deckId]);
+				});
 						
 			// Clone a deck
-		} else if (answer === 2) {
+			} else if (answer === 2) {
 			// TBD check with lisa on what to incorp
 			console.log('user wants to clone a deck');
-		}
+			}
 
   }
 
