@@ -95,7 +95,7 @@ export class MakeListComponent implements OnInit, OnDestroy {
                 // Already done above
                 break;
             case 2:
-                // Sort decks by last played - Lisa as of 10/17
+                // Sort decks by last played
                 this.decks.sort((a, b) => {
                     if (a.lastPlayed === null && b.lastPlayed === null)
                         return 0;

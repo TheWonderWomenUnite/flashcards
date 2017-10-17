@@ -110,14 +110,13 @@ export class DeckListComponent implements OnInit {
                         return 0;
                     if (a.lastPlayed === null)
                         return 1;
-
-                    // this returns NaN
-                    console.log(b.lastPlayed.valueOf() - a.lastPlayed.valueOf());
-                    // return (b.lastPlayed.valueOf() - a.lastPlayed.valueOf());
-
-                    // this not working for prod build, but working in dev;
-                    return (Date.parse(b.lastPlayed) - Date.parse(a.lastPlayed));
-                        
+                    if (b.lastPlayed > a.lastPlayed) {
+                        return 1;
+                    }
+                    else {
+                        return -1;
+                    }
+                
                 });
                 break;
 
