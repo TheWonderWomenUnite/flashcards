@@ -20,6 +20,7 @@ export class MakeEditComponent implements OnInit {
   deck: Deck;
   cards: Card[];
   id: string;
+  userId: string;
   display = 'none'; // For the are you sure modal
 
 	constructor(private route: ActivatedRoute,
@@ -28,6 +29,7 @@ export class MakeEditComponent implements OnInit {
         		  private router: Router) { }
 
 	ngOnInit() {
+		this.userId = localStorage.getItem('UserId');
   		this.route.params
   			.subscribe(
   				(params: Params) =>{
@@ -71,8 +73,8 @@ export class MakeEditComponent implements OnInit {
     } else {
       // Creating a new deck, initialize all values except the ones the user
       // can fill in, ie name and category  
-      const UserId = localStorage.getItem('UserId');
-      console.log("UserId = "+UserId);
+      
+      console.log("UserId = "+userId);
       const editDeck = new Deck(
         this.deckForm.value.name, 
         true,
@@ -80,7 +82,7 @@ export class MakeEditComponent implements OnInit {
         null,
         0,
         false,
-        UserId,
+        userId,
       );
 
       this.deckService.addDeck(editDeck).subscribe(
@@ -124,10 +126,14 @@ export class MakeEditComponent implements OnInit {
               console.log(card);
             });                              
           }
+		  this.onExit();
 
         });
     
       }
+	  else {
+	  	 this.onExit();
+	  }
      
    }
 
@@ -152,7 +158,8 @@ export class MakeEditComponent implements OnInit {
   }
 
   onExit() {
-    this.router.navigate(['./makeflashcards/', 'start']);
+	this.router.navigate(['./makeflashcards', 'makelist', this.userId]);
+     
   }
 
   onAddCard() {
