@@ -6,7 +6,6 @@ import { Deck } from "../models/deck.model";
 import { Card } from "../models/card.model";
 import { DeckService } from "../shared/deck.service";
 import { CardService } from "../shared/card.service";
-import { MakeCardDetailComponent } from './make-card-detail.component';
 
 
 
