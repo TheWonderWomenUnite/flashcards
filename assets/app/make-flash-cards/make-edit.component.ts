@@ -74,7 +74,6 @@ export class MakeEditComponent implements OnInit {
       // Creating a new deck, initialize all values except the ones the user
       // can fill in, ie name and category  
       
-      console.log("UserId = "+userId);
       const editDeck = new Deck(
         this.deckForm.value.name, 
         true,
@@ -82,7 +81,7 @@ export class MakeEditComponent implements OnInit {
         null,
         0,
         false,
-        userId,
+        this.userId,
       );
 
       this.deckService.addDeck(editDeck).subscribe(

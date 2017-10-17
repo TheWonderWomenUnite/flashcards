@@ -56,7 +56,7 @@ export class MakeDetailComponent {
 			const newDeck = new Deck(this.newDeckName,               
 			true,
 			this.newCategory,
-			Date.now(),
+			null,
 			0,
 			false,
 			this.userId); 

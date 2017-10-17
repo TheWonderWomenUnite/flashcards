@@ -90,7 +90,13 @@ export class MakeListComponent implements OnInit, OnDestroy {
 						return 0;
 					if (a.lastPlayed === null)
 						return 1;
-					return (b.lastPlayed.valueOf() - a.lastPlayed.valueOf());
+					if (b.lastPlayed > a.lastPlayed) {
+						return 1;
+					}
+					else {
+						return -1;
+					}
+					
 					});
                 break;
             case 3:
