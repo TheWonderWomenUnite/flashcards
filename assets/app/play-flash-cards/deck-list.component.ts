@@ -102,14 +102,22 @@ export class DeckListComponent implements OnInit {
                 break;
             case 2:
                 // Sort decks by last played
-                this.decks.sort((a, b) => 
-                        ((a.lastPlayed === null) && (b.lastPlayed === null)) 
-                            ? 0
-                            : ((a.lastPlayed === null) 
-                                ? 1 
-                                : (Date.parse(b.lastPlayed) - Date.parse(a.lastPlayed))
-                ));
+                this.decks.sort((a, b) => {
+                    if (a.lastPlayed === null && b.lastPlayed === null)
+                        return 0;
+                    if (a.lastPlayed === null)
+                        return 1;
+
+                    // this returns NaN
+                    console.log(b.lastPlayed.valueOf() - a.lastPlayed.valueOf());
+                    // return (b.lastPlayed.valueOf() - a.lastPlayed.valueOf());
+
+                    // this not working for prod build, but working in dev;
+                    return (Date.parse(b.lastPlayed) - Date.parse(a.lastPlayed));
+                        
+                });
                 break;
+
             case 3:
                 // Sort decks by favorites (note that within favs decks
                 // are sorted by cat + name - see above)
