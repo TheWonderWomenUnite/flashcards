@@ -85,15 +85,11 @@ export class MakeListComponent implements OnInit, OnDestroy {
     // currently it's in 2 places: make-list and deck-list
     private sortDecks(sortBy) {
 
-        // First sort deck by deck name within category(so that decks will sort 
-        // by cat + name for both the sort by 'Categ' option and 'Favs' option)
-        this.decks.sort((a, b) => a.name.localeCompare(b.name));
-        this.decks.sort((a, b) => a.category.localeCompare(b.category));
-
         switch(sortBy) {
             case 1:
-                // Already done above
+                this.decks.sort((a, b) => a.category.localeCompare(b.category));
                 break;
+
             case 2:
                 // Sort decks by last played
                 this.decks.sort((a, b) => {
@@ -110,10 +106,18 @@ export class MakeListComponent implements OnInit, OnDestroy {
                 
                 });
                 break;
+
             case 3:
-                // Sort decks by favorites (note that within favs decks
-                // are sorted by cat + name - see above)
-                this.decks.sort((a, b) => (!a.favorite && b.favorite) ? 1 : 0 );
+                // Sort decks by favorites
+                this.decks.sort((a, b) => {
+                    if (a.favorite && b.favorite) {
+                        return 0;
+                    } else if (!a.favorite && b.favorite) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                });
                 break;
         }       
     }
