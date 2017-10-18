@@ -78,11 +78,6 @@ export class DeckListComponent implements OnInit {
             });            
     }
 
-    onGoBack() {
-        // This component should have a back button that takes you 
-        // back to a general welcome screen
-    }
-
     onSortBy() {
         console.log("Sort decks by " + this.optionChoice[0]);
         console.log(this.decks);
