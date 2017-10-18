@@ -22,6 +22,7 @@ export class MakeEditComponent implements OnInit {
   deck: Deck;
   cards: Card[];
   id: string;
+  userId: string;
   display = 'none'; // For the are you sure modal
   liveCard = 0;
 
@@ -31,6 +32,7 @@ export class MakeEditComponent implements OnInit {
         		  private router: Router) { }
 
 	ngOnInit() {
+      this.userId = localStorage.getItem('UserId');
   		this.route.params
   			.subscribe(
   				(params: Params) =>{
@@ -41,8 +43,8 @@ export class MakeEditComponent implements OnInit {
               this.cardService.getCards(this.deck.deckId)
                 .subscribe((cards: Card[]) => {
                 this.cards = cards; 
-                this.liveEditArr = Array(cards.length).fill(false);
-                console.log('in init and live');
+                // this.liveEditArr = Array(cards.length).fill(false);
+                // console.log('in init and live');
                 console.log("have the cards, calling initform");
                 this.initForm(); 
                 });
@@ -76,8 +78,7 @@ export class MakeEditComponent implements OnInit {
     } else {
       // Creating a new deck, initialize all values except the ones the user
       // can fill in, ie name and category  
-      const UserId = localStorage.getItem('UserId');
-      console.log("UserId = "+UserId);
+
       const editDeck = new Deck(
         this.deckForm.value.name, 
         true,
@@ -85,7 +86,7 @@ export class MakeEditComponent implements OnInit {
         null,
         0,
         false,
-        UserId,
+        this.userId,
       );
 
       this.deckService.addDeck(editDeck).subscribe(
@@ -129,9 +130,12 @@ export class MakeEditComponent implements OnInit {
               console.log(card);
             });                              
           }
+          this.onExit();
         });
-      }
-   }
+    } else {
+      this.onExit();
+    }
+  }
 
   onCancel() {
     // Ask if they want to leave if they have made changes
@@ -152,28 +156,25 @@ export class MakeEditComponent implements OnInit {
     }
   }
 
-  isLive(index: number) {
-    return (this.liveCard === index);
-  }
+  // isLive(index: number) {
+  //   return (this.liveCard === index);
+  // }
   
   onExit() {
-    this.router.navigate(['./makeflashcards/', 'start']);
+    this.router.navigate(['./makeflashcards', 'makelist', this.userId]);     
   }
 
   onAddCard() {
-    // TBD Ask lisa - I'm trying to figure out how to use a callback
-    // or ng-change?? here so that setFocus only runs after the DOM is udated
-    // with the new card. Not sure how.
-  
+    // Ask Lisa - any issue that I changed this to insert(0) to show at front of list?
+    // Lisa had:
+    // (<FormArray>this.deckForm.get('cards')).push(
+    
     (<FormArray>this.deckForm.get('cards')).insert((0),
       new FormGroup({
         'side1': new FormControl(null, Validators.required),
         'side2': new FormControl(null, Validators.required)
       })
     );
-
-    // TBD not working - it puts focus on second item, not newest item
-    document.getElementsByTagName("textarea")[0].focus();
   }
 
   onDeleteCard(index: number) {
@@ -182,7 +183,6 @@ export class MakeEditComponent implements OnInit {
   }
 
   getControls() {
-    console.log((<FormArray>this.deckForm.get('cards')).controls);
     return (<FormArray>this.deckForm.get('cards')).controls;
   }
 

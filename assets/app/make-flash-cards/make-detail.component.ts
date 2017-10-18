@@ -1,6 +1,8 @@
 import { Component, Input } from "@angular/core";
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
+import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
+
 import { Deck } from "../models/deck.model";
 import { DeckService } from "../shared/deck.service";
 import { UtilsService } from "../shared/utils.service";
@@ -23,6 +25,7 @@ export class MakeDetailComponent {
 	progressPct = 0;
 	newCategory = "";
 	newDeckName = "";
+	userId: string;
 
  	constructor(private deckService: DeckService,
  			        private utilsService: UtilsService,
@@ -30,7 +33,8 @@ export class MakeDetailComponent {
 			        private router: Router) { }
 
 	ngOnInit() {
-		// Go get the progress bar img string
+		this.userId = localStorage.getItem('UserId');
+
     if (this.deck) {
 	  	this.progressPct = this.deck.progressBar;
 		  this.isFavorite = this.deck.favorite;
@@ -50,23 +54,19 @@ export class MakeDetailComponent {
 
 		// Add a new deck
     if (answer === 1) {
-			// TBD not working. Ask Lisa for help here - 
-			// Should userId or something be passed into addDeck below?
-			// As is, the value of 'this.deck' is undefined.
-			// Not sure if an object with categ, deck name & userId should be passed in or what??
-		
-			console.log('about to call deckService.addDeck and passing in this.deck:')
-			console.log(this.deck);
-
-			this.deckService.addDeck(this.deck).subscribe(
-        (deck: Deck) => {
-          console.log(deck);
-				// then either call onEdit() or something close to this router & require at least one card to be added?
-				// or will deck list immed refresh to show new deck?
-				// TBD think this will need same url as onEdit once that works...
-				this.router.navigate(['./makeflashcards', 'edit', this.deck.deckId]);
-			});
-						
+			const newDeck = new Deck(this.newDeckName,               
+				true,
+				this.newCategory,
+				null,
+				0,
+				false,
+				this.userId); 
+			this.deckService.addDeck(newDeck).subscribe(
+				(deck: Deck) => {
+					console.log(deck);
+					this.router.navigate(['./makeflashcards', 'edit', deck.deckId]);
+					});
+											
 			// Clone a deck
 		} else if (answer === 2) {
 			// TBD check with lisa on what to incorp
