@@ -108,6 +108,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)="onAddNewDeck(1)">Add New Deck</button>
         <button type="button" class="btn btn-default" (click)="onAddNewDeck(2)">Clone a Deck</button>
+        <ss-multiselect-dropdown *ngIf="cloneDrop" [options]="cloneDeckList" [texts]="cloneTexts" [settings]="dropSettings" [(ngModel)]="cloneChoice" (ngModelChange)="onClone($event)"></ss-multiselect-dropdown>
         <button type="button" class="btn btn-default" (click)="onAddNewDeck(3)">Cancel</button>
       </div>
     </div>

@@ -1,5 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { ActivatedRoute, Params, Router } from '@angular/router';
+// check with Lisa - do I need to import subscription?
+//import { Subscription } from 'rxjs/subscription';
 
 import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 
@@ -14,18 +16,33 @@ import { UtilsService } from "../shared/utils.service";
 })
 
 export class MakeDetailComponent {
-  @Input() deck: Deck;
+	@Input() deck: Deck;
+	
+// check with Lisa - are these needed?
+	// cloneDecks: Deck[];
+	// subscription: Subscription;
+
 	display = 'none';
 	displayAddDeck = 'none';
-
-  displayBar = "";
-	displayHeart = "";
 	isFavorite = false;
 	favTitle = "";
 	progressPct = 0;
 	newCategory = "";
 	newDeckName = "";
 	userId: string;
+
+	// When cloneDrop is true, display the dropdown to choose a deck to clone
+	cloneDrop: boolean = false;
+	// ask Lisa - I think this needs to be string for deck id
+	cloneChoice: number[];
+	cloneDeckList: IMultiSelectOption[];
+	cloneTexts: IMultiSelectTexts = { defaultTitle: 'Deck to Clone' };
+
+	// These settings limit dropdown to one choice (for both drop downs)
+	dropSettings: IMultiSelectSettings = {
+			selectionLimit: 1,
+			autoUnselect: true
+			};
 
  	constructor(private deckService: DeckService,
  			        private utilsService: UtilsService,
@@ -47,6 +64,13 @@ export class MakeDetailComponent {
 	}
 
 	onAddNewDeck(answer:number) {
+		// This function fires when the user has made a selection on 
+		// the add card modal. 
+		// Possible answers:
+		// 0) Cancel and do nothing 
+		// 1) User wants to create his own deck, route to the edit screen
+		// 2) User would like to clone one of the existing decks
+
 	    // Get rid of the modal
 		this.displayAddDeck = 'none';
 		console.log('adding/cloning deck for: ' + this.newCategory + ' and ' + this.newDeckName);
@@ -68,13 +92,30 @@ export class MakeDetailComponent {
 						
 			// Clone a deck
 			} else if (answer === 2) {
-			// TBD check with lisa on what to incorp
-			console.log('user wants to clone a deck');
+				console.log('user wants to clone a deck');
+
+				// Go to deckservice and get list of possible decks to clone 
+				// to populate the dropdown list should look like
+				console.log(this.cloneDeckList);
+				console.log("Going to call getUnownedDecks");
+				this.cloneDeckList = [];
+				this.deckService.getUnownedDecks()
+						.subscribe(
+						(decks: Deck[]) => {
+								console.log(decks);
+								for (let deck of decks) {
+										const deckName = deck.category+'-'+deck.name;
+										this.cloneDeckList.push({id:deck.deckId, name:deckName});  
+										}
+								// Make the dropdown list show so the user can pick 
+								// a deck to clone  
+								this.cloneDrop = true;
+						});
+
 			}
 
   }
 
-	/// deck list look at import stuff - bring same vars over - clone drop, drop down etc.
 //     private onModalResponse(answer:number) {
 //         // This function fires when the user has made a selection on 
 //         // the add card modal. 
@@ -111,24 +152,22 @@ export class MakeDetailComponent {
 
 //     }
 
-//     onClone() {
-//         // This function fires when the user chooses a deck to clone
-//         // this.cloneChoice is the id of the deck to clone
-//         // Because of the subscription to deckschanged, the list will show
-//         // the newly added cloned deck
-//         this.display = 'none';
-//         const deckToClone: Deck = this.deckService.getDeck(this.cloneChoice);
-//         this.deckService.cloneDeck(deckToClone)
-//             .subscribe(
-//                 (deck: Deck) => {
-//                    console.log(deck);
-//                 });
+    onClone() {
+        // This function fires when the user chooses a deck to clone
+        // this.cloneChoice is the id of the deck to clone
+        // Because of the subscription to deckschanged, the list will show
+        // the newly added cloned deck
+        this.display = 'none';
+        // const deckToClone: Deck = this.deckService.getDeck(this.cloneChoice);
+        const deckToClone: Deck = this.deckService.getDeck(this.cloneChoice[0]);
+        this.deckService.cloneDeck(deckToClone)
+            .subscribe(
+                (deck: Deck) => {
+                   console.log(deck);
+                });
 
-//     }
+    }
  
-
-////////////////////////////////////////////////////////////
-
 	onDelete() {
   	// Show the delete modal
     this.display = 'block';
