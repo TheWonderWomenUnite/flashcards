@@ -1,6 +1,6 @@
 # Awesome Flashcards
 
-## *A build to learn project built by * ##
+## A build to learn project built by ##
 
 ## Diane Zevenbergen (@dianezev) & Lisa Copeland (@lisacopeland)
 
