@@ -1,20 +1,25 @@
-This is the readme for the FlashCard Project, A LaunchCode Seattle Learning Project 
+# Awesome Flashcards
 
-Author: lisacope@msn.com
+## A build to learn project built by ##
 
-Assumed installed dependencies - Npm, Mongodb
-To install 
+## Diane Zevenbergen (@dianezev) & Lisa Copeland (@lisacopeland)
 
-	- clone a copy to a local directory
-	- go into the directory and run >npm install 
-	  (This will install all node dependencies) 
-	- open a cmd window and start mongod
-	  (the node server will not run without this)
-	- open a cmd window, go into the local directory and run >npm run build  
-	  (this will start the build process) 	
-	- open a cmd window and go into local directory and run >npm start
-	  (this will start the node server)
-	- open a browser and navigate to localhost:3000
-	  (this will load the front end)  
+This application allows a user to develop decks of flashcards and study topics like mathematics and languages. It contains user authorization so users can create accounts and decks of flashcards. They can also save their progress in learning the cards and designate favorite decks.  
 
-This is a change to the readme
+The purpose of this project was to learn MEAN full stack web development. This project utilizes the following technologies and is all original work by the authors. 
+
+	* Angular 4 with Typescript
+	* Bootstrap 4
+	* Webpack
+	* Github
+	* Npm 
+	* NodeJs
+	* MongoDB
+	* Mongoose
+	* Express
+
+
+This app is deployed to heroku at 
+The mongo database is hosted on mlab
+
+Questions? Reach out to lisacope@msn.com or dianezev@comcast.net

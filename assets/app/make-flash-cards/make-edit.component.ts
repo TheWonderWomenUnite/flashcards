@@ -78,7 +78,6 @@ export class MakeEditComponent implements OnInit {
     } else {
       // Creating a new deck, initialize all values except the ones the user
       // can fill in, ie name and category  
-
       const editDeck = new Deck(
         this.deckForm.value.name, 
         true,

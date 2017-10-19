@@ -34,7 +34,6 @@ export class MakeDetailComponent {
 
 	ngOnInit() {
 		this.userId = localStorage.getItem('UserId');
-
     if (this.deck) {
 	  	this.progressPct = this.deck.progressBar;
 		  this.isFavorite = this.deck.favorite;
@@ -48,30 +47,30 @@ export class MakeDetailComponent {
 	}
 
 	onAddNewDeck(answer:number) {
-    // Get rid of the modal
+	    // Get rid of the modal
 		this.displayAddDeck = 'none';
 		console.log('adding/cloning deck for: ' + this.newCategory + ' and ' + this.newDeckName);
 
 		// Add a new deck
-    if (answer === 1) {
+		if (answer === 1) {
 			const newDeck = new Deck(this.newDeckName,               
-				true,
-				this.newCategory,
-				null,
-				0,
-				false,
-				this.userId); 
-			this.deckService.addDeck(newDeck).subscribe(
-				(deck: Deck) => {
-					console.log(deck);
-					this.router.navigate(['./makeflashcards', 'edit', deck.deckId]);
-					});
-											
+			true,
+			this.newCategory,
+			null,
+			0,
+			false,
+			this.userId); 
+		this.deckService.addDeck(newDeck).subscribe(
+			(deck: Deck) => {
+				console.log(deck);
+				this.router.navigate(['./makeflashcards', 'edit', deck.deckId]);
+				});
+						
 			// Clone a deck
-		} else if (answer === 2) {
+			} else if (answer === 2) {
 			// TBD check with lisa on what to incorp
 			console.log('user wants to clone a deck');
-		}
+			}
 
   }
 
