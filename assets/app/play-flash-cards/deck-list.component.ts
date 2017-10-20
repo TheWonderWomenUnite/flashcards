@@ -20,6 +20,11 @@ export class DeckListComponent implements OnInit {
     decks: Deck[];
     userId: string;
 
+    // TBD change to global var so that user sees same order whether they're
+    // in make or play. (same code in both make-list and deck-list for now)
+    // Initially sort by category
+    sortBy = 1;    
+
     // Attributes for the "sort by" drop down
     optionChoice: number[];
 
@@ -58,6 +63,7 @@ export class DeckListComponent implements OnInit {
                             (decks: Deck[]) => {
                             console.log(decks);
                             this.decks = decks;
+                            this.sortDecks(this.sortBy);                            
                         });
                 }
                 else {
@@ -66,24 +72,57 @@ export class DeckListComponent implements OnInit {
                             (decks: Deck[]) => {
                             console.log(decks);
                             this.decks = decks;
+                            this.sortDecks(this.sortBy);                            
                         });
                 }
             });            
     }
 
     onSortBy() {
-        console.log("Sort decks by "+this.optionChoice[0]);
-        switch(this.optionChoice[0]) {
+        console.log("Sort decks by " + this.optionChoice[0]);
+        console.log(this.decks);
+        this.sortBy = this.optionChoice[0];
+        this.sortDecks(this.sortBy);
+    }
+
+   // TBD would be best to have this code only in deck service -
+    // currently it's in 2 places: make-list and deck-list
+    private sortDecks(sortBy) {
+        
+        switch(sortBy) {
             case 1:
-                // Sort decks by category
+                this.decks.sort((a, b) => a.category.localeCompare(b.category));
                 break;
+
             case 2:
                 // Sort decks by last played
+                this.decks.sort((a, b) => {
+                    if (a.lastPlayed === null && b.lastPlayed === null)
+                        return 0;
+                    if (a.lastPlayed === null)
+                        return 1;
+                    if (b.lastPlayed > a.lastPlayed) {
+                        return 1;
+                    }
+                    else {
+                        return -1;
+                    }
+                
+                });
                 break;
+
             case 3:
                 // Sort decks by favorites
+                this.decks.sort((a, b) => {
+                    if (a.favorite && b.favorite) {
+                        return 0;
+                    } else if (!a.favorite && b.favorite) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                });
                 break;
-        }
+        }       
     }
-    
 }

@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
 @Component({
 	selector: 'app-make-flash-cards',
 	templateUrl: './make-flash-cards.component.html',
-	styleUrls: ['./make-flash-cards.component.css'],
+	styleUrls: ['./make-flash-cards.component.css']
 
 })
 

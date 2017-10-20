@@ -7,6 +7,8 @@ import { Card } from "../models/card.model";
 import { DeckService } from "../shared/deck.service";
 import { CardService } from "../shared/card.service";
 
+
+
 @Component({
   selector: 'app-make-edit',
   templateUrl: './make-edit.component.html',
@@ -22,6 +24,7 @@ export class MakeEditComponent implements OnInit {
   id: string;
   userId: string;
   display = 'none'; // For the are you sure modal
+  liveCard = 0;
 
 	constructor(private route: ActivatedRoute,
       			  private deckService: DeckService,
@@ -29,7 +32,7 @@ export class MakeEditComponent implements OnInit {
         		  private router: Router) { }
 
 	ngOnInit() {
-		this.userId = localStorage.getItem('UserId');
+      this.userId = localStorage.getItem('UserId');
   		this.route.params
   			.subscribe(
   				(params: Params) =>{
@@ -40,6 +43,8 @@ export class MakeEditComponent implements OnInit {
               this.cardService.getCards(this.deck.deckId)
                 .subscribe((cards: Card[]) => {
                 this.cards = cards; 
+                // this.liveEditArr = Array(cards.length).fill(false);
+                // console.log('in init and live');
                 console.log("have the cards, calling initform");
                 this.initForm(); 
                 });
@@ -73,7 +78,6 @@ export class MakeEditComponent implements OnInit {
     } else {
       // Creating a new deck, initialize all values except the ones the user
       // can fill in, ie name and category  
-      
       const editDeck = new Deck(
         this.deckForm.value.name, 
         true,
@@ -125,16 +129,12 @@ export class MakeEditComponent implements OnInit {
               console.log(card);
             });                              
           }
-		  this.onExit();
-
+          this.onExit();
         });
-    
-      }
-	  else {
-	  	 this.onExit();
-	  }
-     
-   }
+    } else {
+      this.onExit();
+    }
+  }
 
   onCancel() {
     // Ask if they want to leave if they have made changes
@@ -153,17 +153,22 @@ export class MakeEditComponent implements OnInit {
       // Just throwing away the changes
       this.onExit();
     }
-
   }
 
+  // isLive(index: number) {
+  //   return (this.liveCard === index);
+  // }
+  
   onExit() {
-	this.router.navigate(['./makeflashcards', 'makelist', this.userId]);
-     
+    this.router.navigate(['./makeflashcards', 'makelist', this.userId]);     
   }
 
   onAddCard() {
-
-    (<FormArray>this.deckForm.get('cards')).push(
+    // Ask Lisa - any issue that I changed this to insert(0) to show at front of list?
+    // Lisa had:
+    // (<FormArray>this.deckForm.get('cards')).push(
+    
+    (<FormArray>this.deckForm.get('cards')).insert((0),
       new FormGroup({
         'side1': new FormControl(null, Validators.required),
         'side2': new FormControl(null, Validators.required)
@@ -207,7 +212,5 @@ export class MakeEditComponent implements OnInit {
       'cards': cardsForm
       });  
     this.readyForm = true;        
-    } 
- 
-
+  } 
 }

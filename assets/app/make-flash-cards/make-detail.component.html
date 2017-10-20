@@ -32,7 +32,7 @@
               <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width': '' + progressPct + '%'}"></div>
             </div>
 
-            <div class="deck-icons">
+            <div class="deckIcons">
               <a class="deck-modify" (click)="onEdit()" title="Add, edit or delete cards from this deck.">
                 <i class="fa fa-pencil-square-o"></i>
               </a>
@@ -91,7 +91,7 @@
           (click)="onModalResponse(false)">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Add a New Deck</h4>
+        <h4 class="modal-title">Add or Clone a New Deck</h4>
       </div>
 
       <div class="modal-body">
@@ -104,7 +104,7 @@
         placeholder="Deck Name"
         [(ngModel)]="newDeckName" />
       </div>
-
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)="onAddNewDeck(1)">Add New Deck</button>
         <button type="button" class="btn btn-default" (click)="onAddNewDeck(2)">Clone a Deck</button>

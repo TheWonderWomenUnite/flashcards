@@ -1,56 +1,53 @@
 <!-- Modal: Sign Up -->
 <div class="w3-modal">
-		<div class="w3-modal-content form">
-			<span class="w3-button w3-display-topright" (click)="onClose()">&times;</span>
-		
-			<!--    Sign up-->
-			<form class="signup-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
-				<div class="form-group">
-					<input 
-						type="text" 
-						id="firstName" 
-						class="form-control"
-						formControlName="firstName"
-						placeholder="First name" />
-				</div>
-				<div class="form-group">
-					<input 
-						type="text" 
-						id="lastName" 
-						class="form-control"
-						formControlName="lastName"
-						placeholder="Last name" />
-				</div>
-				<div class="form-group">
-						<input 
-							type="text" 
-							id="email" 
-							class="form-control"
-							formControlName="email"
-							placeholder="Email address" />
-					</div>
-					<div class="form-group">
-						<input 
-							type="password" 
-							id="password" 
-							class="form-control"
-							formControlName="password"
-							placeholder="Password" />
-					</div>
-					<button 
-						class="btn btn-primary" 
-						type="submit"
-						[disabled]="!myForm.valid" 
-						>SIGNUP</button>
-			
-			<!-- <button type="submit" class="w3-button w3-black" id="signup_now">Sign up</button> -->
-		
-			</form>
+	<div class="w3-modal-content form">
+		<span class="w3-button w3-display-topright" (click)="onClose()">&times;</span>
 	
-			<!-- DMZ moved this outside of form & changed click event from signup to signin -->
-			<p id="gotoLogin" class="message">Already registered? 
-				<a (click)="onSwitchToSignin()" class="highlight">Log In</a>
-			</p> 
-					
-		</div>
-		</div>
+		<!--    Sign up-->
+		<form class="signup-form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+			<div class="form-group">
+				<input 
+					type="text" 
+					id="firstName" 
+					class="form-control"
+					formControlName="firstName"
+					placeholder="First name" />
+			</div>
+			<div class="form-group">
+				<input 
+					type="text" 
+					id="lastName" 
+					class="form-control"
+					formControlName="lastName"
+					placeholder="Last name" />
+			</div>
+			<div class="form-group">
+					<input 
+						type="text" 
+						id="email" 
+						class="form-control"
+						formControlName="email"
+						placeholder="Email address" />
+				</div>
+				<div class="form-group">
+					<input 
+						type="password" 
+						id="password" 
+						class="form-control"
+						formControlName="password"
+						placeholder="Password" />
+				</div>
+				<button 
+					class="btn btn-primary" 
+					type="submit"
+					[disabled]="!myForm.valid" 
+					>SIGNUP</button>
+		</form>
+
+		<!-- DMZ moved this outside of form & changed click event from signup to signin -->
+		<p id="gotoLogin" class="message">Already registered? 
+			<a (click)="onSwitchToSignin()" class="highlight">Log In</a>
+		</p> 
+				
+	</div>
+</div>

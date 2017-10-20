@@ -7,35 +7,7 @@ body {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
-
-/*  get input from lisa*/
-/*    background-image: url("../img/wood4.jpg");*/
-/*    background-image: url("../img/wood5.jpg");*/
-/*    background-image: url("../img/wood6.jpg");*/
-/*    background-image: url("../img/woodgrain.jpg");*/
-  
-/*  or a texture background...*/
- /* background-color: yellow; */
-/*  background-image: url("../img/real-carbon-fibre.png");*/
-  
-/*
-  background-color: #45403c;
-  background-image: url("../img/navy.png");
-*/
-  
-/*
-  background-color: #efcda2;
-  background-image: url("../img/white-linen.png");
-*/
-
-  
-}
-
-/*experiment with hiding small cards for small screen*/
-.smallCard {
-/*  display: none;*/
-
+  background-size: cover;  
 }
 
 
@@ -51,7 +23,7 @@ body, html {
 }
 
 /*add to bootstrap classes*/
-/* TBD add overriding class instead of using important? */
+/* TBD better to add overriding class instead of using important here */
 .navbar, .footer {
   background-color: black!important; /* could use transparent if not using fixed navbar */
   opacity: .8;
@@ -60,12 +32,14 @@ body, html {
   margin-left: 0;
   box-sizing: border-box;
 }
+
 .footer {
   text-transform: uppercase;
 }
 
 .navbar-brand {
-  letter-spacing: 4px;
+  font-family: "Rock Salt", cursive; 
+  font-size: 180%;
   padding: 4px 8px;
   margin: 0;
 }
@@ -110,7 +84,6 @@ body, html {
   color: white;
 }
 .topOfDecks .btn-group {
-/* .topOfDecks { */
     width: 100%;
 }
 .topOfDecks button {
@@ -128,14 +101,21 @@ body, html {
   width: 100%;
 }
 .aspect {
-  /*width: 100%;*/ /* not working in ang */
+  /*width: 100%;*/ /* trouble gettng this to work in ang */
   width: 240px;
   margin-top: 15px;
   margin-bottom: 15px;
   position: relative;
   padding-top: 135%;
 }
-.deckTitle, .deckAddNew {
+.editAspect {
+  width: 270px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  position: relative;
+  padding-top: 135%;
+}
+.deckTitle, .deckAddNew, .cardIcons, .cardAddNew {
   color: white;
   text-align:center;
   padding-top: 10%;
@@ -154,13 +134,6 @@ body, html {
   margin-top: 20px;
   margin-bottom: 50px;
 }
-/* .deckSelect.container {
-  display: flex;
-}
-.deckList.row {
-  display: flex;
-  flex-wrap: wrap;
-} */
 .card, .liveCard, .spreadCards, .deck {
   background-color: #4444a7;
   text-align: center;
@@ -189,10 +162,9 @@ body, html {
   border: calc(10px + .7vw) solid #e6e5e5;
   font-size: calc(16px + .5vw);
   line-height: 1.2;
-/*  padding: 2%;*/
   padding: 5px;
 }
-.progressOnCard, .deck-icons {
+.progressOnCard, .deckIcons {
   position: absolute;
   left: 2%;
   right: 2%;
@@ -200,9 +172,16 @@ body, html {
 .progressOnCard {
   bottom: 2%;
 }
-.deck-icons {
-    bottom: 12%;
-  }
+.deckIcons {
+  bottom: 12%;
+}
+.cardIcons {
+  bottom: 0;
+  font-size: calc(30px + .5vw);
+  left: 0;
+  right: 0;
+  position: absolute;
+}
 .progressContainer a {
   display: inline-block; 
   padding-left: 10px;
@@ -220,17 +199,23 @@ body, html {
   display: inline-block;
   width: 15vw;
 }
-.deck-modify i, .deck-modify:hover i {
+.deck-modify i, .card-modify i {
   color: limegreen;
 }
-.deck-remove i, .deck-remove:hover i {
+.deck-remove i, .card-remove i {
   color: red;
 }
-.deck-fav i, .deck-fav:hover i , .gameInfo i, .deckTitle .fav {
+.deck-fav i, .gameInfo i, .deckTitle .fav {
     color: yellow;
 }
-.deck-modify:hover i, .deck-fav:hover i, .deck-remove:hover i {
+.deck-modify:hover i, 
+.deck-fav:hover i, 
+.deck-remove:hover i, 
+.card-modify:hover i, 
+.card-remove:hover i,
+.card-add:hover i {
   cursor: pointer;
+  font-weight: 800;
 }
 .gameInfo i, .gameInfo p {
   display: inline-block;
@@ -239,7 +224,6 @@ body, html {
   font-size: calc(10px + 1vw);
 }
 .icons i {
-  /* font-size: 250%; */
   font-size: calc(14px + 2vw);
 }
 .icons i {
@@ -257,7 +241,7 @@ body, html {
 .footer .icons a:hover {
   background-color: transparent;
 }
-.play-deck i, .deck-new i {
+.play-deck i, .deck-new i, .card-add i {
   color: #6397f8;
 }
 .play-deck:hover i, .deck-new:hover i {
@@ -294,7 +278,6 @@ a[class^="deck-"]:hover, .play-deck:hover {
   height: 100%;
   width: 95vw;
   max-width: 1200px;
-/*  margin: 65px auto 0 auto;*/
   margin: 0 auto;
 }
 .smallCard, .lgCard, .symbol {
@@ -361,7 +344,6 @@ to center text vertically w/o messing up scrolling*/
   justify-content: center;
   background-color: transparent;
 }
-/* TBD change to svg?*/
 .qMark a {
   width: 100%;
   cursor: pointer;
@@ -395,12 +377,53 @@ to center text vertically w/o messing up scrolling*/
   overflow-y: scroll;
   padding: 5px;
 }
+.card .editText {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-size: calc(16px + .3vw);
+  height: 88%;
+  line-height: 1.2;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 5px;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+.card .editText label {
+  font-size: 75%;
+}
+.card .editText textarea {
+  font-size: 100%;
+  resize: none;
+}
+.card .editText textarea:focus {
+  font-size: 100%;
+  resize: none;
+  color:black;
+  font-weight: 400;
+}
 .card .cardText {
   height: 88%;
 }
 .liveCard .cardText {
   height: 75%;
 }
+.liveEdit {
+  border: 4px solid white;
+}
+.editCards form button, .editCards .card-add {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px auto;
+}
+.card-add i {
+  margin: 0 auto;
+}
+.deckSelect .sortBy {
+  margin: 5px auto 5px 15px;
+}
+.liveEdit textarea:focus
 .lgCard a {
   width: 100%;
   height: 100%;
@@ -427,13 +450,11 @@ to center text vertically w/o messing up scrolling*/
   right:0; 
   bottom:0;
   color: gray;
-/*  font-size: 1em;*/
 }
 .liveGame .row {
   width: 100%;
   
 }
-/*sidebar*/
 .sidebar {
   height: 100%; 
   width: 160px;
@@ -465,3 +486,11 @@ nav a, nav button {
 .script {
   font-family: "Rock Salt", cursive;  
 }
+.img-circle {
+  padding: 15px;
+  border-radius: 50%;
+  width: calc(30px + 10vw);
+  max-width: 100px;
+  height: auto;
+}
+

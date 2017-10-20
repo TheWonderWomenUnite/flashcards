@@ -12,8 +12,8 @@ import { AuthService } from './auth.service';
 })
 
 export class SigninComponent implements OnInit {
-	// DMZ stuck on getting event emit to update main menu...
-	// @Output() loggedIn = new EventEmitter<{status: boolean}>();
+	// ask Lisa - DMZ stuck on getting event emit to update main menu...
+	@Output() loggedIn = new EventEmitter<{status: boolean}>();
 	myForm: FormGroup;
 
 	constructor(private authService: AuthService, private router: Router) {} 

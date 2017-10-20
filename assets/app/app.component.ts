@@ -32,12 +32,13 @@ export class AppComponent implements OnInit {
 	
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
-	this.subscription = this.authService.userChanged.
+	  this.subscription = this.authService.userChanged.
 		subscribe((user: User) => {
 			this.isLoggedIn = this.authService.isLoggedIn();
         });
 	
   }
+
 
   // TBD - Q for Lisa: trying to get event emitter from signin to call this
   //onLoggedIn(loginData: {status: boolean}) {
