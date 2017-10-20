@@ -5,7 +5,9 @@ import { Observable } from "rxjs";
 
 import { Card } from "../models/card.model";
 import { ErrorService } from "../errors/error.service";
-
+/** 
+* Contains all of the methods for creating, updating and deleting deck objects
+*/
 @Injectable()
 export class CardService {
     private cards: Card[] = [];

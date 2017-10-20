@@ -132,12 +132,12 @@ export class DeckPlayComponent implements OnInit {
   
   onSlideLeft() {
     // User pressed the <- arrow
-    //this.goNext(false);
+    this.goNext(false);
   } 
 
   onSlideRight() {
     // User pressed the -> arrow
-    //this.goNext(true);
+    this.goNext(true);
   } 
   
   showAnswer() {
