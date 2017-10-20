@@ -19,7 +19,7 @@ export class DeckService {
     // that belong to a user, the response is in the form of the NodeJS model, 
     // so I convert the returned data to the typescript model
         console.log("getDecks: Going to call get with userId: "+userId);
-        return this.http.get('http://localhost:3000/decks/userDecks/' + userId)
+        return this.http.get('https://awesome-flashcards.herokuapp.com/decks/userDecks/' + userId)
             .map((response: Response) => {
                 const decks = response.json().obj;
                 let transformedDecks: Deck[] = [];
@@ -48,7 +48,7 @@ export class DeckService {
     getUnownedDecks() {
     // Call this method without a userId to get all of the unowned decks, works 
         console.log("GetUnOwnedDecks: going to call get with userOwned false");
-        return this.http.get('http://localhost:3000/decks/unownedDecks/')
+        return this.http.get('https://awesome-flashcards.herokuapp.com/decks/unownedDecks/')
             .map((response: Response) => {
                 const decks = response.json().obj;
                 let transformedDecks: Deck[] = [];
@@ -94,7 +94,7 @@ export class DeckService {
         const token = localStorage.getItem('token') 
             ? '?token=' + localStorage.getItem('token') 
             : ''; 
-        return this.http.post('http://localhost:3000/decks/clone/' + deck.deckId + token, body, {headers: headers})
+        return this.http.post('https://awesome-flashcards.herokuapp.com/decks/clone/' + deck.deckId + token, body, {headers: headers})
             .map((response: Response) => {
                 const result = response.json().obj;
                 const deck = new Deck(
@@ -129,7 +129,7 @@ export class DeckService {
             ? '?token=' + localStorage.getItem('token') 
             : ''; 
 
-        return this.http.post('http://localhost:3000/decks/' + token, body, {headers: headers})
+        return this.http.post('https://awesome-flashcards.herokuapp.com/decks/' + token, body, {headers: headers})
             .map((response: Response) => {
                 const result = response.json().obj;
                 const deck = new Deck(
@@ -161,7 +161,7 @@ export class DeckService {
             ? '?token=' + localStorage.getItem('token') 
             : ''; 
     
-        return this.http.patch('http://localhost:3000/decks/' + deck.deckId + token, body, {headers: headers})
+        return this.http.patch('https://awesome-flashcards.herokuapp.com/decks/' + deck.deckId + token, body, {headers: headers})
             .map((response: Response) => {
                 const result = response.json().obj;
                 const deck = new Deck(
@@ -205,7 +205,7 @@ export class DeckService {
         const token = localStorage.getItem('token') 
             ? '?token=' + localStorage.getItem('token') 
             : ''; 
-        return this.http.delete('http://localhost:3000/decks/' + deck.deckId + token)
+        return this.http.delete('https://awesome-flashcards.herokuapp.com/decks/' + deck.deckId + token)
             .map((response: Response) => {
                 const result = response.json().obj;
                 return result;
