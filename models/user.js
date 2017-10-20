@@ -1,4 +1,4 @@
-// This is the user model for the server side app to deal with the message table
+// This is the user model for the server side app 
 // firstName - the User's first name
 // lastName - the User's last name
 // password - the User's password
