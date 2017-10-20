@@ -7,6 +7,10 @@ import { Subject } from 'rxjs/Subject';
 import { Deck } from "../models/deck.model";
 import { ErrorService } from "../errors/error.service";
 
+/** 
+* Handles all Deck object operations and HTTP calls
+*
+*/
 @Injectable()
 export class DeckService {
     private decks: Deck[] = [];
@@ -14,10 +18,12 @@ export class DeckService {
 
     constructor(private http: Http, private errorService: ErrorService) {}
 
+	/**
+	* Make HTTP call to get all of the decks for the current user
+	* the response is in the form of the NodeJS model, 
+    * so I convert the returned data to the typescript model
+	*/
     getDecks(userId: string) {
-    // Call this method with a user Id to get all of the decks
-    // that belong to a user, the response is in the form of the NodeJS model, 
-    // so I convert the returned data to the typescript model
         console.log("getDecks: Going to call get with userId: "+userId);
         return this.http.get('http://localhost:3000/decks/userDecks/' + userId)
             .map((response: Response) => {
@@ -45,6 +51,9 @@ export class DeckService {
         
     }
 
+	/**
+	* Make HTTP call to get unowned decks for cloning
+	*/
     getUnownedDecks() {
     // Call this method without a userId to get all of the unowned decks, works 
         console.log("GetUnOwnedDecks: going to call get with userOwned false");
@@ -74,6 +83,10 @@ export class DeckService {
         
     }
 
+	/**
+	* Accessor method, return a deck object given the deckId
+	* assumes that the deck array for the current user is in this.decks
+	*/
     getDeck(deckId: string) {
     // Call this method to find the deck object in this.decks array    
         for (let i = 0; i < this.decks.length; i++) {
@@ -86,8 +99,11 @@ export class DeckService {
         return null;
     }
 
+	/**
+	* Clone the deck passed as the parameter, assumes that the owner is 
+	* the currently logged in user, the server side copies all cards as well
+	*/
     cloneDeck(deck: Deck) {
-
         console.log("cloneDeck: going to call post with id "+deck.deckId);
         const body = JSON.stringify(deck);
         const headers = new Headers({'Content-Type': 'application/json'});
@@ -119,9 +135,11 @@ export class DeckService {
 
     }
 
+	/** 
+	* Makes the HTTP call to save the passed deck object
+	*/
     addDeck(deck: Deck) {
         // Call this method to add a deck
-
         console.log("addDeck: Going to call post with userId = "+deck.userId);        
         const body = JSON.stringify(deck);
         const headers = new Headers({'Content-Type': 'application/json'});
@@ -152,6 +170,9 @@ export class DeckService {
             });
     }
 
+	/** 
+	* Update the passed deck object
+	*/
     updateDeck(deck: Deck) {
     // Call this method to update a deck
         console.log("updateDeck: Calling patch with deckId = "+deck.deckId);
@@ -197,6 +218,9 @@ export class DeckService {
 
     }
 
+	/**
+	* Make the HTTP call to delete this deck object, server side deletes the cards
+	*/
     deleteDeck(deck: Deck) {
     // Call this method to delete a deck, deletes the cards for this deck as well
         this.decks.splice(this.decks.indexOf(deck), 1);
