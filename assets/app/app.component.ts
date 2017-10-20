@@ -60,6 +60,14 @@ export class AppComponent implements OnInit {
     this.router.navigate(['./playflashcards/']);
   }
 
+  /**
+  * Menu button for going to 'about us', route to it
+  */
+  onAbout() {
+    this.hideSidebar = true;
+    this.router.navigate(['./about/']);
+  }
+
    /**
   * Menu button for makeflashcards clicked, route to it
   */

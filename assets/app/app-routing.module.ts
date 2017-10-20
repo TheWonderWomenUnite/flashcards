@@ -5,6 +5,7 @@ import { MakeFlashCardsComponent } from './make-flash-cards/make-flash-cards.com
 import { PlayFlashCardsComponent } from './play-flash-cards/play-flash-cards.component';
 import { AuthenticationComponent } from "./auth/authentication.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
+import { AboutComponent } from "./about/about.component";
 
 import { auth_routes } from './auth/auth.routes';
 import { flashcard_routes } from './play-flash-cards/flashcard.routes';
@@ -23,6 +24,7 @@ import { makecard_routes } from './make-flash-cards/makecard.routes';
 const appRoutes: Routes = [
 	{ path: '', redirectTo: 'welcome', pathMatch: 'full' },
 	{ path: 'welcome', component: WelcomeComponent },
+	{ path: 'about', component: AboutComponent },
 	{ path: 'auth', component: AuthenticationComponent, children: auth_routes },
 	{ path: 'makeflashcards', component: MakeFlashCardsComponent, children: makecard_routes },
 	{ path: 'playflashcards', component: PlayFlashCardsComponent, children: flashcard_routes }

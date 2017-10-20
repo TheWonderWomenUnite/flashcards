@@ -1,0 +1,18 @@
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+h5 {
+  cursor: pointer;
+}
+h5:hover span {
+  color: #6E93F8;
+}
+h5 a {
+  text-decoration-line: none;
+  color:white;
+}
