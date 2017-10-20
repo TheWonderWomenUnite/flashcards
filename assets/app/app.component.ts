@@ -16,13 +16,7 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   title = 'app works!';
   hideSidebar = true;
-<<<<<<< HEAD
   subscription: Subscription;
-=======
-  userName: string = '';
-	gravHash: string = '';
-
->>>>>>> edit_cards
 
 	constructor(private route: ActivatedRoute,
 				private router: Router,
@@ -31,7 +25,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     this.isLoggedIn = this.authService.isLoggedIn();
-	this.subscription = this.authService.userChanged.
+	  this.subscription = this.authService.userChanged.
 		subscribe((user: User) => {
 			this.isLoggedIn = this.authService.isLoggedIn();
         });
