@@ -11,6 +11,9 @@ import { User } from '../models/user.model';
 
 @Injectable()
 export class AuthService {
+    private server = "http://localhost:3000";
+    // private server = "https://awesome-flashcards.herokuapp.com";
+
 	private currentUser: User;   
 	userChanged = new Subject<User>();
 
@@ -20,7 +23,7 @@ export class AuthService {
 	signup(user: User) {
 		const body = JSON.stringify(user);
 		const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('https://awesome-flashcards.herokuapp.com/user', body, {headers: headers})
+        return this.http.post(this.server+'/user', body, {headers: headers})
 			.map((response: Response) => response.json())
 			.catch((error: Response) => {
             	this.errorService.handleError(error.json());
@@ -33,7 +36,7 @@ export class AuthService {
 		const body = JSON.stringify(user);
 		const headers = new Headers({'Content-Type': 'application/json'});
 
-        return this.http.post('http:/https://awesome-flashcards.herokuapp.com/user/signin', body, {headers: headers})
+        return this.http.post(this.server+'/user/signin', body, {headers: headers})
 			    .map((response: Response) => {
 				const responseObj = response.json();
 				localStorage.setItem('token', responseObj.token);
@@ -91,7 +94,7 @@ export class AuthService {
    getUser(userId: string) {
     	// Call this method with a user Id to fill the currentUser Object
         console.log("getUser: Going to call get with userId: "+userId);
-        return this.http.get('https://awesome-flashcards.herokuapp.com/user/' + userId)
+        return this.http.get(this.server + '/user/' + userId)
             .map((response: Response) => {
                 const userObj = response.json().obj;
                 const newUser = new User(

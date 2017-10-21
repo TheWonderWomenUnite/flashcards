@@ -10,6 +10,9 @@ import { ErrorService } from "../errors/error.service";
 */
 @Injectable()
 export class CardService {
+    private server = "http://localhost:3000";
+    // private server = "https://awesome-flashcards.herokuapp.com";
+
     private cards: Card[] = [];
 
    	constructor(private http: Http, 
@@ -21,7 +24,7 @@ export class CardService {
     // of the NodeJS model, you have to convert the array to the 
     // form of the typescript model
         console.log("GetCards: Going to call get with DeckId: "+deckId);
-        return this.http.get('https://awesome-flashcards.herokuapp.com/cards/' + deckId)
+        return this.http.get(this.server+'/cards/' + deckId)
             .map((response: Response) => {
                 const cards = response.json().obj;
                 let transformedCards: Card[] = [];
@@ -51,7 +54,7 @@ export class CardService {
         const body = JSON.stringify(card);
         const headers = new Headers({'Content-Type': 'application/json'});
                
-        return this.http.post('http://locahttps://awesome-flashcards.herokuapp.com/lhost:3000/cards/' + card.deckId, body, {headers: headers})
+        return this.http.post(this.server +'/lhost:3000/cards/' + card.deckId, body, {headers: headers})
             .map((response: Response) => {
                 const result = response.json().obj;
                 const card = new Card(
@@ -77,7 +80,7 @@ export class CardService {
         const body = JSON.stringify(card);
         const headers = new Headers({'Content-Type': 'application/json'});
 
-        return this.http.patch('https://awesome-flashcards.herokuapp.com/cards/' + card.cardId, body, {headers: headers})
+        return this.http.patch(this.server +'/cards/' + card.cardId, body, {headers: headers})
             .map((response: Response) => {
                 const result = response.json().obj;
                 const card = new Card(
@@ -109,7 +112,7 @@ export class CardService {
         // Update this.cards array
         this.cards.splice(this.cards.indexOf(card), 1);
         console.log("deleteCard: calling delete with cardId = "+card.cardId);                
-        return this.http.delete('https://awesome-flashcards.herokuapp.com/cards/' + card.cardId)
+        return this.http.delete(this.server +'/cards/' + card.cardId)
             .map((response: Response) => {
                 const result = response.json().obj;
                 return result;
@@ -128,7 +131,7 @@ export class CardService {
             : ''; 
 
         this.cards = [];    
-        return this.http.delete('https://awesome-flashcards.herokuapp.com/cards/allCards/' + deckId + token)
+        return this.http.delete(this.server +'/cards/allCards/' + deckId + token)
             .map((response: Response) => {
                 const result = response.json().obj;
                 return result;

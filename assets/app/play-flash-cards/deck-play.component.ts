@@ -33,6 +33,7 @@ export class DeckPlayComponent implements OnInit {
   isFavorite = false;
   progressPct = 0;
   anonymousPlay = false;
+  isDataAvailable = false;
 
 	constructor(private route: ActivatedRoute,
               private router: Router,
@@ -57,7 +58,7 @@ export class DeckPlayComponent implements OnInit {
             // we have our cards, shuffle them and initialize values 
             // to start the game
          		this.cards = cards;
-           this.deckShuffle();
+            this.deckShuffle();
          		console.log(this.cards);
             this.faceUp = true;
             //this.displayBar = this.utilsService.progressBarPic(this.deck.progressBar);
@@ -81,6 +82,7 @@ export class DeckPlayComponent implements OnInit {
             });
         });        
         console.log('at end of ngOnInit and hideThumbs is ' + this.hideThumbs);
+        this.isDataAvailable = true;
   	}
 	
   goNext(forward: boolean) {
