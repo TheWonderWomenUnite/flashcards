@@ -71,6 +71,8 @@ body, html {
   border-style: none;
   border-radius: 0;
 }
+/* TBD this should be changed so that it is not referencing Bootstrap classes .col-12 etc */
+/* It works best to keep Bootstrap classes as defined in bootstrap files... */
 .col-12, .col-md-3, .col-sm-6 {
   max-width: 300px;
   margin: auto;
@@ -494,3 +496,14 @@ nav a, nav button {
   height: auto;
 }
 
+.fc-header {
+  padding: 15px;
+  color: white;
+  text-align: center;
+  align-items: center;
+  margin: auto;  
+  /* float: right; */
+  position: fixed;
+  top: 3vw;
+  right: 0;
+}

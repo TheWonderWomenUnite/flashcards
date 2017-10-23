@@ -18,7 +18,7 @@
             <a (click)="onMakeCards()" class="nav-link">MAKE FLASH CARDS <i class="fa fa-pencil-square-o"></i> </a>
           </li>
           <li class="nav-item">
-            <a *ngIf="isLoggedIn" [routerLink]="['/auth/logout']" class="nav-link">LOG OUT</a>
+            <a *ngIf="isLoggedIn" (click)="onLogout()" class="nav-link">LOG OUT</a>
             <a *ngIf="!isLoggedIn" [routerLink]="['/auth/signin']" class="nav-link">LOG IN/SIGN UP</a>
           </li>
         </ul>
@@ -31,7 +31,7 @@
     <a (click)="onAbout()" class="nav-link">ABOUT</a>
     <a (click)="onPlayCards()" class="sidebarItem">PLAY FLASH CARDS</a>
     <a (click)="onMakeCards()" class="sidebarItem">MAKE FLASH CARDS</a>
-    <a *ngIf="isLoggedIn" [routerLink]="['/auth/logout']" class="sidebarItem">LOG OUT</a>
+    <a *ngIf="isLoggedIn" (click)="onLogout()" class="sidebarItem">LOG OUT</a>
     <a *ngIf="!isLoggedIn" [routerLink]="['/auth/signin']" class="sidebarItem">LOG IN/SIGN UP</a>
   </nav>
 </div>

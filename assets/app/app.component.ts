@@ -90,6 +90,14 @@ export class AppComponent implements OnInit {
     this.router.navigate(['./about/']);
   }
 
+  /**
+  * Menu button for logging out, route to it
+  */
+	onLogout() {
+		this.authService.logout();
+		this.router.navigate(['/welcome']);
+	}
+
    /**
   * Menu button for makeflashcards clicked, route to it
   */
