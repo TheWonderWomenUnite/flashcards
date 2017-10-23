@@ -18,7 +18,8 @@ export class MakeDetailComponent {
   @Input() deck: Deck;
   @ViewChild('f') addForm: NgForm;
 	
-	cloneDecks: Deck[];
+  cloneDecks: Deck[];
+  cloneDeckIds: string[];
 	display = 'none';
   displayAddDeck = 'none';
   displayShowAddFields = false;
@@ -72,14 +73,18 @@ export class MakeDetailComponent {
             console.log(this.cloneDeckList);
             console.log("Going to call getUnownedDecks");
             this.cloneDeckList = [];
+            this.cloneDeckIds = [];
             this.deckService.getUnownedDecks()
                 .subscribe(
                 (decks: Deck[]) => {
                     console.log(decks);
+                    let deckIdx = 1;
                     for (let deck of decks) {
-                        const deckName = deck.category+'-'+deck.name;
-                        this.cloneDeckList.push({id:deck.deckId, name:deckName});  
-                        }
+                        const deckName = deck.category + '-' + deck.name;
+                        this.cloneDeckIds.push(deck.deckId);
+                        this.cloneDeckList.push({ id: deckIdx, name: deckName });
+                        deckIdx++;
+                    }
                     // Make the dropdown list show so the user can pick 
                     // a deck to clone, when they make a choice, onClone will fire  
                     this.cloneDrop = true;
@@ -203,7 +208,8 @@ export class MakeDetailComponent {
         // the newly added cloned deck
         this.display = 'none';
         // const deckToClone: Deck = this.deckService.getDeck(this.cloneChoice);
-        const deckToClone: Deck = this.deckService.getDeck(this.cloneChoice[0]);
+        const deckId = this.cloneDeckIds[this.cloneChoice[0]-1];
+        const deckToClone: Deck = this.deckService.getDeck(deckId);
         this.deckService.cloneDeck(deckToClone)
             .subscribe(
                 (deck: Deck) => {

@@ -27,7 +27,7 @@ const appRoutes: Routes = [
 	{ path: 'about', component: AboutComponent },
 	{ path: 'auth', component: AuthenticationComponent, children: auth_routes },
 	{ path: 'makeflashcards', component: MakeFlashCardsComponent, children: makecard_routes },
-  { path: 'playflashcards', component: PlayFlashCardsComponent, children: flashcard_routes }
+  { path: 'playflashcards', component: PlayFlashCardsComponent, children: flashcard_routes },
   { path: '**', component: WelcomeComponent }
 ];
 
