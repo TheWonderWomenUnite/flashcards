@@ -28,7 +28,6 @@ export class PlayFlashCardsComponent implements OnInit {
 
 	ngOnInit() {
 	//TBD if component already init, it's not working when called again
-
 		this.subscription = this.authService.userChanged.
 			subscribe((user: User) => {
 				this.getUserInfo();

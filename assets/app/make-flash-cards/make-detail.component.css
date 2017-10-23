@@ -6,6 +6,13 @@
 	width: 100%;
 	height: 100vh;
 }
+.modal {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  z-index: 99 !important;
+}
+
 :host {
 	display: flex;
 	flex-wrap: wrap;
@@ -13,4 +20,8 @@
 }
 h4 {
 	color: black;
+}
+
+form {
+  padding-left:20px;
 }

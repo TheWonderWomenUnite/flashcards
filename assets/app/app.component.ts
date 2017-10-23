@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   title = 'app works!';
   hideSidebar = true;
   subscription: Subscription;
+  isReady = false;
 
 	constructor(private route: ActivatedRoute,
 				private router: Router,
@@ -30,12 +31,33 @@ export class AppComponent implements OnInit {
 * it can change the menu 
 */
 	
-  ngOnInit() {
-    this.isLoggedIn = this.authService.isLoggedIn();
-	  this.subscription = this.authService.userChanged.
-		subscribe((user: User) => {
-			this.isLoggedIn = this.authService.isLoggedIn();
-        });
+    ngOnInit() {
+      // Do this here so you will have the user info if they are logged in when
+      // they start the app
+        this.isLoggedIn = this.authService.isLoggedIn();
+
+        this.subscription = this.authService.userChanged.
+            subscribe((user: User) => {
+                this.isLoggedIn = this.authService.isLoggedIn();
+            });
+
+      if (this.isLoggedIn) {
+          const UserId = localStorage.getItem('UserId');
+          console.log("UserId = " + UserId);
+          this.authService.getUser(UserId)
+              .subscribe(
+              (user: User) => {
+                  console.log("appcomponent :"+user);
+                  this.isReady = true;
+                  this.router.navigate(['/welcome']);
+                });
+          
+      }
+      else {
+          this.isReady = true;
+          this.router.navigate(['/welcome']);
+      }
+    
 	
   }
 

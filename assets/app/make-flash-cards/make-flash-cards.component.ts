@@ -14,8 +14,7 @@ import { User } from '../models/user.model';
 export class MakeFlashCardsComponent implements OnInit {
 // The main component for the PlayFlashCards Module
 
- 	userName: string = '';
-	userEmail: string = '';
+	userName: string = '';
 	gravHash: string = '';
 
 	constructor(private route: ActivatedRoute,
@@ -23,18 +22,15 @@ export class MakeFlashCardsComponent implements OnInit {
 							private authService: AuthService) {}
 
 	ngOnInit() {
-			const UserId = localStorage.getItem('UserId');
-			console.log("UserId = "+UserId);
-
 			// Get the user info so you can display name and gravatar
-			this.authService.getUser(UserId)
-					.subscribe(
-							(user: User) => {
-									console.log(user);
-									this.userName = this.authService.getUserName();
-									this.gravHash = this.authService.getGravHash();
-    							this.router.navigate(['./', 'makelist', UserId], {relativeTo: this.route});
-							}
-					);
-	}
+        this.getUserInfo();
+        const UserId = localStorage.getItem('UserId');
+				this.router.navigate(['./', 'makelist', UserId], {relativeTo: this.route});
+    }
+
+    getUserInfo() {
+            this.userName = this.authService.getUserName();
+            this.gravHash = this.authService.getGravHash();
+        }
 }
+

@@ -22,17 +22,17 @@ import { makecard_routes } from './make-flash-cards/makecard.routes';
 *
 */
 const appRoutes: Routes = [
-	{ path: '', redirectTo: 'welcome', pathMatch: 'full' },
+	// { path: '', redirectTo: 'welcome', pathMatch: 'full' },
 	{ path: 'welcome', component: WelcomeComponent },
 	{ path: 'about', component: AboutComponent },
 	{ path: 'auth', component: AuthenticationComponent, children: auth_routes },
 	{ path: 'makeflashcards', component: MakeFlashCardsComponent, children: makecard_routes },
-	{ path: 'playflashcards', component: PlayFlashCardsComponent, children: flashcard_routes }
+  { path: 'playflashcards', component: PlayFlashCardsComponent, children: flashcard_routes }
+  { path: '**', component: WelcomeComponent }
 ];
 
 @NgModule({
 	imports: [
-		// RouterModule.forRoot(appRoutes, {useHash: true})
 		RouterModule.forRoot(appRoutes)
 	],
 	exports: [RouterModule]

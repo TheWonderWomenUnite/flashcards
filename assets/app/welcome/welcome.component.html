@@ -1,3 +1,16 @@
+<div>
+  <div class="fc-header">
+    <div class="col-xs-6 hideXSmall">
+      <img class="img-circle"
+           src="https://www.gravatar.com/avatar/{{gravHash}}.jpg" />
+      <img *ngIf="!gravHash" class="img-circle"
+           src="{{anonymousGravPic}}" />
+    </div>
+    <div class="hideMedium col-xs-3 col-xs-offset-3">
+      <h6>Hello, {{ userName }}</h6>
+    </div>
+  </div>
+</div>	
 <div class="jumbotron-fluid vertical-center">
   <div class="container">
     <h1 class="script">

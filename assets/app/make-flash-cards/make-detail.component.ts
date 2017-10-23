@@ -1,7 +1,6 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ViewChild } from "@angular/core";
 import { ActivatedRoute, Params, Router } from '@angular/router';
-// check with Lisa - do I need to import subscription?
-//import { Subscription } from 'rxjs/subscription';
+import { NgForm } from '@angular/forms';
 
 import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 
@@ -16,19 +15,16 @@ import { UtilsService } from "../shared/utils.service";
 })
 
 export class MakeDetailComponent {
-	@Input() deck: Deck;
+  @Input() deck: Deck;
+  @ViewChild('f') addForm: NgForm;
 	
-// check with Lisa - are these needed?
-	// cloneDecks: Deck[];
-	// subscription: Subscription;
-
+	cloneDecks: Deck[];
 	display = 'none';
-	displayAddDeck = 'none';
+  displayAddDeck = 'none';
+  displayShowAddFields = false;
 	isFavorite = false;
 	favTitle = "";
 	progressPct = 0;
-	newCategory = "";
-	newDeckName = "";
 	userId: string;
 
 	// When cloneDrop is true, display the dropdown to choose a deck to clone
@@ -60,9 +56,57 @@ export class MakeDetailComponent {
 
 	onAddDeck() {
   	// Show the add deck modal
-    this.displayAddDeck = 'block';
-	}
+        this.displayAddDeck = 'block';
+        console.log("Showing add modal");
+    }
 
+    onAddModalResponse(answer: number) {
+        if (answer === 1) {
+            // Show the input form for getting the category and deckname
+            this.displayShowAddFields = true;
+            // When onSubmit fires, do the add
+        }
+        else if (answer == 2) {
+            // Go to deckservice and get list of possible decks to clone 
+            // to populate the dropdown list should look like
+            console.log(this.cloneDeckList);
+            console.log("Going to call getUnownedDecks");
+            this.cloneDeckList = [];
+            this.deckService.getUnownedDecks()
+                .subscribe(
+                (decks: Deck[]) => {
+                    console.log(decks);
+                    for (let deck of decks) {
+                        const deckName = deck.category+'-'+deck.name;
+                        this.cloneDeckList.push({id:deck.deckId, name:deckName});  
+                        }
+                    // Make the dropdown list show so the user can pick 
+                    // a deck to clone, when they make a choice, onClone will fire  
+                    this.cloneDrop = true;
+                });
+        }
+        else {
+            this.displayAddDeck = 'none';
+        }
+
+    }
+
+    onSubmit() {
+        const newDeck = new Deck(this.addForm.value.newDeckName,
+            true,
+            this.addForm.value.newCategory,
+            null,
+            0,
+            false,
+            this.userId);
+        this.deckService.addDeck(newDeck).subscribe(
+            (deck: Deck) => {
+                console.log(deck);
+                this.router.navigate(['./makeflashcards', 'edit', deck.deckId]);
+            });
+    }
+
+/*
 	onAddNewDeck(answer:number) {
 		// This function fires when the user has made a selection on 
 		// the add card modal. 
@@ -108,14 +152,14 @@ export class MakeDetailComponent {
 										this.cloneDeckList.push({id:deck.deckId, name:deckName});  
 										}
 								// Make the dropdown list show so the user can pick 
-								// a deck to clone  
+								// a deck to clone, when the user picks one, onClone() will fire  
 								this.cloneDrop = true;
 						});
 
 			}
 
   }
-
+*/
 //     private onModalResponse(answer:number) {
 //         // This function fires when the user has made a selection on 
 //         // the add card modal. 
@@ -163,7 +207,8 @@ export class MakeDetailComponent {
         this.deckService.cloneDeck(deckToClone)
             .subscribe(
                 (deck: Deck) => {
-                   console.log(deck);
+                    console.log(deck);
+                    this.router.navigate(['./makeflashcards/', 'makelist', this.userId]);            
                 });
 
     }
@@ -184,7 +229,7 @@ export class MakeDetailComponent {
         (deck: Deck) => {
           console.log(deck);
           // Navigate back to the list
-          //this.router.navigate(['./makeflashcards/', 'makelist', this.deck.userId]);            
+          this.router.navigate(['./makeflashcards/', 'makelist', this.userId]);            
 				});
 		}
   }
@@ -203,6 +248,5 @@ export class MakeDetailComponent {
 					});
 			this.isFavorite = this.deck.favorite;
 			this.favTitle = this.isFavorite ? "Remove 'FAVORITE' status" : "Mark this deck as a 'FAVORITE'";			
-	    // this.displayHeart = this.utilsService.heartPic(this.deck.favorite);
 	}
 }

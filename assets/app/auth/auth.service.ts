@@ -67,13 +67,14 @@ export class AuthService {
 	getUserName() {
 		// Call this method in the callback for getUser to retrieve the 
 		// string that is the user's name
-		if (this.isLoggedIn()) {
-			return this.currentUser.firstName+' '+this.currentUser.lastName;
-			}
+        if (this.isLoggedIn()) {
+            console.log("getUserName: userName :"+this.currentUser.firstName);
+			    return this.currentUser.firstName+' '+this.currentUser.lastName;
+			    }
 			else 
-			{
-				return null;
-			}
+			    {
+				  return null;
+			    }
 	}
 
 	getUserEmail() {
@@ -98,11 +99,12 @@ export class AuthService {
             .map((response: Response) => {
                 const userObj = response.json().obj;
                 const newUser = new User(
-					userObj.email, 
-					userObj.password,
-					userObj.firstName,
-					userObj.lastName);
+					        userObj.email, 
+					        userObj.password,
+					        userObj.firstName,
+					        userObj.lastName);
                 this.currentUser = newUser;
+                console.log("getUser:Just got user, firstname = " + this.currentUser.firstName + ' ' + this.currentUser.lastName);
                 return this.currentUser;
             })
             .catch((error: Response) => {
