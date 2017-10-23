@@ -6,13 +6,82 @@
   align-items: center;
 }
 
-h5 {
-  cursor: pointer;
-}
-h5:hover span {
-  color: #6E93F8;
-}
-h5 a {
-  text-decoration-line: none;
-  color:white;
-}
+  /********** get aspect ratio set for business cards **********/
+  .busCard {
+    font-family: Poppins, sans-serif;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    padding-top: 60%; /* this drives aspect ratio - note % based on width of container */
+  }
+  .busCardInner {
+    background-color: #4444a7;
+    text-align: left;
+    border: 1px solid #e6e5e5;
+    font-size: calc(8px + 1vw);
+    line-height: 1.2;
+    padding: 5px;
+/*    note position and t/l/b/r drives aspect ratio*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .busCardInner h3 {
+    font-size: calc(16px + 1vw);  
+    border-bottom: 1px solid white;
+  }
+  .busCardInner h4 {
+    font-size: calc(11px + 1vw);  
+  }
+  .busCardInner p {
+    font-size: calc(8px + .7vw);  
+  }
+  .busCardInner h3, .busCardInner p, .busCardInner h4{
+    color: white;
+    margin: 5px 15px;
+  }
+  .socMedia {
+    text-align: center;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+  }
+  .socMedia a {
+    text-decoration: none;
+    color: white;
+    opacity: .6;
+    margin: auto;
+  }
+  .socMedia a:hover {
+    opacity: 1;
+  }
+  .busCardInner p a {
+    color: white;
+  }
+  .busCardInner p a:hover {
+    color: #99b2f7;
+  }
+  .aboutUs {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    max-width: 900px;
+    min-width: 300px;
+  }
+  /* this can probably be dropped once bootstrap classes eliminated from style.css */
+  .aboutUs div div {
+    max-width: 100%;
+  }
+  .describeGame {
+    max-width: 900px;
+    margin:60px auto 10px auto;
+  }
+  .describeGame h4 {
+    font-size: calc(11px + .7vw);  
+    line-height: normal;
+  }
+  .describeGame a:hover {
+    color: #99b2f7;
+  }
