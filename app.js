@@ -15,10 +15,13 @@ var cardRoutes = require('./routes/card');
 var app = express();
 
 dotEnv.config();
-var url=process.env.MLAB_URI;
+var url = process.env.MLAB_URI;
+
 mongoose.set('debug', true);
-//mongoose.connect('localhost:27017/flashcards');
-mongoose.connect(url);
+// url = '//localhost:27017/flashcards';
+// mongoose.connect(url);
+
+mongoose.connect(url, { useMongoClient: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

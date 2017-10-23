@@ -12,7 +12,7 @@ import { User } from '../models/user.model';
 @Injectable()
 export class AuthService {
     private server = "http://localhost:3000";
-    // private server = "https://awesome-flashcards.herokuapp.com";
+    //private server = "https://awesome-flashcards.herokuapp.com";
 
 	private currentUser: User;   
 	userChanged = new Subject<User>();

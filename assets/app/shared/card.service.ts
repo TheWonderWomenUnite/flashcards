@@ -11,7 +11,7 @@ import { ErrorService } from "../errors/error.service";
 @Injectable()
 export class CardService {
     private server = "http://localhost:3000";
-    // private server = "https://awesome-flashcards.herokuapp.com";
+    //private server = "https://awesome-flashcards.herokuapp.com";
 
     private cards: Card[] = [];
 
@@ -54,7 +54,7 @@ export class CardService {
         const body = JSON.stringify(card);
         const headers = new Headers({'Content-Type': 'application/json'});
                
-        return this.http.post(this.server +'/lhost:3000/cards/' + card.deckId, body, {headers: headers})
+        return this.http.post(this.server +'/cards/' + card.deckId, body, {headers: headers})
             .map((response: Response) => {
                 const result = response.json().obj;
                 const card = new Card(
