@@ -14,7 +14,7 @@ import { ErrorService } from "../errors/error.service";
 @Injectable()
 export class DeckService {
 
-    private server = "http://localhost:3000";
+    private server = "";
     //private server = "https://awesome-flashcards.herokuapp.com";
 
     private decks: Deck[] = [];
