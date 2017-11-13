@@ -20,7 +20,6 @@ var url = process.env.MLAB_URI;
 
 mongoose.set('debug', true);
 // url = '//localhost:27017/flashcards';
-//mongoose.connect(url);
 
 mongoose.connect(url, { useMongoClient: true });
 
