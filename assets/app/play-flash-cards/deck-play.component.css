@@ -1,0 +1,25 @@
+/*  flip animation adapted from https://davidwalsh.name/css-flip*/
+/* entire container, keeps perspective */
+.flipContainer {
+  height: 450px;
+  perspective: 1000px;
+  /* margin: 4vh auto; */
+}
+.flipInY {
+  transform-style: preserve-3d;
+  /* position: relative; */
+}
+/* flip card over*/
+.liveCard.answerSide, .liveCard.answerSide .cardText {
+  transition: .6s;
+}
+
+.liveCard.answerSide {
+  transform: rotateY(-180deg);    
+}
+
+/* this flips text BACK so it remains readable
+  * even though card is flipped (use js to toggle text as needed...)*/
+.liveCard.answerSide .cardText {
+  transform: rotateY(180deg);
+}

@@ -23,8 +23,8 @@
 				</a>
 
       </div>
-      <div id="curQuestion" class="animated flipInY lgCard">
-        <div class="aspect">
+      <div id="curQuestion" class="flipContainer lgCard">
+        <div class="aspect flipInY">
           <div [ngClass]="{'liveCard': true, 'questionSide': showQSide, 'answerSide': showASide}">
             <div class="cardText" (click)="showAnswer()">
 							<!-- <a *ngIf="faceUp && currentCard" class="flashcard-text" (click)="showAnswer()">{{ currentCard.side1 }}</a> -->
