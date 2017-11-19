@@ -23,13 +23,13 @@
 				</a>
 
       </div>
-      <div id="curQuestion" class="lgCard">
+      <div id="curQuestion" class="animated flipInY lgCard">
         <div class="aspect">
           <div [ngClass]="{'liveCard': true, 'questionSide': showQSide, 'answerSide': showASide}">
             <div class="cardText" (click)="showAnswer()">
 							<!-- <a *ngIf="faceUp && currentCard" class="flashcard-text" (click)="showAnswer()">{{ currentCard.side1 }}</a> -->
 							<a *ngIf="faceUp" class="flashcard-text">{{ currentCard.side1 }}</a>
-							<a *ngIf="!faceUp" class="flashcard-text" (click)="faceup=true">{{ currentCard.side2 }}</a>
+							<a *ngIf="!faceUp" class="flashcard-text" (click)="faceup=true">Answer: {{ currentCard.side2 }}<br><br><small>Question: {{ currentCard.side1 }}</small></a>
 							<div class="gameTip">
 								<small> Click to see answer...</small>
 							</div>
