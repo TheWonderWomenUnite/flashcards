@@ -331,6 +331,10 @@ to center text vertically w/o messing up scrolling*/
 .answerSide .thumbs {
   display: block;
 }
+.answerSide small {
+  font-style: italic;
+  opacity: 0.8;
+}
 .questionSide .thumbs {
   display: none;
 }

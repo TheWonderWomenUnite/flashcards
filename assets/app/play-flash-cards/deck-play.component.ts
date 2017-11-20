@@ -243,5 +243,11 @@ export class DeckPlayComponent implements OnInit {
       }
 
     }
-	
+  
+    flipCardOver() {
+  
+      // Toggle class that triggers card flip
+      var el = document.getElementById("curQuestion");
+      el.classList.toggle("answerSide"); 
+    }
 }

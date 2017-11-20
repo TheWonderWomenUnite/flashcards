@@ -1,57 +1,25 @@
-/* .playing-field {
-	padding-top:15px;
-	position: relative;
-
+/*  flip animation adapted from https://davidwalsh.name/css-flip*/
+/* entire container, keeps perspective */
+.flipContainer {
+  height: 450px;
+  perspective: 1000px;
+  /* margin: 4vh auto; */
+}
+.flipInY {
+  transform-style: preserve-3d;
+  /* position: relative; */
+}
+/* flip card over*/
+.liveCard.answerSide, .liveCard.answerSide .cardText {
+  transition: .6s;
 }
 
-.title-row {
-	background-color: white;
-	border: 5px solid #27509F;
-	border-radius: 10px;
-	padding-top:5px;
-	padding-bottom:5px;
-	text-align: center;
+.liveCard.answerSide {
+  transform: rotateY(-180deg);    
 }
 
-.left-caret {
-	padding-top:75px;
+/* this flips text BACK so it remains readable
+  * even though card is flipped (use js to toggle text as needed...)*/
+.liveCard.answerSide .cardText {
+  transform: rotateY(180deg);
 }
-
-.right-caret {
-	padding-top:75px;
-}
-
-.flash-card-row {
-	padding-top: 20px;
-	text-align: center;
-}
-
-.flash-card {
-	height:350px;
-	width: 200px;
-	background-color: white;
-	border-top: 5px solid #27509F;
-	border-left: 5px solid #27509F;
-	border-right: 5px solid #27509F;
-	border-bottom: 65px solid #27509F;
-	border-radius: 7px;
-}
-
-.reset-button {
-	border-radius: 5px;
-	text-align: center;
-	background-color: #27509F;
-	color: white;
-	font-weight: bold; 
-	width: 100%;
-}
-
-.flashcard-text {
-	padding-top: 10px;
-	font-size: 24px;
-	text-align: center;
-}
-
-.thumbs-area {
-	padding-top: 10px;
-} */
